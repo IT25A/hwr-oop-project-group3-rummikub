@@ -1,31 +1,36 @@
 openapi: 3.0.3
 info:
-  title: Template Service API
-  description: API for the template service
+  title: Rummikub Game API
+  description: API for managing Rummikub games
   version: 1.0.0
 servers:
   - url: http://localhost:8080
     description: Local development server
+tags:
+  - name: Game
+    description: Manage game lifecycle (create, read).
+  - name: GameAction
+    description: In-game actions performed by players during their turn.
 paths:
-  /trains:
+  /games:
     post:
-      summary: Create a new train
-      operationId: createTrain
+      summary: Start a new game
+      operationId: startGame
       tags:
-        - TrainWrite
+        - Game
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTrainRequest'
+              $ref: '#/components/schemas/StartGameRequest'
       responses:
         '201':
-          description: Train created successfully
+          description: Game started successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TrainCreatedResponse'
+                $ref: '#/components/schemas/GameCreatedResponse'
         '400':
           description: Bad request
           content:
@@ -38,40 +43,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /trains/{trainId}:
-    post:
-      summary: Update an existing train
-      operationId: updateTrain
+  /games/{gameId}:
+    get:
+      summary: Get the current game state
+      operationId: getGame
       tags:
-        - TrainWrite
+        - Game
       parameters:
-        - name: trainId
+        - name: gameId
           in: path
           required: true
           schema:
             type: string
-          description: The unique identifier of the train to update
+          description: The unique identifier of the game
+      responses:
+        '200':
+          description: Game state retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameState'
+        '404':
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /games/{gameId}/plays:
+    post:
+      summary: Play tiles from the rack onto the table
+      description: >
+        The current player submits the new desired state of the entire table.
+        The player may place tiles from their rack onto the table and freely rearrange all existing sets.
+        The submitted table state must consist entirely of valid sets (runs or groups) at the end of the turn.
+        On the first play, the player must form sets totalling at least 30 points solely from their own rack (initial meld).
+        Tiles played are implicitly derived by comparing the new table state with the previous one.
+      operationId: playTiles
+      tags:
+        - GameAction
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique identifier of the game
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateTrainRequest'
+              $ref: '#/components/schemas/PlayTilesRequest'
       responses:
         '200':
-          description: Train updated successfully
+          description: Play accepted, game state updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TrainResponse'
+                $ref: '#/components/schemas/GameState'
         '400':
-          description: Bad request
+          description: >
+            Invalid play (e.g. wrong player, invalid sets on table, initial meld requirement not met,
+            tiles used that are not on the rack or table).
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Train not found
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Action not allowed in current game state (e.g. game already finished)
           content:
             application/json:
               schema:
@@ -82,27 +133,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-    get:
-      summary: Get train by ID
-      operationId: getTrain
+  /games/{gameId}/draws:
+    post:
+      summary: Draw a tile from the pool
+      description: >
+        The current player cannot or chooses not to play tiles.
+        They draw one tile from the pool and their turn ends immediately.
+        This is only allowed when the pool is not empty.
+      operationId: drawTile
       tags:
-        - TrainRead
+        - GameAction
       parameters:
-        - name: trainId
+        - name: gameId
           in: path
           required: true
           schema:
             type: string
-          description: The unique identifier of the train
+          description: The unique identifier of the game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DrawTileRequest'
       responses:
         '200':
-          description: Train retrieved successfully
+          description: Tile drawn successfully, turn passed to next player
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TrainResponse'
+                $ref: '#/components/schemas/GameState'
+        '400':
+          description: Invalid request (e.g. wrong player, pool is empty)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: Train not found
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Action not allowed in current game state
           content:
             application/json:
               schema:
@@ -115,66 +189,154 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CreateTrainRequest:
+    TileColor:
+      type: string
+      description: >
+        The color of a tile.
+        Possible values: RED, BLUE, YELLOW, BLACK, JOKER.
+    Tile:
+      type: object
+      description: >
+        A Rummikub tile.
+        Regular tiles have a color (RED, BLUE, YELLOW, BLACK) and a number (1–13).
+        Joker tiles have color JOKER and no number.
+      required:
+        - color
+      properties:
+        color:
+          $ref: '#/components/schemas/TileColor'
+        number:
+          type: integer
+          description: The number on the tile (1–13). Absent for joker tiles.
+          minimum: 1
+          maximum: 13
+          nullable: true
+    TileSetType:
+      type: string
+      description: >
+        The type of a tile set.
+        RUN: three or more consecutive numbers of the same color.
+        GROUP: three or four tiles of the same number in different colors.
+        Possible values: RUN, GROUP.
+    TileSet:
+      type: object
+      description: >
+        A set of tiles on the table.
+        A valid set is either a run (3 or more consecutive numbers of the same color)
+        or a group (3 or 4 tiles of the same number in different colors).
+        Jokers may substitute any tile.
+      required:
+        - setType
+        - tiles
+      properties:
+        setType:
+          $ref: '#/components/schemas/TileSetType'
+        tiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tile'
+          minItems: 3
+    PlayerRack:
+      type: object
+      description: The tiles currently held by a player.
+      required:
+        - playerId
+        - tiles
+      properties:
+        playerId:
+          type: string
+          description: The unique identifier of the player
+        tiles:
+          type: array
+          description: The tiles currently on the player's rack
+          items:
+            $ref: '#/components/schemas/Tile'
+    GameStatus:
+      type: string
+      description: >
+        The current status of the game.
+        Possible values: IN_PROGRESS, FINISHED.
+    GameState:
       type: object
       required:
-        - trainNumber
-        - maxSpeed
-        - name
+        - gameId
+        - status
+        - currentPlayerId
+        - pool
+        - playerRacks
+        - table
       properties:
-        trainNumber:
-          type: integer
-          description: The train number
-        maxSpeed:
-          type: integer
-          description: The maximum speed of the train in km/h
-        name:
+        gameId:
           type: string
-          description: The name of the train
-    TrainCreatedResponse:
+          description: The unique identifier of the game
+        status:
+          $ref: '#/components/schemas/GameStatus'
+        currentPlayerId:
+          type: string
+          description: The player ID of the player whose turn it is
+        winnerId:
+          type: string
+          description: The player ID of the winner. Present only when status is FINISHED.
+          nullable: true
+        pool:
+          type: array
+          description: Tiles remaining in the draw pool
+          items:
+            $ref: '#/components/schemas/Tile'
+        playerRacks:
+          type: array
+          description: Each player's current rack
+          items:
+            $ref: '#/components/schemas/PlayerRack'
+        table:
+          type: array
+          description: All sets of tiles currently on the table
+          items:
+            $ref: '#/components/schemas/TileSet'
+    StartGameRequest:
       type: object
       required:
-        - id
+        - playerIds
       properties:
-        id:
-          type: string
-          description: The unique identifier of the created train
-    UpdateTrainRequest:
+        playerIds:
+          type: array
+          description: >
+            Ordered list of player IDs joining the game.
+            Must contain between 2 and 4 players.
+          minItems: 2
+          maxItems: 4
+          items:
+            type: string
+    GameCreatedResponse:
       type: object
       required:
-        - trainNumber
-        - maxSpeed
-        - name
+        - gameId
       properties:
-        trainNumber:
-          type: integer
-          description: The train number
-        maxSpeed:
-          type: integer
-          description: The maximum speed of the train in km/h
-        name:
+        gameId:
           type: string
-          description: The name of the train
-    TrainResponse:
+          description: The unique identifier of the created game
+    PlayTilesRequest:
       type: object
       required:
-        - id
-        - trainNumber
-        - maxSpeed
-        - name
+        - playerId
+        - table
       properties:
-        id:
+        playerId:
           type: string
-          description: The unique identifier of the train
-        trainNumber:
-          type: integer
-          description: The train number
-        maxSpeed:
-          type: integer
-          description: The maximum speed of the train in km/h
-        name:
+          description: The ID of the player making the play
+        table:
+          type: array
+          description: The complete new state of the table after the player's turn, including all rearrangements
+          items:
+            $ref: '#/components/schemas/TileSet'
+    DrawTileRequest:
+      type: object
+      required:
+        - playerId
+      properties:
+        playerId:
           type: string
-          description: The name of the train
+          description: The ID of the player drawing a tile
     ErrorResponse:
       type: object
       required:

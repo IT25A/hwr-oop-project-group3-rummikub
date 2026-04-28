@@ -1,2 +1,10 @@
 - 106 Spielsteine = je 26 Steine (2x 1-13) in 4 Farben (Rot, Orange, Schwarz, Blau) + 2 Joker
--
+- Joker: kann einen Stein/ eine Zahl ersetzen; kann durch einen echten Stein ersetzt werden
+
+Funktionen:
+- Sets: 3-4 Steine mit gleicher Zahl, unterschiedliche (!) Farben
+- Runs: mind. 3 aufeinanderfolgende Zahlen (1->13) in derselben Farbe
+- Eröffnung: 30 Punkte notwendig, danach anlegen möglich
+
+1. Steine
+2.

@@ -16,5 +16,47 @@ Funktionen:
 
 
 1. Steine (Zuerst ohne Joker)
-2. Spielfunktionen
-3. Joker (eher am Ende)
+2. Spieler
+3. Spiel
+4. Spielfunktionen
+5. Joker (eher am Ende)
+6. Speichern Filesystem -> im Template ?
+7. Speichern Datenbank -> im Template ?
+
+------------------------------------------------------------------------------------------------------------------------
+
+Fragen:
+Gibt es sowas wie Romme-Hand? Also das die anderen doppelte Punkte bekommen wenn man auf einmal beendet??? -> laut offiziellen Regeln: nein
+Wann ist das Spiel zuende? Nach x Runden? Wenn man keine Lust mehr hat? Nie?->denke unendlich dass man das Spiel immer refreshen kann
+In welcher Konstellation wollen wir coden?
+Wann wollen wir coden?
+
+------------------------------------------------------------------------------------------------------------------------
+
+Übersicht CLI Features:
+- Spiel anlegen
+    $ rummikub new_game Alice Bob Charlie
+    - Neues Spiel wird angelegt und persistiert (ID zurückgegeben)
+    - Steine gemischt, je 14 Steine ausgeteilt
+    - restliche Steine bilden den Pool
+- Spielstatus anzeigen
+    $ rummikub show 1337
+    - Zeigt Status von Spiel ID 1337
+    - Handsteine des aktuellen Spielers
+    - Anzahl verbleibender Steine im Pool
+    - alle liegenden Kombinationen
+- Kombinationen legen
+    $ rummikub 1337 meld R7 B7 O7
+    - Spieler legt Gruppe/Serie auf den Tisch
+    - Fehlermeldung bei ungültiger Kombination oder zu wenig Punkte (Ersteröffnung)
+    - Ausgabe des neuen Spielzustands
+- Anlegen
+    $ rummikub 1337 add R8 meld:Alice:2
+    - Spieler legt Stein R8 (Rot-8) an bestehende Kombination nr. 2 von Alice
+    - Fehlermeldung bei ungültigem Anlegen
+    - Ausgabe des neuen Spielzustands
+- Stein ziehen:
+    $ rummikub 1337 draw
+    - Spieler zieht einen Stein vom Pool (kein Legen möglich gewesen)
+    - nächster Spieler ist dran
+    - Ausgabe des neuen Spielzustands

@@ -11,8 +11,10 @@ Funktionen:
 - Spieler legt an eine bestehnde Sets/ Runs an
 - Spieler regorganisiert liegende Sets/ Runs -> am Ende wieder gültige Gruppen/ Serien
 - Spieler kann nicht legen = ein Stein aus den Pool ziehen
+- Spielende wenn ein Spieler hat alle Steine abgelegt hat
+- Spielende: restliche Spieler zählen Steinwerte + notieren sie als Minuspunkte
 
 
-1. Steine (Zuerst ohne Joker, für eine Farbe, dann fertigen Test/Funktion duplizieren)
+1. Steine (Zuerst ohne Joker)
 2. Spielfunktionen
 3. Joker (eher am Ende)

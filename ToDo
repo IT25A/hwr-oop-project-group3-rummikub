@@ -51,6 +51,7 @@ Vorschlag Reihenfolge:
 5. Joker (eher am Ende)
 6. Speichern Filesystem -> im Template ?
 7. Speichern Datenbank -> im Template ?
+8. Projekt formatieren
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -89,3 +90,4 @@ Wann wollen wir coden?
     - Spieler zieht einen Stein vom Pool (kein Legen möglich gewesen)
     - nächster Spieler ist dran
     - Ausgabe des neuen Spielzustands
+

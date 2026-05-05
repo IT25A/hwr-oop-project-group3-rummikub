@@ -8,6 +8,7 @@ WARNING: This code is for educational purposes only.
 Do not rely on it!
 
 == Feature Liste
+- Test - Generierung der Steine und Überprüfung der Steinanzahl und Farben
 
 // TODO : Add a list of features that your project implements. This can be a simple bullet list or a tables
 
@@ -16,7 +17,7 @@ Do not rely on it!
 [source]
 ----
 .
-├── core/                        # Domänenlogik (keine Abhängigkeiten nach außen)
+├── core/                        # Domaenenlogik (keine Abhaengigkeiten nach außen)
 ├── persistence/
 │   ├── persistence-filesystem/  # Persistenzadapter: Dateisystem
 │   └── persistence-sql/         # Persistenzadapter: PostgreSQL (via Exposed + Liquibase)
@@ -33,14 +34,14 @@ Do not rely on it!
 | Tool | Version / Hinweis
 
 | Java (JDK) | 25
-| Kotlin | 2.3.0 (wird über Maven verwaltet)
-| Docker | Nur für SQL-Tests erforderlich (siehe <<sql-tests>>)
-| (Optional) https://github.com/casey/just?tab=readme-ov-file#installation[just] | Aufgaben-Runner, wrappt Maven-Befehle für einfachere Nutzung (Maven-Befehle können auch direkt mit `./mvnw` ausgeführt werden)
+| Kotlin | 2.3.0 (wird ueber Maven verwaltet)
+| Docker | Nur fuer SQL-Tests erforderlich (siehe <<sql-tests>>)
+| (Optional) https://github.com/casey/just?tab=readme-ov-file#installation[just] | Aufgaben-Runner, wrappt Maven-Befehle fuer einfachere Nutzung (Maven-Befehle koennen auch direkt mit `./mvnw` ausgefuehrt werden)
 |===
 
 [NOTE]
 ====
-Maven kann auch über den mitgelieferten Wrapper `./mvnw` ausgeführt werden – eine separate Maven-Installation ist nicht zwingend notwendig.
+Maven kann auch ueber den mitgelieferten Wrapper `./mvnw` ausgefuehrt werden – eine separate Maven-Installation ist nicht zwingend notwendig.
 ====
 
 == Schnellstart
@@ -52,40 +53,40 @@ Maven kann auch über den mitgelieferten Wrapper `./mvnw` ausgeführt werden –
 just test
 ----
 
-Führt alle Tests aus.
+Fuehrt alle Tests aus.
 Docker ist *nicht* erforderlich – SQL-Tests sind initial deaktiviert (siehe <<sql-tests>>).
 
-=== Alle verfügbaren Befehle anzeigen
+=== Alle verfuegbaren Befehle anzeigen
 
 [source,bash]
 ----
 just
 ----
 
-.Übersicht der wichtigsten Befehle
+.uebersicht der wichtigsten Befehle
 [cols="1,3"]
 |===
 | Befehl | Beschreibung
 
-| `just test` | Alle Tests ausführen
+| `just test` | Alle Tests ausfuehren
 | `just build` | Projekt bauen und ins lokale Maven-Repository installieren
 | `just compile` | Nur kompilieren (ohne Tests)
 | `just service` | Spring Boot Service starten (erfordert vorheriges `just build`)
-| `just cli [args]` | CLI ausführen (erfordert vorheriges `just build`)
+| `just cli [args]` | CLI ausfuehren (erfordert vorheriges `just build`)
 | `just start-db` | PostgreSQL-Datenbank starten (erfordert Docker)
 | `just stop-db` | PostgreSQL-Datenbank stoppen
-| `just discard-db` | PostgreSQL-Datenbank stoppen und alle Daten löschen
+| `just discard-db` | PostgreSQL-Datenbank stoppen und alle Daten loeschen
 |===
 
 == Arbeiten mit dem Template-Repository (Upstream)
 
 Dieses Projekt ist ein Fork des Template-Repositories.
-Das Template bleibt als `upstream` eingebunden, damit Aktualisierungen daraus übernommen werden können.
+Das Template bleibt als `upstream` eingebunden, damit Aktualisierungen daraus uebernommen werden koennen.
 Die eigene Fork bei GitHub ist `origin`.
 
 === Schritt 1: Fork erstellen
 
-Öffne das Template-Repository auf GitHub und klicke auf *Fork*.
+oeffne das Template-Repository auf GitHub und klicke auf *Fork*.
 Damit entsteht eine eigene Kopie unter deinem GitHub-Account.
 
 === Schritt 2: Fork klonen
@@ -98,14 +99,14 @@ cd DEIN_REPO
 
 Nach dem Klonen ist deine Fork automatisch als `origin` eingetragen.
 
-=== Schritt 3: Template als Upstream hinzufügen
+=== Schritt 3: Template als Upstream hinzufuegen
 
 [source,bash]
 ----
 git remote add upstream https://github.com/stefreschke/hwr-oop-project-template-rummikub.git
 ----
 
-=== Remotes prüfen
+=== Remotes pruefen
 
 [source,bash]
 ----
@@ -121,20 +122,20 @@ upstream    https://github.com/stefreschke/hwr-oop-project-template-rummikub.git
 upstream    https://github.com/stefreschke/hwr-oop-project-template-rummikub.git (push)
 ....
 
-=== Änderungen aus dem Template übernehmen
+=== aenderungen aus dem Template uebernehmen
 
-Wenn das Template aktualisiert wurde, kannst du die Änderungen wie folgt in deine Fork übernehmen:
+Wenn das Template aktualisiert wurde, kannst du die aenderungen wie folgt in deine Fork uebernehmen:
 
 [source,bash]
 ----
-# Neueste Änderungen vom Template holen
+# Neueste aenderungen vom Template holen
 git fetch upstream
 
-# Template-Änderungen in deinen main-Branch mergen
+# Template-aenderungen in deinen main-Branch mergen
 git merge upstream/main
 ----
 
-Bei Konflikten müssen diese manuell aufgelöst und dann committed werden:
+Bei Konflikten muessen diese manuell aufgeloest und dann committed werden:
 
 [source,bash]
 ----
@@ -148,7 +149,7 @@ git push
 ====
 Alternativ zu `git merge` kann auch `git rebase upstream/main` verwendet werden.
 Rebase ist idiomatischer, da es eine lineare Commit-History erzeugt – in der Praxis ist es jedoch etwas aufwendiger zu handhaben, vor allem bei Konflikten.
-Für dieses Projekt empfehlen wir daher, auf dem eigenen Fork einfach zu mergen.
+Fuer dieses Projekt empfehlen wir daher, auf dem eigenen Fork einfach zu mergen.
 ====
 
 == Docker und PostgreSQL
@@ -156,11 +157,11 @@ Für dieses Projekt empfehlen wir daher, auf dem eigenen Fork einfach zu mergen.
 === Docker installieren
 
 Docker Desktop kann unter https://www.docker.com/products/docker-desktop/ heruntergeladen und installiert werden.
-Nach der Installation muss Docker Desktop gestartet sein, bevor die folgenden Befehle ausgeführt werden können.
+Nach der Installation muss Docker Desktop gestartet sein, bevor die folgenden Befehle ausgefuehrt werden koennen.
 
 === PostgreSQL-Datenbank starten
 
-Eine lokale PostgreSQL-Datenbank ist über Docker Compose vorkonfiguriert:
+Eine lokale PostgreSQL-Datenbank ist ueber Docker Compose vorkonfiguriert:
 
 [source,bash]
 ----
@@ -176,7 +177,7 @@ Die Datenbank ist anschließend unter `localhost:5432` erreichbar (Verbindungsda
 just stop-db
 ----
 
-Um die Datenbank mit einem *frischen Zustand* (alle Daten gelöscht) neu zu starten:
+Um die Datenbank mit einem *frischen Zustand* (alle Daten geloescht) neu zu starten:
 
 [source,bash]
 ----
@@ -187,7 +188,7 @@ just start-db
 [#sql-tests]
 == SQL-Tests aktivieren
 
-Die Tests, die Docker und PostgreSQL benötigen (`SqlPersistenceTest`, `ServiceSqlTest`, `CliSqlTest`), sind initial mit `@Disabled` annotiert.
+Die Tests, die Docker und PostgreSQL benoetigen (`SqlPersistenceTest`, `ServiceSqlTest`, `CliSqlTest`), sind initial mit `@Disabled` annotiert.
 
 Sobald die SQL-Persistenz implementiert ist, kann die Annotation entfernt werden:
 
@@ -198,4 +199,4 @@ Sobald die SQL-Persistenz implementiert ist, kann die Annotation entfernt werden
 class SqlPersistenceTest { ... }
 ----
 
-Danach benötigt `just test` eine laufende Docker-Instanz.
+Danach benoetigt `just test` eine laufende Docker-Instanz.

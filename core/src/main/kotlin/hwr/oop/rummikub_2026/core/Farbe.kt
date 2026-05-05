@@ -1,4 +1,4 @@
-package hwr.oop.project.group3.rummikub.core
+package hwr.oop.rummikub_2026.core
 
 enum class Farbe {
     Orange,

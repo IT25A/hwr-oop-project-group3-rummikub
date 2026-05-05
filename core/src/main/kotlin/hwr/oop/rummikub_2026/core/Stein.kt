@@ -1,4 +1,4 @@
-package hwr.oop.project.group3.rummikub.core
+package hwr.oop.rummikub_2026.core
 
 data class Stein(
 	private val farbe: Farbe,

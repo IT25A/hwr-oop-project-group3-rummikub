@@ -16,19 +16,19 @@ Spielfunktionen:
     - Spiel-ID vergeben
 - Sets: 3-4 Steine mit gleicher Zahl, unterschiedliche (!) Farben
 - Runs: mind. 3 aufeinanderfolgende Zahlen (1->13) in derselben Farbe
-- Eröffnung: 30 Punkte notwendig, danach anlegen möglich
-- Spielzug (nach Eröffnung):
+- Eroeffnung: 30 Punkte notwendig, danach anlegen moeglich
+- Spielzug (nach Eroeffnung):
     - Spieler legt ein oder mehrere neue Sets/ Runs
     - Spieler legt an eine bestehnde Sets/ Runs an
-    - Spieler regorganisiert liegende Sets/ Runs -> am Ende wieder gültige Gruppen/ Serien
+    - Spieler regorganisiert liegende Sets/ Runs -> am Ende wieder gueltige Gruppen/ Serien
         -Tauscht Joker aus
     - Spieler kann nicht legen = ein Stein aus den Pool ziehen
 - Spielende wenn ein Spieler hat alle Steine abgelegt hat
 - Spielende:
-    - restliche Spieler zählen Steinwerte + notieren sie als Minuspunkte
-    - Gewinner erhält die Summe aller Minuspunkte der anderen als
+    - restliche Spieler zaehlen Steinwerte + notieren sie als Minuspunkte
+    - Gewinner erhaelt die Summe aller Minuspunkte der anderen als
       Pluspunkte
-    + Spielstand anzeigen (Punkteübersicht)
+    + Spielstand anzeigen (Punkteuebersicht)
     + neue Runde starten?? als Option
 - Extra: "help" Funktion, die Regeln und Anleitung anzeigt?
 
@@ -65,10 +65,10 @@ Wann wollen wir coden?
 
 ------------------------------------------------------------------------------------------------------------------------
 
-Übersicht CLI Features:
+uebersicht CLI Features:
 - Spiel anlegen
     $ rummikub new_game Alice Bob Charlie
-    - Neues Spiel wird angelegt und persistiert (ID zurückgegeben)
+    - Neues Spiel wird angelegt und persistiert (ID zurueckgegeben)
     - Steine gemischt, je 14 Steine ausgeteilt
     - restliche Steine bilden den Pool
 - Spielstatus anzeigen
@@ -80,16 +80,16 @@ Wann wollen wir coden?
 - Kombinationen legen
     $ rummikub 1337 meld R7 B7 O7
     - Spieler legt Gruppe/Serie auf den Tisch
-    - Fehlermeldung bei ungültiger Kombination oder zu wenig Punkte (Ersteröffnung)
+    - Fehlermeldung bei ungueltiger Kombination oder zu wenig Punkte (Ersteroeffnung)
     - Ausgabe des neuen Spielzustands
 - Anlegen
     $ rummikub 1337 add R8 meld:Alice:2
     - Spieler legt Stein R8 (Rot-8) an bestehende Kombination nr. 2 von Alice
-    - Fehlermeldung bei ungültigem Anlegen
+    - Fehlermeldung bei ungueltigem Anlegen
     - Ausgabe des neuen Spielzustands
 - Stein ziehen:
     $ rummikub 1337 draw
-    - Spieler zieht einen Stein vom Pool (kein Legen möglich gewesen)
-    - nächster Spieler ist dran
+    - Spieler zieht einen Stein vom Pool (kein Legen moeglich gewesen)
+    - naechster Spieler ist dran
     - Ausgabe des neuen Spielzustands
 

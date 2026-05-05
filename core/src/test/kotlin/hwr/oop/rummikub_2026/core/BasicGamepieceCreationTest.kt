@@ -1,4 +1,4 @@
-package hwr.oop.project.group3.rummikub.core
+package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -18,14 +18,14 @@ class BasicPieceCreationTest {
 			Zahl.Zwei,
 			Zahl.Drei,
 			Zahl.Vier,
-			Zahl.Fünf,
+			Zahl.Fuenf,
 			Zahl.Sechs,
 			Zahl.Sieben,
 			Zahl.Acht,
 			Zahl.Neun,
 			Zahl.Zehn,
 			Zahl.Elf,
-			Zahl.Zwölf,
+			Zahl.Zwoelf,
 			Zahl.Dreizehn,
 		)
 	}
@@ -39,14 +39,14 @@ class BasicPieceCreationTest {
 			Zahl.Zwei,
 			Zahl.Drei,
 			Zahl.Vier,
-			Zahl.Fünf,
+			Zahl.Fuenf,
 			Zahl.Sechs,
 			Zahl.Sieben,
 			Zahl.Acht,
 			Zahl.Neun,
 			Zahl.Zehn,
 			Zahl.Elf,
-			Zahl.Zwölf,
+			Zahl.Zwoelf,
 			Zahl.Dreizehn,
 		)
 

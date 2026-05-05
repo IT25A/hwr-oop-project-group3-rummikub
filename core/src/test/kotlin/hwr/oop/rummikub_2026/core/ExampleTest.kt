@@ -1,4 +1,4 @@
-package hwr.oop.examples.template.core
+package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class ExampleTest {
 	
 	@Test
-	fun `example hello world`() {
+	fun `example test`() {
 		// given
 		val example = Example()
 		// when

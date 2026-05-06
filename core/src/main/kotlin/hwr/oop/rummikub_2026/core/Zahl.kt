@@ -1,17 +1,17 @@
 package hwr.oop.rummikub_2026.core
 
-enum class Zahl(value: Int) {
-    Eins(value=1),
-    Zwei(value=2),
-    Drei(value=3),
-    Vier(value=4),
-    Fuenf(value=5),
-    Sechs(value=6),
-    Sieben(value=7),
-    Acht(value=8),
-    Neun(value=9),
-    Zehn(value=10),
-    Elf(value=11),
-    Zwoelf(value=12),
-    Dreizehn(value=13),
+enum class Zahl(val value: Int) {
+    Eins(1),
+    Zwei(2),
+    Drei(3),
+    Vier(4),
+    Fuenf(5),
+    Sechs(6),
+    Sieben(7),
+    Acht(8),
+    Neun(9),
+    Zehn(10),
+    Elf(11),
+    Zwoelf(12),
+    Dreizehn(13),
 }

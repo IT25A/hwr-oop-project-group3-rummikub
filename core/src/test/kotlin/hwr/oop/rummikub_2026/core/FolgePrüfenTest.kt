@@ -9,7 +9,7 @@ class FolgePrüfenTest {
     @Test
     fun `Folge mit genau 3 Steinen ist valide (Minimum)`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Rot, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Zwei),
             Stein(Farbe.Rot, Zahl.Drei)
@@ -26,7 +26,7 @@ class FolgePrüfenTest {
     @Test
     fun `Folge mit 13 Steinen ist valide (Maximum)`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Zwei),
             Stein(Farbe.Blau, Zahl.Drei),
@@ -53,7 +53,7 @@ class FolgePrüfenTest {
     @Test
     fun `Folge mit weniger als 3 Steinen ist nicht valide`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Orange, Zahl.Zwei)
         )
@@ -71,7 +71,7 @@ class FolgePrüfenTest {
     @Test
     fun `Folge mit mehr als 13 Steinen ist nicht valide`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Schwarz, Zahl.Eins),
             Stein(Farbe.Schwarz, Zahl.Zwei),
             Stein(Farbe.Schwarz, Zahl.Drei),
@@ -104,7 +104,7 @@ class FolgePrüfenTest {
     @Test
     fun `Alle Steine selbe Farbe`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Rot, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Zwei),
             Stein(Farbe.Rot, Zahl.Drei)
@@ -121,7 +121,7 @@ class FolgePrüfenTest {
 
     fun `Steine haben nicht die selbe Farbe`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Zwei),
             Stein(Farbe.Rot, Zahl.Drei)
@@ -143,7 +143,7 @@ class FolgePrüfenTest {
     @Test
     fun `Zahlen folgen korrekt aufeinander`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Orange, Zahl.Fuenf),
             Stein(Farbe.Orange, Zahl.Sechs),
             Stein(Farbe.Orange, Zahl.Sieben),
@@ -160,7 +160,7 @@ class FolgePrüfenTest {
     @Test
     fun `Zahlen folgen nicht aufeinander`() {
         // given
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Rot, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Zwei),
             Stein(Farbe.Rot, Zahl.Vier),
@@ -179,7 +179,7 @@ class FolgePrüfenTest {
     @Test
     fun `Zahlen sind nicht in der richtigen Reihenfolge`() {
         // given - 3, 1, 2 (unsortiert)
-        val steine = listOf(
+        val steine = mutableListOf(
             Stein(Farbe.Blau, Zahl.Drei),
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Zwei)

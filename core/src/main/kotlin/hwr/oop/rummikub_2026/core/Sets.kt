@@ -7,10 +7,10 @@ class Sets {
     fun istGueltigesViererSet1(set: List<Stein>): Boolean {
         if (set.size !in 3..4) return false
 
-        // Prüfen, ob alle die gleiche Zahl haben
+        // Pruefen, ob alle die gleiche Zahl haben
         val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
 
-        // Prüfen, ob alle Farben unterschiedlich sind
+        // Pruefen, ob alle Farben unterschiedlich sind
         val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
 
         // Die Funktion selbst entscheidet anhand der Daten!
@@ -20,10 +20,10 @@ class Sets {
     fun istGueltigesViererSet6(set: List<Stein>): Boolean {
         if (set.size !in 3..4) return false
 
-        // Prüfen, ob alle die gleiche Zahl haben
+        // Pruefen, ob alle die gleiche Zahl haben
         val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
 
-        // Prüfen, ob alle Farben unterschiedlich sind
+        // Pruefen, ob alle Farben unterschiedlich sind
         val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
 
         // Die Funktion selbst entscheidet anhand der Daten!
@@ -33,10 +33,10 @@ class Sets {
     fun istGueltigesViererSet13(set: List<Stein>): Boolean {
         if (set.size !in 3..4) return false
 
-        // Prüfen, ob alle die gleiche Zahl haben
+        // Pruefen, ob alle die gleiche Zahl haben
         val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
 
-        // Prüfen, ob alle Farben unterschiedlich sind
+        // Pruefen, ob alle Farben unterschiedlich sind
         val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
 
         // Die Funktion selbst entscheidet anhand der Daten!
@@ -46,10 +46,10 @@ class Sets {
     fun istGueltigesDreierSet1(set: List<Stein>): Boolean {
         if (set.size != 3) return false
 
-        // Prüfen, ob alle die gleiche Zahl haben
+        // Pruefen, ob alle die gleiche Zahl haben
         val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
 
-        // Prüfen, ob alle Farben unterschiedlich sind
+        // Pruefen, ob alle Farben unterschiedlich sind
         val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
 
         // Die Funktion selbst entscheidet anhand der Daten!
@@ -59,10 +59,10 @@ class Sets {
     fun istGueltigesDreierSet6(set: List<Stein>): Boolean {
         if (set.size != 3) return false
 
-        // Prüfen, ob alle die gleiche Zahl haben
+        // Pruefen, ob alle die gleiche Zahl haben
         val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
 
-        // Prüfen, ob alle Farben unterschiedlich sind
+        // Pruefen, ob alle Farben unterschiedlich sind
         val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
 
         // Die Funktion selbst entscheidet anhand der Daten!
@@ -72,10 +72,10 @@ class Sets {
     fun istGueltigesDreierSet13(set: List<Stein>): Boolean {
         if (set.size != 3) return false
 
-        // Prüfen, ob alle die gleiche Zahl haben
+        // Pruefen, ob alle die gleiche Zahl haben
         val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
 
-        // Prüfen, ob alle Farben unterschiedlich sind
+        // Pruefen, ob alle Farben unterschiedlich sind
         val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
 
         // Die Funktion selbst entscheidet anhand der Daten!
@@ -85,7 +85,7 @@ class Sets {
 
 
 
-/*             (val FolgeListe: List<Stein>): Boolean {
+/*             (val folgeListe: List<Stein>): Boolean {
         assertThat(set).hasSize(4);
 
         val alleSindEins = set.all { it.zahl() == Zahl.Eins }

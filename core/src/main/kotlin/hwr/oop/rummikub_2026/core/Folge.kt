@@ -1,21 +1,21 @@
 package hwr.oop.rummikub_2026.core
 
-class Folge(val FolgeListe: MutableList<Stein>) {
- init{
+class Folge(private val folgeListe: MutableList<Stein>) {
 
- }
-    fun isValid() : Boolean {
-        require(FolgeListe.size >= 3){"Mindestens 3 Steine"}
-        require(FolgeListe.size <= 13){"Maximal 13 Steine"}
-        require(alleGleicheFarbe()){"Alle Steine müssen die selbe Farbe haben"}
-        require(indexverschiebung()){"Steine müssen aufeinander Folgen"}
-        return true
+    val folgeReadOnly: List<Stein>
+        get() = folgeListe
+
+    fun isValid(){
+        require(folgeListe.size >= 3){"Mindestens 3 Steine"}
+        require(folgeListe.size <= 13){"Maximal 13 Steine"}
+        require(alleGleicheFarbe()){"Alle Steine muessen die selbe Farbe haben"}
+        require(indexverschiebung()){"Steine muessen aufeinander Folgen"}
     }
 
     private fun alleGleicheFarbe(): Boolean {
         //Alle selbe Farbe
-        val ersteFarbe = FolgeListe[0].farbe()
-        for (i in FolgeListe) {
+        val ersteFarbe = folgeListe[0].farbe()
+        for (i in folgeListe) {
             if (i.farbe() != ersteFarbe) {
                 return false  }
         }
@@ -23,9 +23,9 @@ class Folge(val FolgeListe: MutableList<Stein>) {
     }
 
     private fun indexverschiebung(): Boolean {
-        for (i in 0 until FolgeListe.size - 1) {
-            val aktuellerWert = FolgeListe[i].zahl().value
-            val naechsterWert = FolgeListe[i + 1].zahl().value
+        for (i in 0 until folgeListe.size - 1) {
+            val aktuellerWert = folgeListe[i].zahl().value
+            val naechsterWert = folgeListe[i + 1].zahl().value
             if (naechsterWert != aktuellerWert + 1) {
                 return false
             }
@@ -34,25 +34,34 @@ class Folge(val FolgeListe: MutableList<Stein>) {
     }
 //Stefan fragen try catch
     fun hinzufuegenHinten(stein: Stein) {
-        FolgeListe.add(stein)
+        folgeListe.add(stein)
 
         try {
             this.isValid()
         } catch (e: IllegalArgumentException) {
-            FolgeListe.removeLast()
+            folgeListe.removeLast()
             throw e
         }
     }
 
     fun hinzufuegenVorne(stein: Stein) {
-        FolgeListe.add(0, stein)
+        folgeListe.add(0, stein)
 
         try {
             this.isValid()
         } catch (e: IllegalArgumentException) {
-            FolgeListe.removeFirst()
+            folgeListe.removeFirst()
             throw e
         }
+        /*
+        * Idee zur Vermeidung von try-catch:
+        * 
+        *  val neueListe = folgeListe + stein
+        * require(istValid(neueListe))
+        * folgeListe.add(stein)
+        * 
+        * man muesste isValid anpassen, sodass man jede Liste als Parameter uebergeben kann
+        * */
     }
 
 }

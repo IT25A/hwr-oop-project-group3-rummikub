@@ -8,7 +8,7 @@ import org.junit.jupiter.api.assertThrows
 class FolgeBearbeitenTest {
 
     @Test
-    fun `Hinten hinzufügen funktioniert`() {
+    fun `Hinten hinzufuegen funktioniert`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -25,7 +25,7 @@ class FolgeBearbeitenTest {
     }
 
     @Test
-    fun `Hinten hinzufügen mit falscher Farbe`() {
+    fun `Hinten hinzufuegen mit falscher Farbe`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -42,11 +42,11 @@ class FolgeBearbeitenTest {
 
         // then
         assertThat(exception.message)
-            .contains("Alle Steine müssen die selbe Farbe haben")
+            .contains("Alle Steine muessen die selbe Farbe haben")
     }
 
     @Test
-    fun `Hinten hinzufügen mit falscher Reihenfolge`() {
+    fun `Hinten hinzufuegen mit falscher Reihenfolge`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -63,11 +63,11 @@ class FolgeBearbeitenTest {
 
         // then
         assertThat(exception.message)
-            .contains("Steine müssen aufeinander Folgen")
+            .contains("Steine muessen aufeinander Folgen")
     }
 
     @Test
-    fun `Hinten darf nicht vorne eingefügt werden`() {
+    fun `Hinten darf nicht vorne eingefuegt werden`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -84,11 +84,11 @@ class FolgeBearbeitenTest {
 
         // then
         assertThat(exception.message)
-            .contains("Steine müssen aufeinander Folgen")
+            .contains("Steine muessen aufeinander Folgen")
     }
 
     @Test
-    fun `Vorne hinzufügen funktioniert`() {
+    fun `Vorne hinzufuegen funktioniert`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -105,7 +105,7 @@ class FolgeBearbeitenTest {
     }
 
     @Test
-    fun `Vorne hinzufügen mit falscher Farbe`() {
+    fun `Vorne hinzufuegen mit falscher Farbe`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -122,11 +122,11 @@ class FolgeBearbeitenTest {
 
         // then
         assertThat(exception.message)
-            .contains("Alle Steine müssen die selbe Farbe haben")
+            .contains("Alle Steine muessen die selbe Farbe haben")
     }
 
     @Test
-    fun `Vorne hinzufügen mit falscher Reihenfolge`() {
+    fun `Vorne hinzufuegen mit falscher Reihenfolge`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -143,11 +143,11 @@ class FolgeBearbeitenTest {
 
         // then
         assertThat(exception.message)
-            .contains("Steine müssen aufeinander Folgen")
+            .contains("Steine muessen aufeinander Folgen")
     }
 
     @Test
-    fun `Vorne darf nicht hinten eingefügt werden`() {
+    fun `Vorne darf nicht hinten eingefuegt werden`() {
         // given
         val folge = Folge(
             mutableListOf(
@@ -164,6 +164,6 @@ class FolgeBearbeitenTest {
 
         // then
         assertThat(exception.message)
-            .contains("Steine müssen aufeinander Folgen")
+            .contains("Steine muessen aufeinander Folgen")
     }
 }

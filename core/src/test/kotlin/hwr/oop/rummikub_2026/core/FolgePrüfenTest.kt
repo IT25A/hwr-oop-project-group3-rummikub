@@ -5,7 +5,22 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
-class FolgePrüfenTest {
+class FolgePruefenTest {
+
+    @Test
+    fun `Zugriff auf private Variable folgeListe ueber folgeReadOnly`(){
+        //given
+        val steine = mutableListOf(
+            Stein(Farbe.Rot, Zahl.Eins),
+            Stein(Farbe.Rot, Zahl.Zwei),
+            Stein(Farbe.Rot, Zahl.Drei)
+        )
+        //when
+        val folge = Folge(steine)
+        //then
+        assertThat(folge.folgeReadOnly).isEqualTo(steine)
+    }
+
     @Test
     fun `Folge mit genau 3 Steinen ist valide (Minimum)`() {
         // given
@@ -20,7 +35,7 @@ class FolgePrüfenTest {
 
         // then - sollte keine Exception werfen
         folge.isValid()
-        assertThat(folge.FolgeListe.size).isEqualTo(3)
+        assertThat(folge.folgeReadOnly.size).isEqualTo(3)
     }
 
     @Test
@@ -47,7 +62,7 @@ class FolgePrüfenTest {
 
         // then - sollte keine Exception werfen
         folge.isValid()
-        assertThat(folge.FolgeListe.size).isEqualTo(13)
+        assertThat(folge.folgeReadOnly.size).isEqualTo(13)
     }
 
     @Test
@@ -134,7 +149,7 @@ class FolgePrüfenTest {
         val exception = assertThrows<IllegalArgumentException> {
             folge.isValid()
         }
-        assertThat(exception.message).contains("Alle Steine müssen die selbe Farbe haben")
+        assertThat(exception.message).contains("Alle Steine muessen die selbe Farbe haben")
 
     }
 
@@ -173,7 +188,7 @@ class FolgePrüfenTest {
         val exception = assertThrows<IllegalArgumentException> {
             folge.isValid()
         }
-        assertThat(exception.message).contains("Steine müssen aufeinander Folgen")
+        assertThat(exception.message).contains("Steine muessen aufeinander Folgen")
     }
 
     @Test
@@ -192,6 +207,6 @@ class FolgePrüfenTest {
         val exception = assertThrows<IllegalArgumentException> {
             folge.isValid()
         }
-        assertThat(exception.message).contains("Steine müssen aufeinander Folgen")
+        assertThat(exception.message).contains("Steine muessen aufeinander Folgen")
     }
 }

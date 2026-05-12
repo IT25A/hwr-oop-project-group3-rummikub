@@ -8,7 +8,7 @@ WARNING: This code is for educational purposes only.
 Do not rely on it!
 
 == Feature Liste
-- Test - Generierung der Steine und Überprüfung der Steinanzahl und Farben
+- Test - Generierung der Steine und ueberpruefung der Steinanzahl und Farben
 
 // TODO : Add a list of features that your project implements. This can be a simple bullet list or a tables
 

@@ -9,7 +9,7 @@ class FolgeBearbeitenTest {
 
     @Test
     fun `Hinten hinzufuegen funktioniert`() {
-        // given
+        // give
         val folge = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Zwei),

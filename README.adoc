@@ -1,4 +1,4 @@
-= HWR OOP Lecture Project Template
+(= HWR OOP Rummikub Gruppe 3
 
 // TODO: Change headline to better fit your project!
 
@@ -9,6 +9,10 @@ Do not rely on it!
 
 == Feature Liste
 - Test - Generierung der Steine und ueberpruefung der Steinanzahl und Farben
+- Test - Folgen sind richtig (Anzahl der Steine, Farbe, aufeinanderfolgende Zahlen)
+- Test - Man kann Steine zur Folge hinzufuegen - vorne und hinten
+- Test - Sets sind richtig (Anzahl der Steine (dreier Sets und vierer Sets), unterschiedliche Farben, gleiche Zahlen)
+- Test - Sets sind ungueltig (Anzahl der Steine ist falsch (2>=x>=5)Farbe ist doppelt, unterschiedliche Zahlen)
 
 // TODO : Add a list of features that your project implements. This can be a simple bullet list or a tables
 

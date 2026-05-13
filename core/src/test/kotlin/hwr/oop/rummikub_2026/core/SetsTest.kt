@@ -18,7 +18,7 @@ class SetsTest {
         )
         //when
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesViererSet1(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isTrue()
@@ -34,7 +34,7 @@ class SetsTest {
         )
         //then
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesViererSet1(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isFalse()
@@ -50,7 +50,7 @@ class SetsTest {
         )
         // when
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesViererSet6(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
         //then
         assertThat(istGueltig).isTrue()
     }
@@ -65,7 +65,7 @@ class SetsTest {
         )
         //then
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesViererSet6(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isFalse()
@@ -81,7 +81,7 @@ class SetsTest {
         )
         // when
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesViererSet13(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
         //then
         assertThat(istGueltig).isTrue()
     }
@@ -96,7 +96,7 @@ class SetsTest {
         )
         //then
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesViererSet13(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isFalse()
@@ -112,7 +112,7 @@ class SetsTest {
         )
         // when
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesDreierSet1(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
         //then
         assertThat(istGueltig).isTrue()
     }
@@ -126,7 +126,7 @@ class SetsTest {
         )
         //then
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesDreierSet1(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isFalse()
@@ -141,7 +141,7 @@ class SetsTest {
         )
         // when
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesDreierSet6(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
         //then
         assertThat(istGueltig).isTrue()
     }
@@ -155,7 +155,7 @@ class SetsTest {
         )
         //then
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesDreierSet6(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isFalse()
@@ -170,7 +170,7 @@ class SetsTest {
         )
         // when
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesDreierSet13(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
         //then
         assertThat(istGueltig).isTrue()
     }
@@ -184,7 +184,7 @@ class SetsTest {
         )
         //then
         val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesDreierSet13(set)
+        val istGueltig = regelPruefer.istGueltigesSet(set)
 
         //then
         assertThat(istGueltig).isFalse()

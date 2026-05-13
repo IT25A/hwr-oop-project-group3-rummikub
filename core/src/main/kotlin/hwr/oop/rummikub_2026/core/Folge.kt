@@ -3,7 +3,7 @@ package hwr.oop.rummikub_2026.core
 class Folge(private val folgeListe: MutableList<Stein>) {
 
     val folgeReadOnly: List<Stein>
-        get() = folgeListe
+        get() = folgeListe.toList()
 
     fun isValid(){
         require(folgeListe.size >= 3){"Mindestens 3 Steine"}
@@ -36,7 +36,7 @@ class Folge(private val folgeListe: MutableList<Stein>) {
     fun hinzufuegenHinten(stein: Stein) {
         folgeListe.add(stein)
 
-        try {
+        try {//aendern
             this.isValid()
         } catch (e: IllegalArgumentException) {
             folgeListe.removeLast()
@@ -46,13 +46,13 @@ class Folge(private val folgeListe: MutableList<Stein>) {
 
     fun hinzufuegenVorne(stein: Stein) {
         folgeListe.add(0, stein)
-
-        try {
             this.isValid()
+
+       /* try {
         } catch (e: IllegalArgumentException) {
             folgeListe.removeFirst()
             throw e
-        }
+        }*/
         /*
         * Idee zur Vermeidung von try-catch:
         * 

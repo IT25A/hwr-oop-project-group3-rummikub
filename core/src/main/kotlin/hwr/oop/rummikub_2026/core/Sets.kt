@@ -3,7 +3,7 @@ package hwr.oop.rummikub_2026.core
 //import org.assertj.core.api.Assertions.assertThat
 
 class Sets {
-
+//besser: exceptions mit message
     fun istGueltigesSet(set: List<Stein>): Boolean {
         if (set.size !in 3..4) return false
 

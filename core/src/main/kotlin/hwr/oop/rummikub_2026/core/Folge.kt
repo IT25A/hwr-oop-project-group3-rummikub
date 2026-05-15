@@ -35,13 +35,14 @@ class Folge(private val folgeListe: MutableList<Stein>) {
 //Stefan fragen try catch
     fun hinzufuegenHinten(stein: Stein) {
         folgeListe.add(stein)
-
-        try {//aendern
             this.isValid()
-        } catch (e: IllegalArgumentException) {
-            folgeListe.removeLast()
-            throw e
-        }
+
+//        try {//aendern
+//
+//        } catch (e: IllegalArgumentException) {
+//            folgeListe.removeLast()
+//            throw e
+//        }
     }
 
     fun hinzufuegenVorne(stein: Stein) {

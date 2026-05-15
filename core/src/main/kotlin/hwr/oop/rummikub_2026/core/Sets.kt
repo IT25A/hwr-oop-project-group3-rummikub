@@ -1,21 +1,45 @@
 package hwr.oop.rummikub_2026.core
 
+import kotlin.collections.get
+import kotlin.compareTo
+
 //import org.assertj.core.api.Assertions.assertThat
 
-class Sets {
-//besser: exceptions mit message
-    fun istGueltigesSet(set: List<Stein>): Boolean {
-        if (set.size !in 3..4) return false
+class Sets(private val setListe: MutableList<Stein>) {
 
-        // Pruefen, ob alle die gleiche Zahl haben
-        val alleZahlenGleich = set.map { it.zahl() }.toSet().size == 1
+    val setReadOnly: List<Stein>
+        get() = setListe.toList()
 
-        // Pruefen, ob alle Farben unterschiedlich sind
-        val alleFarbenUnterschiedlich = set.map { it.farbe() }.toSet().size == set.size
+    fun istGueltigesSet(){
+        require(alleZahlenGleich()){"Alle Steine muessen dieselbe Zahl haben"}
+        require(setListe.size >= 3){"Mindestens 3 Steine"}
+        require(setListe.size <= 4){"Maximal 4 Steine"}
+        require(alleFarbenUnterschiedlich()){"Alle Steine muessen unterschiedliche Farbe haben"}
+         }
 
-        // Die Funktion selbst entscheidet anhand der Daten!
-        return alleZahlenGleich && alleFarbenUnterschiedlich
+    private fun alleZahlenGleich(): Boolean {
+        //Alle gleiche Zahl
+        val zahlen = setListe[0].zahl()
+        for (i in setListe) {
+            if (i.zahl() != zahlen) {
+                //Line Coverage hier nicht
+                return false  }
+        }
+        return true
     }
+
+    private fun alleFarbenUnterschiedlich(): Boolean {
+        //Alle unterschiedliche Farbe
+        val farben = mutableSetOf<Any>()
+        for (i in setListe) {
+            if (!farben.add(i.farbe())) {
+                return false  }
+        }
+
+        //Line Coverage hier nicht
+        return true
+    }
+
 }
 
 /*             (val folgeListe: List<Stein>): Boolean {

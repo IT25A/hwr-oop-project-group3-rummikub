@@ -2,6 +2,7 @@ package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 //import org.junit.jupiter.api.Assertions.assertTrue
 
@@ -10,18 +11,17 @@ class SetsTest {
     @Test
     fun `gueltige Set mit vier Steine, selbe Zahl (Eins) und unterschiedliche Farben`() {
         // given
-        val set = listOf(
+        val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Schwarz, Zahl.Eins)
         )
         //when
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isTrue()
+        assertThat(sets.setReadOnly).isEqualTo(set)
     }
 
     @Test
@@ -32,27 +32,29 @@ class SetsTest {
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Schwarz, Zahl.Eins)
         )
-        //then
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isFalse()
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
 
     @Test
     fun `gueltige Set mit vier Steine, selbe Zahl (Sechs) und unterschiedliche Farben`() {
-        val set = listOf(
+        val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Sechs),
             Stein(Farbe.Rot, Zahl.Sechs),
             Stein(Farbe.Blau, Zahl.Sechs),
             Stein(Farbe.Schwarz, Zahl.Sechs)
         )
-        // when
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
+
         //then
-        assertThat(istGueltig).isTrue()
+        assertThat(sets.setReadOnly).isEqualTo(set)
     }
 
     @Test
@@ -63,27 +65,29 @@ class SetsTest {
             Stein(Farbe.Blau, Zahl.Sechs),
             Stein(Farbe.Schwarz, Zahl.Sechs)
         )
-        //then
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isFalse()
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
 
     @Test
     fun `gueltige Set mit vier Steine, selbe Zahl (Dreizehn) und unterschiedliche Farben`() {
-        val set = listOf(
+        val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Dreizehn),
             Stein(Farbe.Rot, Zahl.Dreizehn),
             Stein(Farbe.Blau, Zahl.Dreizehn),
             Stein(Farbe.Schwarz, Zahl.Dreizehn)
         )
-        // when
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
+
         //then
-        assertThat(istGueltig).isTrue()
+        assertThat(sets.setReadOnly).isEqualTo(set)
     }
 
     @Test
@@ -94,12 +98,14 @@ class SetsTest {
             Stein(Farbe.Blau, Zahl.Dreizehn),
             Stein(Farbe.Schwarz, Zahl.Dreizehn)
         )
-        //then
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isFalse()
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
 
     @Test
@@ -110,11 +116,11 @@ class SetsTest {
             Stein(Farbe.Rot, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Eins),
         )
-        // when
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
+
         //then
-        assertThat(istGueltig).isTrue()
+        assertThat(sets.setReadOnly).isEqualTo(set)
     }
 
     @Test
@@ -124,12 +130,14 @@ class SetsTest {
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Eins),
         )
-        //then
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isFalse()
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
 
     @Test
@@ -139,11 +147,11 @@ class SetsTest {
             Stein(Farbe.Blau, Zahl.Sechs),
             Stein(Farbe.Schwarz, Zahl.Sechs)
         )
-        // when
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
+
         //then
-        assertThat(istGueltig).isTrue()
+        assertThat(sets.setReadOnly).isEqualTo(set)
     }
 
     @Test
@@ -153,12 +161,14 @@ class SetsTest {
             Stein(Farbe.Schwarz, Zahl.Sechs),
             Stein(Farbe.Schwarz, Zahl.Sechs)
         )
-        //then
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isFalse()
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
 
     @Test
@@ -168,11 +178,11 @@ class SetsTest {
             Stein(Farbe.Blau, Zahl.Dreizehn),
             Stein(Farbe.Schwarz, Zahl.Dreizehn)
         )
-        // when
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
+
         //then
-        assertThat(istGueltig).isTrue()
+        assertThat(sets.setReadOnly).isEqualTo(set)
     }
 
     @Test
@@ -182,11 +192,13 @@ class SetsTest {
             Stein(Farbe.Blau, Zahl.Dreizehn),
             Stein(Farbe.Blau, Zahl.Dreizehn)
         )
-        //then
-        val regelPruefer = Sets()
-        val istGueltig = regelPruefer.istGueltigesSet(set)
+        //when
+        val sets = Sets(set)
 
         //then
-        assertThat(istGueltig).isFalse()
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
 }

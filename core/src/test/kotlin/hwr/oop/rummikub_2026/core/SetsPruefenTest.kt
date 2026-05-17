@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 //import org.junit.jupiter.api.Assertions.assertTrue
 
 
-class SetsTest {
+class SetsPruefenTest {
     @Test
     fun `gueltige Set mit vier Steine, selbe Zahl (Eins) und unterschiedliche Farben`() {
         // given
@@ -52,6 +52,7 @@ class SetsTest {
         )
         //when
         val sets = Sets(set)
+        sets.istGueltigesSet()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -85,6 +86,7 @@ class SetsTest {
         )
         //when
         val sets = Sets(set)
+        sets.istGueltigesSet()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -109,6 +111,24 @@ class SetsTest {
     }
 
     @Test
+    fun `ungueltige Set mit vier Steine, unterschiedlichen Zahl und unterschiedlichen Farben`() {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Rot, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
+        )
+        //when
+        val sets = Sets(set)
+
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen dieselbe Zahl haben")
+    }
+
+    @Test
     fun `gueltige Set mit drei Steine, selbe Zahl (Eins) und unterschiedliche Farben`() {
         // given
         val set = listOf(
@@ -118,6 +138,7 @@ class SetsTest {
         )
         //when
         val sets = Sets(set)
+        sets.istGueltigesSet()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -149,6 +170,7 @@ class SetsTest {
         )
         //when
         val sets = Sets(set)
+        sets.istGueltigesSet()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -180,6 +202,7 @@ class SetsTest {
         )
         //when
         val sets = Sets(set)
+        sets.istGueltigesSet()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -200,5 +223,22 @@ class SetsTest {
             sets.istGueltigesSet()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
+    }
+
+    @Test
+    fun `ungueltige Set mit drei Steine, unterschiedlichen Zahl und unterschiedliche Farben`() {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Rot, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn)
+        )
+        //when
+        val sets = Sets(set)
+
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Alle Steine muessen dieselbe Zahl haben")
     }
 }

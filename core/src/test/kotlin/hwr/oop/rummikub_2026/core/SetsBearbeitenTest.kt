@@ -10,10 +10,10 @@ class SetsBearbeitenTest {
     // Hinzufuegen zu 3er Set, Voraussetzung: Anlegen ist valide
     // Hinzufuegen zu 4er Set, Anlegen ist nicht valide
     // Wegnehmen vom 4er Set, Voraussetzung: gueltiges Set oder gueltige Folge
-    // Frage: ein Test ausreichend für alle Zahlen?
-
     // Wegnehmen vom 3er Set nicht valide
-    
+
+    //Hinzufuegen und Wegnehmen: Abfragen, ob gueltig/ nicht gueltig implementiert
+    //Hinzufuegen und Wegnehmen: Funktion für das eigentliche Hinzufuegen/ Wegnehmen fehlt noch
 
     @Test
     fun `Hinzufuegen zu 3er Set Eins = gueltiges 4er Set` () {
@@ -62,7 +62,7 @@ class SetsBearbeitenTest {
 
 
     @Test
-    fun `Hinzufuegen zu 4er Set = ungueltiges Set` () {
+    fun `Hinzufuegen zu 4er Set Eins = ungueltiges Set` () {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
@@ -116,7 +116,7 @@ class SetsBearbeitenTest {
     }
 
     @Test
-    fun `Wegnehmen vom 4er Set = gueltiges Set oder gueltige Folge` () {
+    fun `Wegnehmen vom 4er Set Eins = gueltiges Set oder gueltige Folge` () {
         // given
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
@@ -132,10 +132,72 @@ class SetsBearbeitenTest {
     }
 
     @Test
-    fun `Wegnehmen zu 3er Set = ungueltiges Set` () {
+    fun `Wegnehmen vom 4er Set Sechs = gueltiges Set oder gueltige Folge` () {
+        // given
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Sechs),
+            Stein(Farbe.Rot, Zahl.Sechs),
+            Stein(Farbe.Blau, Zahl.Sechs),
+        )
+        //when
+        val sets = Sets(set)
+        sets.istGueltigesSet()
+
+        //then
+        assertThat(sets.setReadOnly).isEqualTo(set)
+    }
+
+    @Test
+    fun `Wegnehmen vom 4er Set Dreizehn = gueltiges Set oder gueltige Folge` () {
+        // given
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Dreizehn),
+            Stein(Farbe.Rot, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+        )
+        //when
+        val sets = Sets(set)
+        sets.istGueltigesSet()
+
+        //then
+        assertThat(sets.setReadOnly).isEqualTo(set)
+    }
+
+    @Test
+    fun `Wegnehmen zu 3er Set Eins = ungueltiges Set` () {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
+        )
+        val sets = Sets(set)
+
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Mindestens 3 Steine")
+    }
+
+    @Test
+    fun `Wegnehmen zu 3er Set Sechs = ungueltiges Set` () {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Sechs),
+            Stein(Farbe.Rot, Zahl.Sechs),
+        )
+        val sets = Sets(set)
+
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Mindestens 3 Steine")
+    }
+
+    @Test
+    fun `Wegnehmen zu 3er Set Dreizehn = ungueltiges Set` () {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Dreizehn),
+            Stein(Farbe.Rot, Zahl.Dreizehn),
         )
         val sets = Sets(set)
 

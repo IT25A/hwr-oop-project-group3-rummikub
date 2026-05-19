@@ -8,8 +8,6 @@ import org.junit.jupiter.api.assertThrows
 class SetsBearbeitenTest {
 
     // Hinzufuegen zu 3er Set, Voraussetzung: Anlegen ist valide
-    // Frage: ein Test ausreihend für alle Zahlen?
-
     // Hinzufuegen zu 4er Set, Anlegen ist nicht valide
     // Wegnehmen vom 4er Set, Voraussetzung: gueltiges Set oder gueltige Folge
     // Frage: ein Test ausreichend für alle Zahlen?
@@ -18,7 +16,7 @@ class SetsBearbeitenTest {
     
 
     @Test
-    fun `Hinzufuegen zu 3er Set = gueltiges 4er Set` () {
+    fun `Hinzufuegen zu 3er Set Eins = gueltiges 4er Set` () {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
@@ -33,6 +31,37 @@ class SetsBearbeitenTest {
     }
 
     @Test
+    fun `Hinzufuegen zu 3er Set Sechs = gueltiges 4er Set` () {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Sechs),
+            Stein(Farbe.Rot, Zahl.Sechs),
+            Stein(Farbe.Blau, Zahl.Sechs),
+            Stein(Farbe.Schwarz, Zahl.Sechs)
+        )
+        val sets = Sets(set)
+        sets.istGueltigesSet()
+
+        //then
+        assertThat(sets.setReadOnly).isEqualTo(set)
+    }
+
+    @Test
+    fun `Hinzufuegen zu 3er Set Dreizehn = gueltiges 4er Set` () {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Dreizehn),
+            Stein(Farbe.Rot, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
+        )
+        val sets = Sets(set)
+        sets.istGueltigesSet()
+
+        //then
+        assertThat(sets.setReadOnly).isEqualTo(set)
+    }
+
+
+    @Test
     fun `Hinzufuegen zu 4er Set = ungueltiges Set` () {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
@@ -40,6 +69,42 @@ class SetsBearbeitenTest {
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Schwarz, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Eins)
+        )
+        val sets = Sets(set)
+
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Maximal 4 Steine")
+    }
+
+    @Test
+    fun `Hinzufuegen zu 4er Set Sechs = ungueltiges Set` () {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Sechs),
+            Stein(Farbe.Rot, Zahl.Sechs),
+            Stein(Farbe.Blau, Zahl.Sechs),
+            Stein(Farbe.Schwarz, Zahl.Sechs),
+            Stein(Farbe.Blau, Zahl.Sechs)
+        )
+        val sets = Sets(set)
+
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            sets.istGueltigesSet()
+        }
+        assertThat(exception.message).contains("Maximal 4 Steine")
+    }
+
+    @Test
+    fun `Hinzufuegen zu 4er Set Dreizehn = ungueltiges Set` () {
+        val set = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Dreizehn),
+            Stein(Farbe.Rot, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn)
         )
         val sets = Sets(set)
 

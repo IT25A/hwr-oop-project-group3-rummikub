@@ -17,49 +17,46 @@ class SetsBearbeitenTest {
 
     @Test
     fun `Hinzufuegen zu 3er Set Eins = gueltiges 4er Set` () {
-        val set = mutableListOf(
+        val set = Sets(mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
-            Stein(Farbe.Blau, Zahl.Eins),
-            Stein(Farbe.Schwarz, Zahl.Eins)
+            Stein(Farbe.Blau, Zahl.Eins)
         )
-        val sets = Sets(set)
-        sets.istGueltigesSet()
-
+        )
         //then
-        assertThat(sets.setReadOnly).isEqualTo(set)
+        assertDoesNotThrow {
+            set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Eins))
+        }
+        assertThat(Stein(Farbe.Schwarz, Zahl.Eins) in set.setReadOnly)
     }
 
     @Test
     fun `Hinzufuegen zu 3er Set Sechs = gueltiges 4er Set` () {
-        val set = mutableListOf(
+        val set = Sets(mutableListOf(
             Stein(Farbe.Orange, Zahl.Sechs),
             Stein(Farbe.Rot, Zahl.Sechs),
-            Stein(Farbe.Blau, Zahl.Sechs),
             Stein(Farbe.Schwarz, Zahl.Sechs)
         )
-        val sets = Sets(set)
-        sets.istGueltigesSet()
-
-        //then
-        assertThat(sets.setReadOnly).isEqualTo(set)
+        )//when
+        assertDoesNotThrow {
+            set.hinzufuegenZumSet(Stein(Farbe.Blau, Zahl.Sechs))
+        }
+        assertThat(Stein(Farbe.Blau, Zahl.Sechs) in set.setReadOnly)
     }
 
     @Test
     fun `Hinzufuegen zu 3er Set Dreizehn = gueltiges 4er Set` () {
-        val set = mutableListOf(
+        val set = Sets(mutableListOf(
             Stein(Farbe.Orange, Zahl.Dreizehn),
             Stein(Farbe.Rot, Zahl.Dreizehn),
             Stein(Farbe.Blau, Zahl.Dreizehn),
-            Stein(Farbe.Schwarz, Zahl.Dreizehn)
-        )
-        val sets = Sets(set)
-        sets.istGueltigesSet()
-
+        ))
         //then
-        assertThat(sets.setReadOnly).isEqualTo(set)
+        assertDoesNotThrow {
+            set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Dreizehn))
+        }
+        assertThat(Stein(Farbe.Schwarz, Zahl.Eins) in set.setReadOnly)
     }
-
 
     @Test
     fun `Hinzufuegen zu 4er Set Eins = ungueltiges Set` () {
@@ -67,8 +64,7 @@ class SetsBearbeitenTest {
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
             Stein(Farbe.Blau, Zahl.Eins),
-            Stein(Farbe.Schwarz, Zahl.Eins),
-            Stein(Farbe.Blau, Zahl.Eins)
+            Stein(Farbe.Schwarz, Zahl.Eins)
         )
         val sets = Sets(set)
 
@@ -85,8 +81,7 @@ class SetsBearbeitenTest {
             Stein(Farbe.Orange, Zahl.Sechs),
             Stein(Farbe.Rot, Zahl.Sechs),
             Stein(Farbe.Blau, Zahl.Sechs),
-            Stein(Farbe.Schwarz, Zahl.Sechs),
-            Stein(Farbe.Blau, Zahl.Sechs)
+            Stein(Farbe.Schwarz, Zahl.Sechs)
         )
         val sets = Sets(set)
 
@@ -103,8 +98,7 @@ class SetsBearbeitenTest {
             Stein(Farbe.Orange, Zahl.Dreizehn),
             Stein(Farbe.Rot, Zahl.Dreizehn),
             Stein(Farbe.Blau, Zahl.Dreizehn),
-            Stein(Farbe.Schwarz, Zahl.Dreizehn),
-            Stein(Farbe.Blau, Zahl.Dreizehn)
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
         )
         val sets = Sets(set)
 
@@ -121,7 +115,7 @@ class SetsBearbeitenTest {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Eins),
             Stein(Farbe.Rot, Zahl.Eins),
-            Stein(Farbe.Blau, Zahl.Eins),
+            Stein(Farbe.Blau, Zahl.Eins)
         )
         //when
         val sets = Sets(set)
@@ -137,7 +131,7 @@ class SetsBearbeitenTest {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Sechs),
             Stein(Farbe.Rot, Zahl.Sechs),
-            Stein(Farbe.Blau, Zahl.Sechs),
+            Stein(Farbe.Blau, Zahl.Sechs)
         )
         //when
         val sets = Sets(set)
@@ -153,7 +147,7 @@ class SetsBearbeitenTest {
         val set = mutableListOf(
             Stein(Farbe.Orange, Zahl.Dreizehn),
             Stein(Farbe.Rot, Zahl.Dreizehn),
-            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Blau, Zahl.Dreizehn)
         )
         //when
         val sets = Sets(set)

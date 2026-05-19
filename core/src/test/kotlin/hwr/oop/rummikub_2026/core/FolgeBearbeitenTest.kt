@@ -22,6 +22,7 @@ class FolgeBearbeitenTest {
         assertDoesNotThrow {
             folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Fuenf))
         }
+        assertThat(Stein(Farbe.Rot, Zahl.Fuenf) in folge.folgeReadOnly)
     }
 
     @Test
@@ -43,6 +44,7 @@ class FolgeBearbeitenTest {
         // then
         assertThat(exception.message)
             .contains("Alle Steine muessen die selbe Farbe haben")
+        assertThat(Stein(Farbe.Blau, Zahl.Fuenf) !in folge.folgeReadOnly)
     }
 
     @Test
@@ -64,6 +66,7 @@ class FolgeBearbeitenTest {
         // then
         assertThat(exception.message)
             .contains("Steine muessen aufeinander Folgen")
+        assertThat(Stein(Farbe.Rot, Zahl.Sechs) !in folge.folgeReadOnly)
     }
 
     @Test
@@ -85,6 +88,7 @@ class FolgeBearbeitenTest {
         // then
         assertThat(exception.message)
             .contains("Steine muessen aufeinander Folgen")
+        assertThat(Stein(Farbe.Rot, Zahl.Eins) !in folge.folgeReadOnly)
     }
 
     @Test
@@ -102,6 +106,7 @@ class FolgeBearbeitenTest {
         assertDoesNotThrow {
             folge.hinzufuegenVorne(Stein(Farbe.Rot, Zahl.Eins))
         }
+        assertThat(Stein(Farbe.Rot, Zahl.Eins) in folge.folgeReadOnly)
     }
 
     @Test
@@ -123,6 +128,7 @@ class FolgeBearbeitenTest {
         // then
         assertThat(exception.message)
             .contains("Alle Steine muessen die selbe Farbe haben")
+        assertThat(Stein(Farbe.Blau, Zahl.Eins) !in folge.folgeReadOnly)
     }
 
     @Test
@@ -144,6 +150,7 @@ class FolgeBearbeitenTest {
         // then
         assertThat(exception.message)
             .contains("Steine muessen aufeinander Folgen")
+        assertThat(Stein(Farbe.Rot, Zahl.Sechs) !in folge.folgeReadOnly)
     }
 
     @Test
@@ -165,5 +172,45 @@ class FolgeBearbeitenTest {
         // then
         assertThat(exception.message)
             .contains("Steine muessen aufeinander Folgen")
+        assertThat(Stein(Farbe.Rot, Zahl.Fuenf) !in folge.folgeReadOnly)
+    }
+
+
+    @Test
+    fun `Hinten entfernen funktioniert`() {
+        // give
+        val folge = Folge(
+            mutableListOf(
+                Stein(Farbe.Rot, Zahl.Zwei),
+                Stein(Farbe.Rot, Zahl.Drei),
+                Stein(Farbe.Rot, Zahl.Vier),
+                Stein(Farbe.Rot, Zahl.Fuenf)
+            )
+        )
+        //when
+        val stein = folge.wegnehmenHinten()
+        // then
+
+        assertThat(Stein(Farbe.Rot, Zahl.Fuenf) !in folge.folgeReadOnly)
+        assertThat(stein == (Stein(Farbe.Rot, Zahl.Fuenf)))
+    }
+
+    @Test
+    fun `Vorne entfernen funktioniert`() {
+        // give
+        val folge = Folge(
+            mutableListOf(
+                Stein(Farbe.Rot, Zahl.Zwei),
+                Stein(Farbe.Rot, Zahl.Drei),
+                Stein(Farbe.Rot, Zahl.Vier),
+                Stein(Farbe.Rot, Zahl.Fuenf)
+            )
+        )
+        //when
+        val stein = folge.wegnehmenVorne()
+        // then
+
+        assertThat(Stein(Farbe.Rot, Zahl.Zwei) !in folge.folgeReadOnly)
+        assertThat(stein == (Stein(Farbe.Rot, Zahl.Zwei)))
     }
 }

@@ -1,6 +1,6 @@
 package hwr.oop.rummikub_2026.core
 
-class Folge(private val folgeListe: MutableList<Stein>) {
+data class Folge(private val folgeListe: MutableList<Stein>) {
 
     val folgeReadOnly: List<Stein>
         get() = folgeListe.toList()
@@ -32,37 +32,29 @@ class Folge(private val folgeListe: MutableList<Stein>) {
         }
         return true
     }
-//Stefan fragen try catch
+
     fun hinzufuegenHinten(stein: Stein) {
         folgeListe.add(stein)
-
-        try {//aendern
-            this.isValid()
-        } catch (e: IllegalArgumentException) {
-            folgeListe.removeLast()
-            throw e
-        }
+        this.isValid()
     }
 
     fun hinzufuegenVorne(stein: Stein) {
         folgeListe.add(0, stein)
-            this.isValid()
-
-       /* try {
-        } catch (e: IllegalArgumentException) {
-            folgeListe.removeFirst()
-            throw e
-        }*/
-        /*
-        * Idee zur Vermeidung von try-catch:
-        * 
-        *  val neueListe = folgeListe + stein
-        * require(istValid(neueListe))
-        * folgeListe.add(stein)
-        * 
-        * man muesste isValid anpassen, sodass man jede Liste als Parameter uebergeben kann
-        * */
+        this.isValid()
     }
 
+    fun wegnehmenVorne() : Stein{
+        val stein = folgeListe[0]
+        folgeListe.removeFirst()
+        this.isValid()
+        return stein
+    }
+
+    fun wegnehmenHinten() : Stein{
+        val stein = folgeListe[folgeListe.size - 1]
+        folgeListe.removeLast()
+        this.isValid()
+        return stein
+    }
 }
 

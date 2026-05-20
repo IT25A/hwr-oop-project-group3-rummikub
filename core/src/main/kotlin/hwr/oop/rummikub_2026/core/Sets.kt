@@ -1,8 +1,5 @@
 package hwr.oop.rummikub_2026.core
 
-import kotlin.collections.get
-import kotlin.compareTo
-
 //import org.assertj.core.api.Assertions.assertThat
 
 data class Sets(private val setListe: MutableList<Stein>) {
@@ -22,6 +19,7 @@ data class Sets(private val setListe: MutableList<Stein>) {
         val zahlen = setListe[0].zahl()
         for (i in setListe) {
             if (i.zahl() != zahlen) {
+                //keine Coverage!!!
                 return false  }
         }
         return true
@@ -32,6 +30,7 @@ data class Sets(private val setListe: MutableList<Stein>) {
         val farben = mutableSetOf<Any>()
         for (i in setListe) {
             if (!farben.add(i.farbe())) {
+                //keine Coverage!!
                 return false  }
         }
         return true
@@ -42,9 +41,8 @@ data class Sets(private val setListe: MutableList<Stein>) {
             this.istGueltigesSet()
     }
 
-    fun wegnehmenVomSet() : Stein{
-        val stein = setListe[0]
-        setListe.removeFirst()
+    fun wegnehmenVomSet(stein: Stein): Stein{
+        setListe.remove(stein)
         this.istGueltigesSet()
         return stein
     }

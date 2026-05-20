@@ -4,181 +4,161 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 
 class FolgeBearbeitenTest {
 
-    @Test
-    fun `Hinten hinzufuegen funktioniert`() {
-        // give
-        val folge = Folge(
+    companion object {
+
+        private fun standardFolge() = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Zwei),
                 Stein(Farbe.Rot, Zahl.Drei),
                 Stein(Farbe.Rot, Zahl.Vier)
             )
         )
+
+        @JvmStatic
+        fun gueltigeHintenSteine() = listOf(
+            Stein(Farbe.Rot, Zahl.Fuenf)
+        )
+
+        @JvmStatic
+        fun gueltigeVorneSteine() = listOf(
+            Stein(Farbe.Rot, Zahl.Eins)
+        )
+
+        @JvmStatic
+        fun ungueltigeHintenSteine() = listOf(
+
+            // falsche Farbe
+            Pair(
+                Stein(Farbe.Blau, Zahl.Fuenf),
+                "Alle Steine muessen die selbe Farbe haben"
+            ),
+
+            // Lücke
+            Pair(
+                Stein(Farbe.Rot, Zahl.Sechs),
+                "Steine muessen aufeinander Folgen"
+            ),
+
+            // eigentlich vorne
+            Pair(
+                Stein(Farbe.Rot, Zahl.Eins),
+                "Steine muessen aufeinander Folgen"
+            ),
+
+            // doppelte Zahl
+            Pair(
+                Stein(Farbe.Rot, Zahl.Vier),
+                "Steine muessen aufeinander Folgen"
+            )
+        )
+
+        @JvmStatic
+        fun ungueltigeVorneSteine() = listOf(
+
+            // falsche Farbe
+            Pair(
+                Stein(Farbe.Blau, Zahl.Eins),
+                "Alle Steine muessen die selbe Farbe haben"
+            ),
+
+            // falsche Reihenfolge
+            Pair(
+                Stein(Farbe.Rot, Zahl.Sechs),
+                "Steine muessen aufeinander Folgen"
+            ),
+
+            // eigentlich hinten
+            Pair(
+                Stein(Farbe.Rot, Zahl.Fuenf),
+                "Steine muessen aufeinander Folgen"
+            ),
+
+            // doppelte Zahl
+            Pair(
+                Stein(Farbe.Rot, Zahl.Zwei),
+                "Steine muessen aufeinander Folgen"
+            )
+        )
+    }
+
+    @ParameterizedTest
+    @MethodSource("gueltigeHintenSteine")
+    fun `gueltiges hinten hinzufuegen funktioniert`(
+        stein: Stein
+    ) {
+        // given
+        val folge = standardFolge()
 
         // then
         assertDoesNotThrow {
-            folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Fuenf))
+            folge.hinzufuegenHinten(stein)
         }
-        assertThat(Stein(Farbe.Rot, Zahl.Fuenf) in folge.folgeReadOnly)
+
+        assertThat(folge.folgeReadOnly)
+            .contains(stein)
     }
 
-    @Test
-    fun `Hinten hinzufuegen mit falscher Farbe`() {
+    @ParameterizedTest
+    @MethodSource("ungueltigeHintenSteine")
+    fun `ungueltiges hinten hinzufuegen wirft exception`(
+        testfall: Pair<Stein, String>
+    ) {
         // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
+        val folge = standardFolge()
 
         // when
         val exception = assertThrows<IllegalArgumentException> {
-            folge.hinzufuegenHinten(Stein(Farbe.Blau, Zahl.Fuenf))
+            folge.hinzufuegenHinten(testfall.first)
         }
 
         // then
         assertThat(exception.message)
-            .contains("Alle Steine muessen die selbe Farbe haben")
-        assertThat(Stein(Farbe.Blau, Zahl.Fuenf) !in folge.folgeReadOnly)
+            .contains(testfall.second)
     }
 
-    @Test
-    fun `Hinten hinzufuegen mit falscher Reihenfolge`() {
+    @ParameterizedTest
+    @MethodSource("gueltigeVorneSteine")
+    fun `gueltiges vorne hinzufuegen funktioniert`(
+        stein: Stein
+    ) {
         // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
-
-        // when
-        val exception = assertThrows<IllegalArgumentException> {
-            folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Sechs))
-        }
-
-        // then
-        assertThat(exception.message)
-            .contains("Steine muessen aufeinander Folgen")
-        assertThat(Stein(Farbe.Rot, Zahl.Sechs) !in folge.folgeReadOnly)
-    }
-
-    @Test
-    fun `Hinten darf nicht vorne eingefuegt werden`() {
-        // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
-
-        // when
-        val exception = assertThrows<IllegalArgumentException> {
-            folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Eins))
-        }
-
-        // then
-        assertThat(exception.message)
-            .contains("Steine muessen aufeinander Folgen")
-        assertThat(Stein(Farbe.Rot, Zahl.Eins) !in folge.folgeReadOnly)
-    }
-
-    @Test
-    fun `Vorne hinzufuegen funktioniert`() {
-        // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
+        val folge = standardFolge()
 
         // then
         assertDoesNotThrow {
-            folge.hinzufuegenVorne(Stein(Farbe.Rot, Zahl.Eins))
+            folge.hinzufuegenVorne(stein)
         }
-        assertThat(Stein(Farbe.Rot, Zahl.Eins) in folge.folgeReadOnly)
+
+        assertThat(folge.folgeReadOnly)
+            .contains(stein)
     }
 
-    @Test
-    fun `Vorne hinzufuegen mit falscher Farbe`() {
+    @ParameterizedTest
+    @MethodSource("ungueltigeVorneSteine")
+    fun `ungueltiges vorne hinzufuegen wirft exception`(
+        testfall: Pair<Stein, String>
+    ) {
         // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
+        val folge = standardFolge()
 
         // when
         val exception = assertThrows<IllegalArgumentException> {
-            folge.hinzufuegenVorne(Stein(Farbe.Blau, Zahl.Eins))
+            folge.hinzufuegenVorne(testfall.first)
         }
 
         // then
         assertThat(exception.message)
-            .contains("Alle Steine muessen die selbe Farbe haben")
-        assertThat(Stein(Farbe.Blau, Zahl.Eins) !in folge.folgeReadOnly)
+            .contains(testfall.second)
     }
 
     @Test
-    fun `Vorne hinzufuegen mit falscher Reihenfolge`() {
+    fun `wegnehmen hinten entfernt letzten Stein`() {
         // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
-
-        // when
-        val exception = assertThrows<IllegalArgumentException> {
-            folge.hinzufuegenVorne(Stein(Farbe.Rot, Zahl.Sechs))
-        }
-
-        // then
-        assertThat(exception.message)
-            .contains("Steine muessen aufeinander Folgen")
-        assertThat(Stein(Farbe.Rot, Zahl.Sechs) !in folge.folgeReadOnly)
-    }
-
-    @Test
-    fun `Vorne darf nicht hinten eingefuegt werden`() {
-        // given
-        val folge = Folge(
-            mutableListOf(
-                Stein(Farbe.Rot, Zahl.Zwei),
-                Stein(Farbe.Rot, Zahl.Drei),
-                Stein(Farbe.Rot, Zahl.Vier)
-            )
-        )
-
-        // when
-        val exception = assertThrows<IllegalArgumentException> {
-            folge.hinzufuegenVorne(Stein(Farbe.Rot, Zahl.Fuenf))
-        }
-
-        // then
-        assertThat(exception.message)
-            .contains("Steine muessen aufeinander Folgen")
-        assertThat(Stein(Farbe.Rot, Zahl.Fuenf) !in folge.folgeReadOnly)
-    }
-
-
-    @Test
-    fun `Hinten entfernen funktioniert`() {
-        // give
         val folge = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Zwei),
@@ -187,17 +167,24 @@ class FolgeBearbeitenTest {
                 Stein(Farbe.Rot, Zahl.Fuenf)
             )
         )
-        //when
-        val stein = folge.wegnehmenHinten()
-        // then
 
-        assertThat(Stein(Farbe.Rot, Zahl.Fuenf) !in folge.folgeReadOnly)
-        assertThat(stein == (Stein(Farbe.Rot, Zahl.Fuenf)))
+        // when
+        val entfernt = folge.wegnehmenHinten()
+
+        // then
+        assertThat(entfernt)
+            .isEqualTo(Stein(Farbe.Rot, Zahl.Fuenf))
+
+        assertThat(folge.folgeReadOnly)
+            .doesNotContain(Stein(Farbe.Rot, Zahl.Fuenf))
+
+        assertThat(folge.folgeReadOnly)
+            .hasSize(3)
     }
 
     @Test
-    fun `Vorne entfernen funktioniert`() {
-        // give
+    fun `wegnehmen vorne entfernt ersten Stein `() {
+        // given
         val folge = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Zwei),
@@ -206,11 +193,18 @@ class FolgeBearbeitenTest {
                 Stein(Farbe.Rot, Zahl.Fuenf)
             )
         )
-        //when
-        val stein = folge.wegnehmenVorne()
-        // then
 
-        assertThat(Stein(Farbe.Rot, Zahl.Zwei) !in folge.folgeReadOnly)
-        assertThat(stein == (Stein(Farbe.Rot, Zahl.Zwei)))
+        // when
+        val entfernt = folge.wegnehmenVorne()
+
+        // then
+        assertThat(entfernt)
+            .isEqualTo(Stein(Farbe.Rot, Zahl.Zwei))
+
+        assertThat(folge.folgeReadOnly)
+            .doesNotContain(Stein(Farbe.Rot, Zahl.Zwei))
+
+        assertThat(folge.folgeReadOnly)
+            .hasSize(3)
     }
 }

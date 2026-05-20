@@ -94,13 +94,20 @@ class FolgeBearbeitenTest {
         // given
         val folge = standardFolge()
 
-        // then
+        // when
         assertDoesNotThrow {
             folge.hinzufuegenHinten(stein)
         }
 
+        // then
         assertThat(folge.folgeReadOnly)
             .contains(stein)
+
+        assertThat(folge.folgeReadOnly.last())
+            .isEqualTo(stein)
+
+        assertThat(folge.folgeReadOnly)
+            .hasSize(4)
     }
 
     @ParameterizedTest
@@ -129,13 +136,20 @@ class FolgeBearbeitenTest {
         // given
         val folge = standardFolge()
 
-        // then
+        // when
         assertDoesNotThrow {
             folge.hinzufuegenVorne(stein)
         }
 
+        // then
         assertThat(folge.folgeReadOnly)
             .contains(stein)
+
+        assertThat(folge.folgeReadOnly.first())
+            .isEqualTo(stein)
+
+        assertThat(folge.folgeReadOnly)
+            .hasSize(4)
     }
 
     @ParameterizedTest
@@ -206,5 +220,100 @@ class FolgeBearbeitenTest {
 
         assertThat(folge.folgeReadOnly)
             .hasSize(3)
+    }
+
+    @Test
+    fun `wegnehmen hinten bei minimaler Folge wirft Exception`() {
+        // given
+        val folge = Folge(
+            mutableListOf(
+                Stein(Farbe.Blau, Zahl.Eins),
+                Stein(Farbe.Blau, Zahl.Zwei),
+                Stein(Farbe.Blau, Zahl.Drei)
+            )
+        )
+
+        // when & then
+        val exception = assertThrows<IllegalArgumentException> {
+            folge.wegnehmenHinten()
+        }
+
+        assertThat(exception.message)
+            .contains("Mindestens 3 Steine")
+    }
+
+    @Test
+    fun `wegnehmen vorne bei minimaler Folge wirft Exception`() {
+        // given
+        val folge = Folge(
+            mutableListOf(
+                Stein(Farbe.Orange, Zahl.Zehn),
+                Stein(Farbe.Orange, Zahl.Elf),
+                Stein(Farbe.Orange, Zahl.Zwoelf)
+            )
+        )
+
+        // when & then
+        val exception = assertThrows<IllegalArgumentException> {
+            folge.wegnehmenVorne()
+        }
+
+        assertThat(exception.message)
+            .contains("Mindestens 3 Steine")
+    }
+
+    @Test
+    fun `hinzufuegen zu maximaler Folge wirft Exception`() {
+        // given
+        val folge = Folge(
+            mutableListOf(
+                Stein(Farbe.Schwarz, Zahl.Eins),
+                Stein(Farbe.Schwarz, Zahl.Zwei),
+                Stein(Farbe.Schwarz, Zahl.Drei),
+                Stein(Farbe.Schwarz, Zahl.Vier),
+                Stein(Farbe.Schwarz, Zahl.Fuenf),
+                Stein(Farbe.Schwarz, Zahl.Sechs),
+                Stein(Farbe.Schwarz, Zahl.Sieben),
+                Stein(Farbe.Schwarz, Zahl.Acht),
+                Stein(Farbe.Schwarz, Zahl.Neun),
+                Stein(Farbe.Schwarz, Zahl.Zehn),
+                Stein(Farbe.Schwarz, Zahl.Elf),
+                Stein(Farbe.Schwarz, Zahl.Zwoelf),
+                Stein(Farbe.Schwarz, Zahl.Dreizehn)
+            )
+        )
+
+        // when & then
+        val exception = assertThrows<IllegalArgumentException> {
+            folge.hinzufuegenHinten(Stein(Farbe.Schwarz, Zahl.Dreizehn))
+        }
+
+        assertThat(exception.message)
+            .contains("Maximal 13 Steine")
+    }
+
+    @Test
+    fun `mehrfaches hinzufuegen und wegnehmen funktioniert`() {
+        // given
+        val folge = standardFolge()
+
+        // when
+        folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Fuenf))
+        folge.hinzufuegenVorne(Stein(Farbe.Rot, Zahl.Eins))
+        val entfernt = folge.wegnehmenHinten()
+        folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Fuenf))
+
+        // then
+        assertThat(entfernt)
+            .isEqualTo(Stein(Farbe.Rot, Zahl.Fuenf))
+
+        assertThat(folge.folgeReadOnly)
+            .containsExactly(
+                Stein(Farbe.Rot, Zahl.Eins),
+                Stein(Farbe.Rot, Zahl.Zwei),
+                Stein(Farbe.Rot, Zahl.Drei),
+                Stein(Farbe.Rot, Zahl.Vier),
+                Stein(Farbe.Rot, Zahl.Fuenf)
+            )
     }
 }

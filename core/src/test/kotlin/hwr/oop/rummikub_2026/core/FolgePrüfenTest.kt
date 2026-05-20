@@ -47,29 +47,41 @@ class FolgePruefenTest {
         )
 
         @JvmStatic
-        fun ungueltigeLaengen() = listOf(
-            // Zu kurz
+        fun zuKurzeFolgen() = listOf(
+            // Nur 2 Steine
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins),
                 Stein(Farbe.Rot, Zahl.Zwei)
             ),
 
-            // Zu lang
+            // Nur 1 Stein
             mutableListOf(
-                Stein(Farbe.Blau, Zahl.Eins),
-                Stein(Farbe.Blau, Zahl.Zwei),
-                Stein(Farbe.Blau, Zahl.Drei),
-                Stein(Farbe.Blau, Zahl.Vier),
-                Stein(Farbe.Blau, Zahl.Fuenf),
-                Stein(Farbe.Blau, Zahl.Sechs),
-                Stein(Farbe.Blau, Zahl.Sieben),
-                Stein(Farbe.Blau, Zahl.Acht),
-                Stein(Farbe.Blau, Zahl.Neun),
-                Stein(Farbe.Blau, Zahl.Zehn),
-                Stein(Farbe.Blau, Zahl.Elf),
-                Stein(Farbe.Blau, Zahl.Zwoelf),
-                Stein(Farbe.Blau, Zahl.Dreizehn),
-                Stein(Farbe.Blau, Zahl.Eins)
+                Stein(Farbe.Blau, Zahl.Fuenf)
+            ),
+
+            // Leere Liste
+            mutableListOf<Stein>()
+        )
+
+        @JvmStatic
+        fun zuLangeFolgen() = listOf(
+            // 14 Steine
+            mutableListOf(
+                Stein(Farbe.Orange, Zahl.Eins),
+                Stein(Farbe.Orange, Zahl.Zwei),
+                Stein(Farbe.Orange, Zahl.Drei),
+                Stein(Farbe.Orange, Zahl.Vier),
+                Stein(Farbe.Orange, Zahl.Fuenf),
+                Stein(Farbe.Orange, Zahl.Sechs),
+                Stein(Farbe.Orange, Zahl.Sieben),
+                Stein(Farbe.Orange, Zahl.Acht),
+                Stein(Farbe.Orange, Zahl.Neun),
+                Stein(Farbe.Orange, Zahl.Zehn),
+                Stein(Farbe.Orange, Zahl.Elf),
+                Stein(Farbe.Orange, Zahl.Zwoelf),
+                Stein(Farbe.Orange, Zahl.Dreizehn),
+
+                Stein(Farbe.Orange, Zahl.Dreizehn)
             )
         )
 
@@ -110,6 +122,14 @@ class FolgePruefenTest {
                 Stein(Farbe.Orange, Zahl.Sieben),
                 Stein(Farbe.Orange, Zahl.Sechs),
                 Stein(Farbe.Orange, Zahl.Fuenf)
+            ),
+
+            // Doppelte Zahl
+            mutableListOf(
+                Stein(Farbe.Schwarz, Zahl.Fuenf),
+                Stein(Farbe.Schwarz, Zahl.Sechs),
+                Stein(Farbe.Schwarz, Zahl.Sechs),
+                Stein(Farbe.Schwarz, Zahl.Sieben)
             )
         )
     }
@@ -143,15 +163,33 @@ class FolgePruefenTest {
     }
 
     @ParameterizedTest
-    @MethodSource("ungueltigeLaengen")
-    fun `ungueltige Laengen werfen Exception`(
+    @MethodSource("zuKurzeFolgen")
+    fun `zu kurze Folgen werfen Exception`(
         steine: MutableList<Stein>
     ) {
         val folge = Folge(steine)
 
-        assertThrows<IllegalArgumentException> {
+        val exception = assertThrows<IllegalArgumentException> {
             folge.isValid()
         }
+
+        assertThat(exception.message)
+            .contains("Mindestens 3 Steine")
+    }
+
+    @ParameterizedTest
+    @MethodSource("zuLangeFolgen")
+    fun `zu lange Folgen werfen Exception`(
+        steine: MutableList<Stein>
+    ) {
+        val folge = Folge(steine)
+
+        val exception = assertThrows<IllegalArgumentException> {
+            folge.isValid()
+        }
+
+        assertThat(exception.message)
+            .contains("Maximal 13 Steine")
     }
 
     @ParameterizedTest

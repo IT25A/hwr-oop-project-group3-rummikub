@@ -136,11 +136,86 @@ class SpielerTest {
             ),
             mutableListOf()
         )
+
+        @JvmStatic
+        fun listeGueltigeSteine() = listOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Blau, Zahl.Zwei),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
+        )
+
+        @JvmStatic
+        fun listeUngueltigeSteine() = listOf(
+            Stein(Farbe.Orange, Zahl.Zwei),
+            Stein(Farbe.Blau, Zahl.Eins),
+            Stein(Farbe.Schwarz, Zahl.Sechs)
+        )
     }
 
     @ParameterizedTest
+    @MethodSource("listeGueltigeSteine")
+    fun `Stein loeschen funktioniert`(
+        stein: Stein
+    ) {
+        //given
+        val loeschenListe = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Blau, Zahl.Zwei),
+            Stein(Farbe.Blau, Zahl.Zwei),
+            Stein(Farbe.Rot, Zahl.Vier),
+            Stein(Farbe.Orange, Zahl.Fuenf),
+            Stein(Farbe.Blau, Zahl.Sechs),
+            Stein(Farbe.Schwarz, Zahl.Sieben),
+            Stein(Farbe.Orange, Zahl.Acht),
+            Stein(Farbe.Blau, Zahl.Neun),
+            Stein(Farbe.Orange, Zahl.Zehn),
+            Stein(Farbe.Rot, Zahl.Elf),
+            Stein(Farbe.Orange, Zahl.Zwoelf),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
+        )
+        val spieler = Spieler("Maxi-Taxi", "4", loeschenListe.toMutableList())
+        //when
+        spieler.entfernen(stein)
+        loeschenListe.remove(stein)
+        //then
+        assertThat(spieler.boardReadOnly).containsExactlyInAnyOrderElementsOf(loeschenListe)
+    }
+
+    @ParameterizedTest
+    @MethodSource("listeUngueltigeSteine")
+    fun `Stein, der nicht in der Liste ist, loeschen funktioniert nicht`(
+        stein: Stein
+    ) {
+        //given
+        val loeschenListe = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Blau, Zahl.Zwei),
+            Stein(Farbe.Blau, Zahl.Zwei),
+            Stein(Farbe.Rot, Zahl.Vier),
+            Stein(Farbe.Orange, Zahl.Fuenf),
+            Stein(Farbe.Blau, Zahl.Sechs),
+            Stein(Farbe.Schwarz, Zahl.Sieben),
+            Stein(Farbe.Orange, Zahl.Acht),
+            Stein(Farbe.Blau, Zahl.Neun),
+            Stein(Farbe.Orange, Zahl.Zehn),
+            Stein(Farbe.Rot, Zahl.Elf),
+            Stein(Farbe.Orange, Zahl.Zwoelf),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
+        )
+        val spieler = Spieler("Maxi-Taxi", "4", loeschenListe.toMutableList())
+        //when
+        //then
+        val exception = assertThrows<IllegalArgumentException> {
+            spieler.entfernen(stein)
+        }
+        assertThat(exception.message).contains("Der Stein ist nicht vorhanden.")
+        }
+
+    @ParameterizedTest
     @MethodSource("liste14Steine")
-    fun ` Anfangssteine werfen keine Exception`(
+    fun `Anfangssteine werfen keine Exception`(
         anfangsSteine: MutableList<Stein>
     ) {
         //then
@@ -163,5 +238,4 @@ class SpielerTest {
 }
 
 
-//Spieler kann Steine weglegen->Steine werden aus der Liste entfernt
-//get() für board.readOnly für Steinestand
+

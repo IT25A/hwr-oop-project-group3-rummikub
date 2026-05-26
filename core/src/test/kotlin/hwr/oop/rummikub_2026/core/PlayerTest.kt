@@ -1,4 +1,4 @@
-package hwr.oop.rummikub_2026.core
+ package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions

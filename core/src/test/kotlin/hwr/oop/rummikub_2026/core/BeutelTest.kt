@@ -58,7 +58,7 @@ class BeutelTest {
 
         val steinAusLeeremBeutel = beutel.zieheSteinAusBeutel()
 
-        assertNull(steinAusLeeremBeutel, "Wenn der Beutel leer ist, wird null zurückgegeben.")
+        assertNull(steinAusLeeremBeutel, "Wenn der Beutel leer ist, wird null zurueckgegeben.")
         assertTrue(beutel.istLeer(), "Der Beutel sollte weiterhin leer sein.")
     }
 

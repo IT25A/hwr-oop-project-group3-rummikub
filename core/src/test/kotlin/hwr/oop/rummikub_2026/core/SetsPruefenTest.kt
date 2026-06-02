@@ -37,7 +37,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
@@ -52,7 +52,7 @@ class SetsPruefenTest {
         )
         //when
         val sets = Sets(set)
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -71,7 +71,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
@@ -86,7 +86,7 @@ class SetsPruefenTest {
         )
         //when
         val sets = Sets(set)
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -105,7 +105,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
@@ -123,7 +123,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen dieselbe Zahl haben")
     }
@@ -138,7 +138,7 @@ class SetsPruefenTest {
         )
         //when
         val sets = Sets(set)
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -156,7 +156,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
@@ -170,7 +170,7 @@ class SetsPruefenTest {
         )
         //when
         val sets = Sets(set)
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -188,7 +188,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
@@ -202,7 +202,7 @@ class SetsPruefenTest {
         )
         //when
         val sets = Sets(set)
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         //then
         assertThat(sets.setReadOnly).isEqualTo(set)
@@ -220,7 +220,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
     }
@@ -237,7 +237,7 @@ class SetsPruefenTest {
 
         //then
         val exception = assertThrows<IllegalArgumentException> {
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(exception.message).contains("Alle Steine muessen dieselbe Zahl haben")
     }

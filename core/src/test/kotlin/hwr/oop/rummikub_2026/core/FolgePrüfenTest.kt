@@ -158,7 +158,7 @@ class FolgePruefenTest {
         val folge = Folge(steine)
 
         assertDoesNotThrow {
-            folge.isValid()
+            folge.istGueltig()
         }
     }
 
@@ -170,7 +170,7 @@ class FolgePruefenTest {
         val folge = Folge(steine)
 
         val exception = assertThrows<IllegalArgumentException> {
-            folge.isValid()
+            folge.istGueltig()
         }
 
         assertThat(exception.message)
@@ -185,7 +185,7 @@ class FolgePruefenTest {
         val folge = Folge(steine)
 
         val exception = assertThrows<IllegalArgumentException> {
-            folge.isValid()
+            folge.istGueltig()
         }
 
         assertThat(exception.message)
@@ -200,7 +200,7 @@ class FolgePruefenTest {
         val folge = Folge(steine)
 
         val exception = assertThrows<IllegalArgumentException> {
-            folge.isValid()
+            folge.istGueltig()
         }
 
         assertThat(exception.message)
@@ -215,7 +215,7 @@ class FolgePruefenTest {
         val folge = Folge(steine)
 
         val exception = assertThrows<IllegalArgumentException> {
-            folge.isValid()
+            folge.istGueltig()
         }
 
         assertThat(exception.message)

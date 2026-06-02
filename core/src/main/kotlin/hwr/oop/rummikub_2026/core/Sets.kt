@@ -2,12 +2,12 @@ package hwr.oop.rummikub_2026.core
 
 //import org.assertj.core.api.Assertions.assertThat
 
-data class Sets(private val setListe: MutableList<Stein>) {
+data class Sets(private val setListe: MutableList<Stein>) : Kombinationen{
 
     val setReadOnly: List<Stein>
         get() = setListe.toList()
 
-    fun istGueltigesSet(){
+    override fun istGueltig(){
         require(setListe.size >= 3){"Mindestens 3 Steine"}
         require(setListe.size <= 4){"Maximal 4 Steine"}
         require(alleZahlenGleich()){"Alle Steine muessen dieselbe Zahl haben"}
@@ -38,12 +38,12 @@ data class Sets(private val setListe: MutableList<Stein>) {
 
     fun hinzufuegenZumSet(stein: Stein){
         setListe.add(stein)
-            this.istGueltigesSet()
+            this.istGueltig()
     }
 
     fun wegnehmenVomSet(stein: Stein): Stein{
         setListe.remove(stein)
-        this.istGueltigesSet()
+        this.istGueltig()
         return stein
     }
 

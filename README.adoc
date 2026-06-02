@@ -8,15 +8,23 @@ Do not rely on it!
 
 // TODO : Add a list of features that your project implements. This can be a simple bullet list or a tables
 == Feature Liste
+Steine:
 - Test - Generierung der Steine und ueberpruefung der Steinanzahl und Farben
+Folgen:
 - Test - Folgen sind richtig (Anzahl der Steine, Farbe, aufeinanderfolgende Zahlen)
 - Test - Man kann Steine zur Folge hinzufuegen - vorne und hinten
+Sets:
 - Test - Sets sind richtig (Anzahl der Steine (dreier Sets und vierer Sets), unterschiedliche Farben, gleiche Zahlen)
 - Test - Sets sind ungueltig (Anzahl der Steine ist falsch (2>=x>=5)Farbe ist doppelt, unterschiedliche Zahlen)
-- Test - Sets Bearbeiten: Hinzufuegen zu 3er Set (= gueltiges 4er Set)
-- Test - Sets Bearbeiten: Hinzufuegen zu 4er Set (= ungueltiges Set)
-- Test - Sets Bearbeiten: Wegnehmen vom 3er Set (= ungueltiges Set)
-- Test - Sets Bearbeiten: Wegnehmen vom 4er Set (= gueltiges 3er Set oder gueltige Folge)
+- Test - Sets Bearbeiten: Hinzufuegen zu 3er Set (= gueltiges 4er Set) und Hinzufuegen zu 4er Set (= ungueltiges Set)
+- Test - Sets Bearbeiten: Wegnehmen vom 3er Set (= ungueltiges Set) und Wegnehmen vom 4er Set (= gueltiges 3er Set oder gueltige Folge)
+Spieler:
+- Test - Spieler hat einen Name und ID
+- Test - Spieler hat Board (kann legen und ziehen)
+Beutel:
+- Test - Beutel kann existieren
+- Test - Beutel hat 104 (ohne Joker) Steine
+- Test - Steine ziehen funktioniert korrekt (Stein Anzahl minus 1)
 
 
 

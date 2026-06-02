@@ -1,11 +1,11 @@
 package hwr.oop.rummikub_2026.core
 
-data class Folge(private val folgeListe: MutableList<Stein>) {
+data class Folge  (private val folgeListe: MutableList<Stein>) : Kombinationen{
 
     val folgeReadOnly: List<Stein>
         get() = folgeListe.toList()
 
-    fun isValid(){
+    override fun istGueltig() {
         require(folgeListe.size >= 3){"Mindestens 3 Steine"}
         require(folgeListe.size <= 13){"Maximal 13 Steine"}
         require(alleGleicheFarbe()){"Alle Steine muessen die selbe Farbe haben"}
@@ -35,25 +35,25 @@ data class Folge(private val folgeListe: MutableList<Stein>) {
 
     fun hinzufuegenHinten(stein: Stein) {
         folgeListe.add(stein)
-        this.isValid()
+        this.istGueltig()
     }
 
     fun hinzufuegenVorne(stein: Stein) {
         folgeListe.add(0, stein)
-        this.isValid()
+        this.istGueltig()
     }
 
     fun wegnehmenVorne() : Stein{
         val stein = folgeListe[0]
         folgeListe.removeFirst()
-        this.isValid()
+        this.istGueltig()
         return stein
     }
 
     fun wegnehmenHinten() : Stein{
         val stein = folgeListe[folgeListe.size - 1]
         folgeListe.removeLast()
-        this.isValid()
+        this.istGueltig()
         return stein
     }
 }

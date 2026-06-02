@@ -70,7 +70,7 @@ class SetsBearbeitenTest {
         //then
         val exception = assertThrows<IllegalArgumentException> {
             set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Eins))
-            set.istGueltigesSet()
+            set.istGueltig()
         }
         assertThat(exception.message).contains("Maximal 4 Steine")
     }
@@ -87,7 +87,7 @@ class SetsBearbeitenTest {
         //then
         val exception = assertThrows<IllegalArgumentException> {
             set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Sechs))
-            set.istGueltigesSet()
+            set.istGueltig()
         }
         assertThat(exception.message).contains("Maximal 4 Steine")
     }
@@ -104,7 +104,7 @@ class SetsBearbeitenTest {
         //then
         val exception = assertThrows<IllegalArgumentException> {
             set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Sechs))
-            set.istGueltigesSet()
+            set.istGueltig()
         }
         assertThat(exception.message).contains("Maximal 4 Steine")
     }
@@ -121,7 +121,7 @@ class SetsBearbeitenTest {
         val sets = Sets(set)
 
         sets.wegnehmenVomSet(Stein(Farbe.Rot, Zahl.Eins))
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Rot, Zahl.Eins))
     }
@@ -139,7 +139,7 @@ class SetsBearbeitenTest {
         //when
         val sets = Sets(set)
         sets.wegnehmenVomSet(Stein(Farbe.Blau, Zahl.Sechs))
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Blau, Zahl.Sechs))
     }
@@ -157,7 +157,7 @@ class SetsBearbeitenTest {
         val sets = Sets(set)
 
         sets.wegnehmenVomSet(Stein(Farbe.Orange, Zahl.Dreizehn))
-        sets.istGueltigesSet()
+        sets.istGueltig()
 
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Orange, Zahl.Dreizehn))
     }
@@ -174,7 +174,7 @@ class SetsBearbeitenTest {
         //then
         val exception = assertThrows<IllegalArgumentException> {
             sets.wegnehmenVomSet(Stein(Farbe.Orange, Zahl.Eins))
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Orange, Zahl.Eins))
         assertThat(exception.message).contains("Mindestens 3 Steine")
@@ -192,7 +192,7 @@ class SetsBearbeitenTest {
         //then
         val exception = assertThrows<IllegalArgumentException> {
             sets.wegnehmenVomSet(Stein(Farbe.Rot, Zahl.Sechs))
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Rot, Zahl.Sechs))
         assertThat(exception.message).contains("Mindestens 3 Steine")
@@ -210,7 +210,7 @@ class SetsBearbeitenTest {
         //then
         val exception = assertThrows<IllegalArgumentException> {
             sets.wegnehmenVomSet(Stein(Farbe.Schwarz, Zahl.Dreizehn))
-            sets.istGueltigesSet()
+            sets.istGueltig()
         }
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Schwarz, Zahl.Dreizehn))
         assertThat(exception.message).contains("Mindestens 3 Steine")

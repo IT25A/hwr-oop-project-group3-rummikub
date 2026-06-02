@@ -1,9 +1,8 @@
 package hwr.oop.rummikub_2026.core
 
 class Tisch {
-    //val test: List<Kombinationen>
-
-
+	//val test: List<Kombinationen>
+	
 }
 /* TODO: Tisch mit einer Liste mit Folgen und Sets (interface)
     TODO: neue kombi legen

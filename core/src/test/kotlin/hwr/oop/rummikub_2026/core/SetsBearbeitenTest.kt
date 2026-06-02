@@ -7,14 +7,6 @@ import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 
 class SetsBearbeitenTest {
 
-    // Hinzufuegen zu 3er Set, Voraussetzung: Anlegen ist valide
-    // Hinzufuegen zu 4er Set, Anlegen ist nicht valide
-    // Wegnehmen vom 4er Set, Voraussetzung: gueltiges Set oder gueltige Folge
-    // Wegnehmen vom 3er Set nicht valide
-
-    //Hinzufuegen und Wegnehmen: Abfragen, ob gueltig/ nicht gueltig implementiert
-    //Hinzufuegen und Wegnehmen: Funktion für das eigentliche Hinzufuegen/ Wegnehmen fehlt noch
-
     @Test
     fun `Hinzufuegen zu 3er Set Eins = gueltiges 4er Set` () {
         val set = Sets(mutableListOf(
@@ -27,7 +19,7 @@ class SetsBearbeitenTest {
         assertDoesNotThrow {
             set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Eins))
         }
-        assertThat(Stein(Farbe.Schwarz, Zahl.Eins) in set.setReadOnly)
+        assertThat(Stein(Farbe.Schwarz, Zahl.Eins) in set.setReadOnly).isTrue
     }
 
     @Test
@@ -41,7 +33,7 @@ class SetsBearbeitenTest {
         assertDoesNotThrow {
             set.hinzufuegenZumSet(Stein(Farbe.Blau, Zahl.Sechs))
         }
-        assertThat(Stein(Farbe.Blau, Zahl.Sechs) in set.setReadOnly)
+        assertThat(Stein(Farbe.Blau, Zahl.Sechs) in set.setReadOnly).isTrue
     }
 
     @Test

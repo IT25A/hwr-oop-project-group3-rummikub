@@ -36,10 +36,10 @@ class SpielerTest {
         //when
 
         //then
-        assertThat(spieler1.nameReadOnly == "Thanh")
-        assertThat(spieler2.nameReadOnly == "Gabriela")
-        assertThat(spieler3.nameReadOnly == "Charlotte")
-        assertThat(spieler4.nameReadOnly == "Maxi-Taxi")
+        assertThat(spieler1.nameReadOnly).isEqualTo("Thanh")
+        assertThat(spieler2.nameReadOnly).isEqualTo("Gabriela")
+        assertThat(spieler3.nameReadOnly).isEqualTo("Charlotte")
+        assertThat(spieler4.nameReadOnly ).isEqualTo("Maxi-Taxi")
     }
 
     @Test

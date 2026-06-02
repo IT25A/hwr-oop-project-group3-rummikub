@@ -27,7 +27,7 @@ class BeutelTest {
         val alleSteine = mutableListOf<Stein>()
 
         while (!beutel.istLeer()) {
-            alleSteine.add(beutel.zieheSteinausBeutel()!!)
+            alleSteine.add(beutel.zieheSteinAusBeutel()!!)
         }
 
         for (farbe in Farbe.entries) {
@@ -43,7 +43,7 @@ class BeutelTest {
         val beutel = Beutel()
         val startAnzahl = beutel.anzahlSteine()
 
-        val gezogenerStein = beutel.zieheSteinausBeutel()
+        val gezogenerStein = beutel.zieheSteinAusBeutel()
 
         assertNotNull(gezogenerStein, "Es sollte ein Stein gezogen werden.")
         assertEquals(startAnzahl - 1, beutel.anzahlSteine(), "Die Anzahl der Steine im Beutel ist um 1 gesunken.")
@@ -53,10 +53,10 @@ class BeutelTest {
     fun `zieheSteinausBeutel sollte null zurueckgeben, wenn der Beutel leer ist`() {
         val beutel = Beutel()
         while (!beutel.istLeer()) {
-            beutel.zieheSteinausBeutel()
+            beutel.zieheSteinAusBeutel()
         }
 
-        val steinAusLeeremBeutel = beutel.zieheSteinausBeutel()
+        val steinAusLeeremBeutel = beutel.zieheSteinAusBeutel()
 
         assertNull(steinAusLeeremBeutel, "Wenn der Beutel leer ist, wird null zurückgegeben.")
         assertTrue(beutel.istLeer(), "Der Beutel sollte weiterhin leer sein.")
@@ -69,7 +69,7 @@ class BeutelTest {
         assertFalse(beutel.istLeer(), "Der Beutel sollte am Anfang nicht leer sein.")
 
         repeat(104) {
-            beutel.zieheSteinausBeutel()
+            beutel.zieheSteinAusBeutel()
         }
 
         assertTrue(beutel.istLeer(), "Nach dem Ziehen aller 104 Steine sollte der Beutel leer sein.")
@@ -81,10 +81,10 @@ class BeutelTest {
 
         assertEquals(104, beutel.anzahlSteine())
 
-        beutel.zieheSteinausBeutel()
+        beutel.zieheSteinAusBeutel()
         assertEquals(103, beutel.anzahlSteine())
 
-        beutel.zieheSteinausBeutel()
+        beutel.zieheSteinAusBeutel()
         assertEquals(102, beutel.anzahlSteine())
     }
 }

@@ -207,4 +207,61 @@ class SetsBearbeitenTest {
         assertThat(sets.setReadOnly).doesNotContain(Stein(Farbe.Schwarz, Zahl.Dreizehn))
         assertThat(exception.message).contains("Mindestens 3 Steine")
     }
+
+    @Test
+    fun `hinzufuegenZumSet exception bei zu vielen Steinen`() {
+        val set = Sets(mutableListOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Rot, Zahl.Eins),
+            Stein(Farbe.Blau, Zahl.Eins),
+            Stein(Farbe.Schwarz, Zahl.Eins)
+        ))
+
+        val exception = assertThrows<IllegalArgumentException> {
+            set.hinzufuegenZumSet(Stein(Farbe.Orange, Zahl.Eins))
+        }
+        assertThat(exception.message).contains("Maximal 4 Steine")
+    }
+
+    @Test
+    fun `hinzufuegenZumSet exception bei falscher Zahl`() {
+        val set = Sets(mutableListOf(
+            Stein(Farbe.Orange, Zahl.Drei),
+            Stein(Farbe.Rot, Zahl.Drei),
+            Stein(Farbe.Blau, Zahl.Drei)
+        ))
+
+        val exception = assertThrows<IllegalArgumentException> {
+            set.hinzufuegenZumSet(Stein(Farbe.Schwarz, Zahl.Vier))
+        }
+        assertThat(exception.message).contains("Alle Steine muessen dieselbe Zahl haben")
+    }
+
+    @Test
+    fun `hinzufuegenZumSet exception bei doppelter Farbe`() {
+        val set = Sets(mutableListOf(
+            Stein(Farbe.Orange, Zahl.Fuenf),
+            Stein(Farbe.Rot, Zahl.Fuenf),
+            Stein(Farbe.Blau, Zahl.Fuenf)
+        ))
+
+        val exception = assertThrows<IllegalArgumentException> {
+            set.hinzufuegenZumSet(Stein(Farbe.Rot, Zahl.Fuenf))
+        }
+        assertThat(exception.message).contains("Alle Steine muessen unterschiedliche Farbe haben")
+    }
+
+    @Test
+    fun `wegnehmenVomSet exception bei zu wenig Steinen`() {
+        val set = Sets(mutableListOf(
+            Stein(Farbe.Orange, Zahl.Sieben),
+            Stein(Farbe.Rot, Zahl.Sieben),
+            Stein(Farbe.Blau, Zahl.Sieben)
+        ))
+
+        val exception = assertThrows<IllegalArgumentException> {
+            set.wegnehmenVomSet(Stein(Farbe.Orange, Zahl.Sieben))
+        }
+        assertThat(exception.message).contains("Mindestens 3 Steine")
+    }
 }

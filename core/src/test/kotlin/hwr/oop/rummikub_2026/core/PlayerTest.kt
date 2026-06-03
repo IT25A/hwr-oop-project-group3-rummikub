@@ -3,7 +3,6 @@ package hwr.oop.rummikub_2026.core
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -63,7 +62,7 @@ class SpielerTest {
         )
         val spieler = Spieler("Luxi-Taxi", "1", steine14)
         //when
-        spieler.ziehen(Stein(Farbe.Orange, Zahl.Zwei));
+        spieler.ziehen(Stein(Farbe.Orange, Zahl.Zwei))
         //then
         assertThat(spieler.boardReadOnly).contains(Stein(Farbe.Orange, Zahl.Zwei))
     }

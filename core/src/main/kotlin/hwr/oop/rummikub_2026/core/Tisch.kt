@@ -3,10 +3,17 @@ package hwr.oop.rummikub_2026.core
 class Tisch (private val tisch: MutableList<Kombinationen>) {
     val tischReadOnly: List<Kombinationen>
         get() = tisch.toList()
+
+    init {
+        val copyTisch = tisch.toMutableList()
+    }
+
+    val tmpListe = mutableListOf<Stein>()
     
     fun gueltig(){
         for (i in tisch){
             i.istGueltig()
+            require(tmpListe.isEmpty()){"Ungueltiger Zug, du hast nicht alle aufgeloesten Kombinationen verwendet."}
         }
     }
 
@@ -33,13 +40,18 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
             val neueListe = tisch[kombination].get()
             neueListe.add(stein)
             val neuesSet = Sets(neueListe)
-            tisch.set(kombination, neuesSet)
+            tisch[kombination] = neuesSet
         }else{
             val neueListe = tisch[kombination].get()
             neueListe.add(stein)
             val neueFolge = Folge(neueListe)
-            tisch.set(kombination, neueFolge)
+            tisch[kombination] = neueFolge
         }
+    }
+
+    fun aufloesen (kombi: Int){
+        tmpListe + (tisch[kombi].get())
+        tisch.removeAt(kombi)
     }
 }
 
@@ -47,10 +59,10 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
    (+)TODO: neue kombi legen
    (+)TODO: Tisch/Kombis anzeige
    (+)TODO: etwas anlegen können
-    
-    TODO: auseinanderziehen
+   (+)TODO: gucken ob alles valid ist
+   TODO: auseinanderziehen
     TODO: temporäre Liste aktualisieren nach jedem Zug
-    TODO: gucken ob alles valid ist
+
    */
 
 /*In Kotlin gibt es die Möglichkeit, eine Funktion so zu definieren, dass sie eine variable Anzahl an Argumenten mit demselben Datentyp entgegennehmen kann.

@@ -272,4 +272,15 @@ class TischTest {
         
         assertThat(tisch.tischReadOnly[0].get()).contains(Stein(Farbe.Orange, Zahl.Eins))
     }
+
+    @ParameterizedTest
+    @MethodSource("gueltigeFolgen")
+    fun `aufloesen funktioniert folge`(
+        folge: Folge
+    ) {
+        val tisch = Tisch(mutableListOf(folge))
+        tisch.aufloesen(0)
+        //*list.toIntArray()
+        assertThat(tisch.tmpListe).isEqualTo(folge.get())
+    }
 }

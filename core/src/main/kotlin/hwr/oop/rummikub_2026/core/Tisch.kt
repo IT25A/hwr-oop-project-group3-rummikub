@@ -50,7 +50,7 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
     }
 
     fun aufloesen (kombi: Int){
-        tmpListe + (tisch[kombi].get())
+        tmpListe.addAll(tisch[kombi].get())
         tisch.removeAt(kombi)
     }
 }

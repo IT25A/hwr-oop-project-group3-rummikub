@@ -3,7 +3,7 @@ package hwr.oop.rummikub_2026.core
 data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 	
 	val folgeReadOnly: List<Stein>
-		get() = folgeListe.toList()
+		get() = folgeListe.toMutableList()
 	
 	override fun get() : MutableList<Stein>{
 		return folgeListe.toMutableList()

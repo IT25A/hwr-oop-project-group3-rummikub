@@ -5,6 +5,9 @@ data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 	val folgeReadOnly: List<Stein>
 		get() = folgeListe.toList()
 	
+	override fun get() : MutableList<Stein>{
+		return folgeListe.toMutableList()
+	}
 	override fun istGueltig() {
 		require(folgeListe.size >= 3) { "Mindestens 3 Steine" }
 		require(folgeListe.size <= 13) { "Maximal 13 Steine" }

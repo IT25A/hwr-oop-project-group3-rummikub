@@ -7,6 +7,10 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 	val setReadOnly: List<Stein>
 		get() = setListe.toList()
 	
+	override fun get() : MutableList<Stein>{
+		return setListe.toMutableList()
+	}
+	
 	override fun istGueltig() {
 		require(setListe.size >= 3) { "Mindestens 3 Steine" }
 		require(setListe.size <= 4) { "Maximal 4 Steine" }

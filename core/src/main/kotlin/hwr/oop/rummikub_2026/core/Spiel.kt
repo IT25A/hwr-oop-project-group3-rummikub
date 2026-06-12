@@ -6,14 +6,14 @@ data class Spiel(
     val aktivSpieler: Spieler,
     val beutel: List<Stein>,
     val tisch: Tisch
-)
-{
-    fun auslegen(spieler: Spieler,
-                 istSet: Boolean,
-                 neuStein: List<Stein>,
-                 aktuellerTisch: Tisch,
-                 vararg steine: Stein
-                 ) : Spiel {
+) {
+    fun auslegen(
+        spieler: Spieler,
+        istSet: Boolean,
+        //neuStein: List<Stein>,
+        aktuellerTisch: Tisch,
+        vararg steine: Stein
+    ): Spiel {
 
         val liste: MutableList<Stein> = mutableListOf()
         for (stein in steine) {
@@ -27,15 +27,15 @@ data class Spiel(
         var brett = aktivSpieler.boardReadOnly
         var mglSteine = brett + aktuellerTisch.tmpListe
 
-        if (!(mglSteine).containsAll(neuStein)) {
+        if (!(mglSteine).containsAll(liste)) {
             throw InvalidObjectException("Du hast diesen Stein nicht!")
         }
 
-        if (neuStein.isEmpty()) {
+        if (liste.isEmpty()) {
             throw InvalidObjectException("Keine Steine ausgewählt!")
         }
 
-        aktuellerTisch.kombiLegen(istSet,liste)
+        aktuellerTisch.kombiLegen(istSet, liste)
 
         mglSteine = mglSteine - liste
         aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
@@ -43,15 +43,16 @@ data class Spiel(
 
         return this.copy(
             tisch = aktuellerTisch,
-            aktivSpieler = Spieler (aktivSpieler.nameReadOnly, aktivSpieler.id,brett)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett)
         )
     }
 
-    fun anlegen(spieler: Spieler,
-                neuStein: Stein,
-                kombi: Int,
-                aktuellerTisch: Tisch
-    ) : Spiel {
+    fun anlegen(
+        spieler: Spieler,
+        neuStein: Stein,
+        kombi: Int,
+        aktuellerTisch: Tisch
+    ): Spiel {
 
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
@@ -82,26 +83,25 @@ data class Spiel(
 //}
 //    aktuelleTischListe.add(kombination)
 
-//    fun ziehen(spieler: Spieler): Spiel {
-//
-//        if (spieler != aktivSpieler) {
-//            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
-//        }
-//        if (beutel.isEmpty()) {
-//            throw IllegalStateException("Der Beutel ist leer!")
-//        }
-//        var spieler = aktivSpieler.boardReadOnly
-//        val gezogenerStein = beutel.first()
-//        val neuerBeutel = beutel - gezogenerStein
-//
-//        val aktuelleSteine = aktivSpieler ?: aktivSpieler.boardReadOnly
-//        val neueSteine = aktuelleSteine + gezogenerStein
-//
-//        val neueBretterMap = spielerBretter + (aktivSpieler to neueSteine)
-//
-//        return this.copy(
-//            beutel = neuerBeutel,
-//            spielerBretter = neueBretterMap
-//        )
-//        }
+    fun ziehen(spieler: Spieler): Spiel {
+
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
+
+        if (beutel.isEmpty()) {
+            throw IllegalStateException("Der Beutel ist leer!")
+        }
+
+        val gezogenerStein = beutel.first()
+        val neuerBeutel = beutel - gezogenerStein
+
+        val aktuelleSteine = (aktivSpieler.boardReadOnly)
+        val neueSteine = (aktuelleSteine + gezogenerStein).toMutableList()
+
+        return this.copy(
+            beutel = neuerBeutel,
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, neueSteine)
+        )
+    }
 }

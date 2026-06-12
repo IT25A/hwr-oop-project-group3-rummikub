@@ -232,7 +232,7 @@ class TischTest {
         liste: MutableList<Stein>
     ) {
         val tisch = Tisch(mutableListOf())
-        val test = tisch.kombiLegen(false, *liste.toTypedArray())
+        val test = tisch.kombiLegen(false, liste)
         //*list.toIntArray()
         
         assertThat(tisch.tischReadOnly).isNotEmpty()
@@ -243,7 +243,7 @@ class TischTest {
         liste: MutableList<Stein>
     ) {
         val tisch = Tisch(mutableListOf())
-        val test = tisch.kombiLegen(true, *liste.toTypedArray())
+        val test = tisch.kombiLegen(true, liste)
         //*list.toIntArray()
         
         assertThat(tisch.tischReadOnly).isNotEmpty()

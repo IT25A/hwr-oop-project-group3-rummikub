@@ -2,54 +2,32 @@ package hwr.oop.rummikub_2026.core
 
 import java.io.InvalidObjectException
 
-
 data class Spiel(
     val aktivSpieler: Spieler,
     val beutel: List<Stein>,
-    val spielerBretter: Map<Spieler, List<Stein>>,
     val tisch: Tisch
 )
 {
+    fun auslegen(spieler: Spieler,
+                 istSet: Boolean,
+                 neuStein: List<Stein>,
+                 aktuellerTisch: Tisch,
+                 vararg steine: Stein
+                 ) : Spiel {
 
-    fun zug(spieler: Spieler): Spiel {
-
-    }
-
-    fun ziehen(spieler: Spieler): Spiel {
+        val liste: MutableList<Stein> = mutableListOf()
+        for (stein in steine) {
+            liste.add(stein)
+        }
 
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }
-        if (beutel.isEmpty()) {
-            throw IllegalStateException("Der Beutel ist leer!")
-        }
-        val gezogenerStein = beutel.first()
-        val neuerBeutel = beutel - gezogenerStein
 
-        val aktuelleSteine = spielerBretter[aktivSpieler] ?: aktivSpieler.boardReadOnly
-        val neueSteine = aktuelleSteine + gezogenerStein
+        var brett = aktivSpieler.boardReadOnly
+        var mglSteine = brett + aktuellerTisch.tmpListe
 
-        val neueBretterMap = spielerBretter + (aktivSpieler to neueSteine)
-
-        return this.copy(
-            beutel = neuerBeutel,
-            spielerBretter = neueBretterMap
-        )
-    }
-
-    fun legen(spieler: Spieler,
-              kombination: Kombinationen,
-              neuStein: List<Stein>,
-              alteKombination: Kombinationen? = null
-    ): Spiel {
-
-        // Spielspezifische Prüfungen (bleiben im Spiel)
-        if (spieler != aktivSpieler) {
-            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
-        }
-
-        val brett = spielerBretter[spieler]!!
-        if (!brett.containsAll(neuStein)) {
+        if (!(mglSteine).containsAll(neuStein)) {
             throw InvalidObjectException("Du hast diesen Stein nicht!")
         }
 
@@ -57,27 +35,73 @@ data class Spiel(
             throw InvalidObjectException("Keine Steine ausgewählt!")
         }
 
-        val aktuelleTischListe = tisch.tischReadOnly.toMutableList()
-        val neuerTisch = Tisch(aktuelleTischListe)
+        aktuellerTisch.kombiLegen(istSet,liste)
 
+        mglSteine = mglSteine - liste
+        aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
+        brett = (mglSteine - aktuellerTisch.tmpListe).toMutableList()
 
-//        // Validierung durch Kombination selbst
-//        kombination.istGueltig()
+        return this.copy(
+            tisch = aktuellerTisch,
+            aktivSpieler = Spieler (aktivSpieler.nameReadOnly, aktivSpieler.id,brett)
+        )
+    }
+
+    fun anlegen(spieler: Spieler,
+                neuStein: Stein,
+                kombi: Int,
+                aktuellerTisch: Tisch
+    ) : Spiel {
+
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
+
+        var brett = aktivSpieler.boardReadOnly
+        var mglSteine = brett + aktuellerTisch.tmpListe
+
+        if (!(mglSteine).contains(neuStein)) {
+            throw InvalidObjectException("Du hast diesen Stein nicht!")
+        }
+
+        aktuellerTisch.anlegen(kombi, neuStein)
+
+        mglSteine = mglSteine - neuStein
+        aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
+        brett = (mglSteine - aktuellerTisch.tmpListe).toMutableList()
+
+        return this.copy(
+            tisch = aktuellerTisch,
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett)
+        )
+    }
+
+//    if (alteKombination != null) {
+//    // Entferne alte Kombination und füge neue hinzu
+//    aktuelleTischListe.remove(alteKombination)
+//}
+//    aktuelleTischListe.add(kombination)
+
+//    fun ziehen(spieler: Spieler): Spiel {
 //
-//        // Erstelle neue Tisch-Liste (Tisch-Manager verwaltet die Kombinationen)
-//        val aktuelleTischListe = tisch.tischReadOnly.toMutableList()
-//        if (alteKombination != null) {
-//            // Entferne alte Kombination und füge neue hinzu
-//            aktuelleTischListe.remove(alteKombination)
+//        if (spieler != aktivSpieler) {
+//            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
 //        }
-//        aktuelleTischListe.add(kombination)
+//        if (beutel.isEmpty()) {
+//            throw IllegalStateException("Der Beutel ist leer!")
+//        }
+//        var spieler = aktivSpieler.boardReadOnly
+//        val gezogenerStein = beutel.first()
+//        val neuerBeutel = beutel - gezogenerStein
 //
-//        val neuerTisch = Tisch(aktuelleTischListe)
-//        val neuBrett = spielerBretter + (spieler to (brett - neuStein.toSet()))
+//        val aktuelleSteine = aktivSpieler ?: aktivSpieler.boardReadOnly
+//        val neueSteine = aktuelleSteine + gezogenerStein
+//
+//        val neueBretterMap = spielerBretter + (aktivSpieler to neueSteine)
 //
 //        return this.copy(
-//            tisch = neuerTisch,
-//            spielerBretter = neuBrett
+//            beutel = neuerBeutel,
+//            spielerBretter = neueBretterMap
 //        )
-    }
+//        }
 }

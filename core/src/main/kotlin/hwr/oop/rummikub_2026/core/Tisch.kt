@@ -8,7 +8,7 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
         val copyTisch = tisch.toMutableList()
     }
 
-    val tmpListe = mutableListOf<Stein>()
+    var tmpListe = mutableListOf<Stein>()
     
     fun gueltig(){
         for (i in tisch){
@@ -17,12 +17,8 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
         }
     }
 
-    fun kombiLegen (istSet: Boolean, vararg steine: Stein) {
+    fun kombiLegen (istSet: Boolean, liste: MutableList<Stein>) {
         val mglKombi : Kombinationen
-        val liste: MutableList<Stein> = mutableListOf()
-        for(stein in steine) {
-            liste.add  (stein)
-        }
 
         if (istSet){
             mglKombi = Sets(liste)
@@ -60,7 +56,7 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
    (+)TODO: Tisch/Kombis anzeige
    (+)TODO: etwas anlegen können
    (+)TODO: gucken ob alles valid ist
-   TODO: auseinanderziehen
+    TODO: auseinanderziehen
     TODO: temporäre Liste aktualisieren nach jedem Zug
 
    */

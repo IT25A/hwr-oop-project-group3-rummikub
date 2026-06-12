@@ -59,7 +59,7 @@ class SpielTest {
             aktivSpieler = aktivSpieler,
             beutel = startBeutel,
             spielerBretter = startBretter,
-            alleSteine = emptyList()
+            tisch = Tisch(mutableListOf())
         )
 
         if (sollFehlerWerfen) {
@@ -105,7 +105,7 @@ class SpielTest {
             aktivSpieler = aktivSpieler,
             beutel = emptyList(),
             spielerBretter = startBretter,
-            alleSteine = emptyList()
+            tisch = Tisch(mutableListOf())
         )
 
         val exception = assertThrows<InvalidObjectException> {
@@ -137,7 +137,7 @@ class SpielTest {
             aktivSpieler = spieler1,
             beutel = emptyList(),
             spielerBretter = startBretter,
-            alleSteine = if (alteKombination != null) listOf(alteKombination) else emptyList()
+            tisch = if (alteKombination != null) Tisch(mutableListOf(alteKombination)) else Tisch(mutableListOf())
         )
 
         val neuesSpiel = spiel.legen(
@@ -147,10 +147,10 @@ class SpielTest {
             alteKombination
         )
 
-        assertThat(neuesSpiel.alleSteine).hasSize(erwarteteSteineAnzahl)
-        assertThat(neuesSpiel.alleSteine).contains(kombination)
+        assertThat(neuesSpiel.tisch.tischReadOnly).hasSize(erwarteteSteineAnzahl)
+        assertThat(neuesSpiel.tisch.tischReadOnly).contains(kombination)
         if (alteKombination != null) {
-            assertThat(neuesSpiel.alleSteine).doesNotContain(alteKombination)
+            assertThat(neuesSpiel.tisch.tischReadOnly).doesNotContain(alteKombination)
         }
         assertThat(neuesSpiel.spielerBretter[spieler1]).hasSize(erwarteteBrettGroesse)
     }

@@ -7,9 +7,13 @@ data class Spiel(
     val aktivSpieler: Spieler,
     val beutel: List<Stein>,
     val spielerBretter: Map<Spieler, List<Stein>>,
-    val alleSteine: List<Kombinationen>
+    val tisch: Tisch
 )
 {
+
+    fun zug(spieler: Spieler): Spiel {
+
+    }
 
     fun ziehen(spieler: Spieler): Spiel {
 
@@ -39,6 +43,7 @@ data class Spiel(
               alteKombination: Kombinationen? = null
     ): Spiel {
 
+        // Spielspezifische Prüfungen (bleiben im Spiel)
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }
@@ -47,24 +52,32 @@ data class Spiel(
         if (!brett.containsAll(neuStein)) {
             throw InvalidObjectException("Du hast diesen Stein nicht!")
         }
+
         if (neuStein.isEmpty()) {
             throw InvalidObjectException("Keine Steine ausgewählt!")
         }
 
-        kombination.istGueltig()
+        val aktuelleTischListe = tisch.tischReadOnly.toMutableList()
+        val neuerTisch = Tisch(aktuelleTischListe)
 
-        val gesamtSteine = if (alteKombination != null) {
-            // Stein wird an Kombi angelegt
-            alleSteine - alteKombination + kombination
-        } else {
-            // Neue Kombination wird gelegt
-            alleSteine + kombination
-        }
-        val neuBrett = spielerBretter + (spieler to (brett - neuStein.toSet()))
 
-        return this.copy(
-            alleSteine = gesamtSteine,
-            spielerBretter = neuBrett
-        )
+//        // Validierung durch Kombination selbst
+//        kombination.istGueltig()
+//
+//        // Erstelle neue Tisch-Liste (Tisch-Manager verwaltet die Kombinationen)
+//        val aktuelleTischListe = tisch.tischReadOnly.toMutableList()
+//        if (alteKombination != null) {
+//            // Entferne alte Kombination und füge neue hinzu
+//            aktuelleTischListe.remove(alteKombination)
+//        }
+//        aktuelleTischListe.add(kombination)
+//
+//        val neuerTisch = Tisch(aktuelleTischListe)
+//        val neuBrett = spielerBretter + (spieler to (brett - neuStein.toSet()))
+//
+//        return this.copy(
+//            tisch = neuerTisch,
+//            spielerBretter = neuBrett
+//        )
     }
 }

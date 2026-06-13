@@ -12,16 +12,26 @@ class SpielTest {
     companion object {
         private val standardStein = Stein(Farbe.Blau, Zahl.Fuenf)
         private val steinRot = Stein(Farbe.Rot, Zahl.Eins)
+        private val stein2 = Stein(Farbe.Blau, Zahl.Sechs)
+        private val stein3 = Stein(Farbe.Blau, Zahl.Sieben)
+
+        private fun create14Steine(vararg zusaetzlicheSteine: Stein): MutableList<Stein> {
+            val steine = zusaetzlicheSteine.toMutableList()
+            while (steine.size < 14) {
+                steine.add(Stein(Farbe.Schwarz, Zahl.Eins))
+            }
+            return steine
+        }
 
         @JvmStatic
         fun gueltigeZiehenSzenarien() = listOf(
-            Pair(listOf(steinRot), 1)
+            Pair(listOf(steinRot), 15)
         )
 
         @JvmStatic
         fun ungueltigeAuslegenSzenarien() = listOf(
             Pair(
-                Triple(listOf(standardStein), listOf(steinRot), arrayOf<Stein>()),
+                Triple(listOf(standardStein), listOf(steinRot), arrayOf(steinRot)),
                 "Du hast diesen Stein nicht!"
             ),
             Pair(
@@ -37,7 +47,7 @@ class SpielTest {
         testfall: Pair<List<Stein>, Int>
     ) {
         // given
-        val spieler = Spieler("Luxi-Taxi", "1", mutableListOf())
+        val spieler = Spieler("Luxi-Taxi", "1", create14Steine())
         val spiel = Spiel(
             aktivSpieler = spieler,
             beutel = testfall.first,
@@ -61,8 +71,8 @@ class SpielTest {
     @Test
     fun `ungueltiger Spieler darf nicht ziehen wirft Exception`() {
         // given
-        val spieler1 = Spieler("Luxi-Taxi", "1", mutableListOf())
-        val spieler2 = Spieler("Smilla", "2", mutableListOf())
+        val spieler1 = Spieler("Luxi-Taxi", "1", create14Steine())
+        val spieler2 = Spieler("Smilla", "2", create14Steine())
         val spiel = Spiel(
             aktivSpieler = spieler1,
             beutel = listOf(steinRot),
@@ -81,7 +91,7 @@ class SpielTest {
     @Test
     fun `Ziehen bei leerem Beutel wirft Exception`() {
         // given
-        val spieler = Spieler("Luxi-Taxi", "1", mutableListOf())
+        val spieler = Spieler("Luxi-Taxi", "1", create14Steine())
         val spiel = Spiel(
             aktivSpieler = spieler,
             beutel = emptyList(),
@@ -107,7 +117,7 @@ class SpielTest {
         val neuStein = testfall.first.second
         val varargSteine = testfall.first.third
 
-        val spieler = Spieler("Luxi-Taxi", "1", hand.toMutableList())
+        val spieler = Spieler("Luxi-Taxi", "1", create14Steine(*hand.toTypedArray()))
         val spiel = Spiel(
             aktivSpieler = spieler,
             beutel = emptyList(),
@@ -131,8 +141,8 @@ class SpielTest {
     @Test
     fun `auslegen von ungueltigem Spieler wirft Exception`() {
         // given
-        val spieler1 = Spieler("Luxi-Taxi", "1", mutableListOf(standardStein))
-        val spieler2 = Spieler("Smilla", "2", mutableListOf())
+        val spieler1 = Spieler("Luxi-Taxi", "1", create14Steine(standardStein))
+        val spieler2 = Spieler("Smilla", "2", create14Steine())
         val spiel = Spiel(
             aktivSpieler = spieler1,
             beutel = emptyList(),
@@ -156,7 +166,7 @@ class SpielTest {
     @Test
     fun `gueltiges auslegen einer neuen Kombination funktioniert`() {
         // given
-        val spieler = Spieler("Luxi-Taxi", "1", mutableListOf(standardStein))
+        val spieler = Spieler("Luxi-Taxi", "1", create14Steine(standardStein, stein2, stein3))
         val spiel = Spiel(
             aktivSpieler = spieler,
             beutel = emptyList(),
@@ -168,11 +178,11 @@ class SpielTest {
             spieler = spieler,
             istSet = false,
             aktuellerTisch = spiel.tisch,
-            steine = arrayOf(standardStein)
+            steine = arrayOf(standardStein, stein2, stein3)
         )
 
         // then
         assertThat(neuesSpiel.aktivSpieler.boardReadOnly)
-            .isEmpty()
+            .hasSize(11)
     }
 }

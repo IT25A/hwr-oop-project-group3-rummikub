@@ -43,7 +43,7 @@ data class Spiel(
 
         return this.copy(
             tisch = aktuellerTisch,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, validateInitialCount = false)
         )
     }
 
@@ -73,7 +73,7 @@ data class Spiel(
 
         return this.copy(
             tisch = aktuellerTisch,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, validateInitialCount = false)
         )
     }
 
@@ -101,7 +101,7 @@ data class Spiel(
 
         return this.copy(
             beutel = neuerBeutel,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, neueSteine)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, neueSteine, validateInitialCount = false)
         )
     }
 }

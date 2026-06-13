@@ -1,8 +1,15 @@
 package hwr.oop.rummikub_2026.core
 
-data class Spieler(private val name: String, val id: String, private val board: MutableList<Stein>) {
+data class Spieler(
+	private val name: String,
+	val id: String,
+	private val board: MutableList<Stein>,
+	private val validateInitialCount: Boolean = true
+) {
 	init {
-		require(board.size == 14) { "Es muss 14 Steine vergeben werden" }
+		if (validateInitialCount) {
+			require(board.size == 14) { "Es muss 14 Steine vergeben werden" }
+		}
 	}
 	
 	val nameReadOnly: String

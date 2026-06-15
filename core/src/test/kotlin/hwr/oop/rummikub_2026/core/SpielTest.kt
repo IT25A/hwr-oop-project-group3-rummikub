@@ -6,6 +6,8 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 
 class SpielTest {
 
@@ -22,6 +24,63 @@ class SpielTest {
             }
             return steine
         }
+        @JvmStatic
+        fun testKombis() = listOf(
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Zwei),
+                    Stein(Farbe.Rot, Zahl.Drei)
+                )
+            ),
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Blau, Zahl.Fuenf),
+                    Stein(Farbe.Blau, Zahl.Sechs),
+                    Stein(Farbe.Blau, Zahl.Sieben),
+                    Stein(Farbe.Blau, Zahl.Acht)
+                )
+            ),
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Schwarz, Zahl.Eins),
+                    Stein(Farbe.Schwarz, Zahl.Zwei),
+                    Stein(Farbe.Schwarz, Zahl.Drei),
+                    Stein(Farbe.Schwarz, Zahl.Vier),
+                    Stein(Farbe.Schwarz, Zahl.Fuenf),
+                    Stein(Farbe.Schwarz, Zahl.Sechs),
+                    Stein(Farbe.Schwarz, Zahl.Sieben),
+                    Stein(Farbe.Schwarz, Zahl.Acht),
+                    Stein(Farbe.Schwarz, Zahl.Neun),
+                    Stein(Farbe.Schwarz, Zahl.Zehn),
+                    Stein(Farbe.Schwarz, Zahl.Elf),
+                    Stein(Farbe.Schwarz, Zahl.Zwoelf),
+                    Stein(Farbe.Schwarz, Zahl.Dreizehn)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Blau, Zahl.Eins)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Sechs),
+                    Stein(Farbe.Blau, Zahl.Sechs),
+                    Stein(Farbe.Schwarz, Zahl.Sechs)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Blau, Zahl.Eins),
+                    Stein(Farbe.Schwarz, Zahl.Eins)
+                )
+            )
+        )
 
         @JvmStatic
         fun gueltigeZiehenSzenarien() = listOf(
@@ -40,6 +99,129 @@ class SpielTest {
             )
         )
     }
+    @Test
+    fun `Exception bei leerer Kombination`() {
+
+        val spieler = Spieler(
+            "Max",
+            "1",
+            create14Steine()
+        )
+        val leereKombi = Folge(
+            mutableListOf()
+        )
+        val tisch = Tisch(
+            mutableListOf(leereKombi)
+        )
+        val spiel = Spiel(
+            spieler,
+            emptyList(),
+            tisch
+        )
+        assertThrows<InvalidObjectException> {
+            spiel.aufloesen(
+                leereKombi,
+                spieler,
+                false,
+                tisch
+            )
+        }
+    }
+    @Test
+    fun `Kombination wird vom Tisch entfernt`() {
+
+        val spieler = Spieler(
+            "Max",
+            "1",
+            create14Steine()
+        )
+
+        val kombi = Folge(
+            mutableListOf(
+                Stein(Farbe.Rot, Zahl.Drei),
+                Stein(Farbe.Rot, Zahl.Vier),
+                Stein(Farbe.Rot, Zahl.Fuenf)
+            )
+        )
+
+        val tisch = Tisch(
+            mutableListOf(kombi)
+        )
+
+        val spiel = Spiel(
+            spieler,
+            emptyList(),
+            tisch
+        )
+
+        val neuesSpiel = spiel.aufloesen(
+            kombi,
+            spieler,
+            false,
+            tisch
+        )
+
+        assertFalse(
+            neuesSpiel.tisch.tischReadOnly.contains(kombi)
+        )
+    }
+    @Test
+    fun `Steine der Kombination landen in tmpListe`() {
+
+        val spieler = Spieler(
+            "Max",
+            "1",
+            create14Steine()
+        )
+
+        val steine = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Zehn),
+            Stein(Farbe.Orange, Zahl.Elf),
+            Stein(Farbe.Orange, Zahl.Zwoelf)
+        )
+
+        val kombi = Folge(steine)
+
+        val tisch = Tisch(
+            mutableListOf(kombi)
+        )
+
+        val spiel = Spiel(
+            spieler,
+            emptyList(),
+            tisch
+        )
+
+        spiel.aufloesen(
+            kombi,
+            spieler,
+            false,
+            tisch
+        )
+
+        assertEquals(
+            steine,
+            tisch.tmpListe
+        )
+    }
+//    @ParameterizedTest
+//    @MethodSource("testKombis")
+//    fun `Spieler loest Kombi auf, die existiert`(aufzuloesendeKombi : Kombinationen){
+//        // given
+//        val spieler = Spieler("Luxi-Taxi", "1", create14Steine())
+//        val spiel = Spiel(
+//            aktivSpieler = spieler,
+//            beutel = emptyList(),
+//            tisch = Tisch(mutableListOf(aufzuloesendeKombi))
+//        )
+//        val tischZuvor = spiel.tisch.tischReadOnly
+//        //when
+//        spiel.aufloesen(aufzuloesendeKombi)
+//        //then
+//        assertEquals(spiel.tisch.tmpListe, aufzuloesendeKombi.get().toList())
+//        assertEquals(tischZuvor - spiel.tisch.tischReadOnly, aufzuloesendeKombi.get().toList())
+//    }
+
 
     @ParameterizedTest
     @MethodSource("gueltigeZiehenSzenarien")

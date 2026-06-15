@@ -77,6 +77,8 @@ data class Spiel(
         )
     }
 
+
+
 //    if (alteKombination != null) {
 //    // Entferne alte Kombination und füge neue hinzu
 //    aktuelleTischListe.remove(alteKombination)
@@ -102,6 +104,29 @@ data class Spiel(
         return this.copy(
             beutel = neuerBeutel,
             aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, neueSteine, validateInitialCount = false)
+        )
+    }
+
+    fun aufloesen(
+        aufzuloesendeKombi: Kombinationen,
+        spieler: Spieler,
+        aktuellerTisch: Tisch
+    ): Spiel {
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
+        var brett = aktivSpieler.boardReadOnly
+
+        if (aufzuloesendeKombi.get().isEmpty()) {
+            throw InvalidObjectException("Keine Kombi ausgewählt!")
+        }
+
+        tisch.aufloesen(aufzuloesendeKombi)
+
+
+        return this.copy(
+            tisch = aktuellerTisch,
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, validateInitialCount = false)
         )
     }
 }

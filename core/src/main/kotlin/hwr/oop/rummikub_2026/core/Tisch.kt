@@ -45,9 +45,15 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
         }
     }
 
-    fun aufloesen (kombi: Int){
-        tmpListe.addAll(tisch[kombi].get())
-        tisch.removeAt(kombi)
+//    fun aufloesen (kombi: Int){
+//        tmpListe.addAll(tisch[kombi].get())
+//        tisch.removeAt(kombi)
+//    }
+    fun aufloesen (kombi: Kombinationen){
+        val stelle = tisch.indexOf(kombi)
+        require(stelle != -1){"Ungueltiger Zug: Diese Kombination gibt es nicht."}
+        tmpListe.addAll(tisch[stelle].get())
+        tisch.removeAt(stelle)
     }
 }
 

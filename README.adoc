@@ -25,11 +25,15 @@ Beutel:
 - Beutel kann existieren
 - Beutel hat 104 (ohne Joker) Steine
 - Steine ziehen funktioniert korrekt (Stein Anzahl minus 1)
+Tisch:
+-Gültige Kombinationen aus Sets und Folgen werden auf dem Tisch geprüft und angelegt
+-passende Kombi kann aufgelöst werden
 Spiel
 - Züge werden auf Gültigkeit geprüft
-- aufloesen
-- anlegen
-- ziehen
+- Auslegen: Die Punkte der Steine werden addiert. Ein Spieler darf Steine ab einem Gesamtwert von >= 30 Punkten auslegen
+- aufloesen: Ein Spieler darf bestehende Kombinationen aufloesen, sobald er herausgekommen ist
+- anlegen: Ein Spieler darf Steine anlegen, sofern er bereits mit >= 30 Punkten ausgelegt hat. Die angelegten Steine werden aus der Hand entfernt und der jeweiligen Kombination hinzugefügt
+- ziehen: pro Zug zieht der Spieler einen Stein aus dem Beutel
 
 Alle oben genannten Features sind getestet
 
@@ -40,7 +44,7 @@ Offen:
 - Gewinnen/ Spiel beenden
 - Highscore/ übrige Punktzahl zählen pro Spieler
 - TODO rausnehmen/ bearbeiten
-- Read-me anpassen
+(+) Read-me anpassen
 - SpielTest auseinanderziehen
 
 - Test-coverage

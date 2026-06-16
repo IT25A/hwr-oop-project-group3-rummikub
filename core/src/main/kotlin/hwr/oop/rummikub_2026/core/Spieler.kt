@@ -4,7 +4,9 @@ data class Spieler(
 	private val name: String,
 	val id: String,
 	private val board: MutableList<Stein>,
+	var rausgekommen: Boolean = false,
 	private val validateInitialCount: Boolean = true
+
 ) {
 	init {
 		if (validateInitialCount) {

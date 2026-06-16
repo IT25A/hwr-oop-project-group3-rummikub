@@ -7,6 +7,13 @@ data class Spiel(
     val beutel: List<Stein>,
     val tisch: Tisch
 ) {
+    var gesammeltePunkte: Int = 0
+
+    fun gueltigerZug() {
+        tisch.gueltig()
+        gesammeltePunkte = 0
+    }
+
     fun auslegen(
         spieler: Spieler,
         istSet: Boolean,
@@ -37,13 +44,22 @@ data class Spiel(
 
         aktuellerTisch.kombiLegen(istSet, liste)
 
+        for (i in liste) {
+            gesammeltePunkte += i.zahl().value
+
+        }
+
+        if(gesammeltePunkte >= 30){
+            aktivSpieler.rausgekommen = true
+        }
+
         mglSteine = mglSteine - liste
         aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
         brett = (mglSteine - aktuellerTisch.tmpListe).toMutableList()
 
         return this.copy(
             tisch = aktuellerTisch,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, validateInitialCount = false)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, aktivSpieler.rausgekommen, false)
         )
     }
 
@@ -53,10 +69,11 @@ data class Spiel(
         kombi: Int,
         aktuellerTisch: Tisch
     ): Spiel {
-
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }
+
+        require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du anlegen kannst!" }
 
         var brett = aktivSpieler.boardReadOnly
         var mglSteine = brett + aktuellerTisch.tmpListe
@@ -73,10 +90,9 @@ data class Spiel(
 
         return this.copy(
             tisch = aktuellerTisch,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, validateInitialCount = false)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, aktivSpieler.rausgekommen, false)
         )
     }
-
 
 
 //    if (alteKombination != null) {
@@ -103,7 +119,13 @@ data class Spiel(
 
         return this.copy(
             beutel = neuerBeutel,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, neueSteine, validateInitialCount = false)
+            aktivSpieler = Spieler(
+                aktivSpieler.nameReadOnly,
+                aktivSpieler.id,
+                neueSteine,
+                aktivSpieler.rausgekommen,
+                false
+            )
         )
     }
 
@@ -112,6 +134,7 @@ data class Spiel(
         spieler: Spieler,
         aktuellerTisch: Tisch
     ): Spiel {
+        require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du anlegen kannst!" }
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }
@@ -123,10 +146,9 @@ data class Spiel(
 
         tisch.aufloesen(aufzuloesendeKombi)
 
-
         return this.copy(
             tisch = aktuellerTisch,
-            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, validateInitialCount = false)
+            aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, aktivSpieler.rausgekommen, false)
         )
     }
 }

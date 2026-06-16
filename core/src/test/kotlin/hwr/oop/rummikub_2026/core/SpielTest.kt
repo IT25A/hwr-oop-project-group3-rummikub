@@ -1,6 +1,7 @@
 package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions
 import java.io.InvalidObjectException
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,6 +26,138 @@ class SpielTest {
             }
             return steine
         }
+        @JvmStatic
+        fun gueltigeSets3Steine() = listOf(
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Blau, Zahl.Eins)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Sechs),
+                    Stein(Farbe.Blau, Zahl.Sechs),
+                    Stein(Farbe.Schwarz, Zahl.Sechs)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Rot, Zahl.Dreizehn),
+                    Stein(Farbe.Blau, Zahl.Dreizehn),
+                    Stein(Farbe.Schwarz, Zahl.Dreizehn)
+                )
+            )
+        )
+
+        @JvmStatic
+        fun gueltigeSets4Steine() = listOf(
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Blau, Zahl.Eins),
+                    Stein(Farbe.Schwarz, Zahl.Eins)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Sechs),
+                    Stein(Farbe.Rot, Zahl.Sechs),
+                    Stein(Farbe.Blau, Zahl.Sechs),
+                    Stein(Farbe.Schwarz, Zahl.Sechs)
+                )
+            ),
+            Sets(
+                mutableListOf(
+                    Stein(Farbe.Orange, Zahl.Dreizehn),
+                    Stein(Farbe.Rot, Zahl.Dreizehn),
+                    Stein(Farbe.Blau, Zahl.Dreizehn),
+                    Stein(Farbe.Schwarz, Zahl.Dreizehn)
+                )
+            )
+        )
+        @JvmStatic
+        fun ungueltigeKombi() = listOf(
+            // Minimum
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Zwei),
+                    Stein(Farbe.Rot, Zahl.Vier)
+                )
+            ),
+
+            // Mittelfall
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Blau, Zahl.Fuenf),
+                    Stein(Farbe.Rot, Zahl.Sechs),
+                    Stein(Farbe.Blau, Zahl.Sieben),
+                    Stein(Farbe.Blau, Zahl.Acht)
+                )
+            ),
+
+            // Maximum
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Schwarz, Zahl.Eins),
+                    Stein(Farbe.Schwarz, Zahl.Zwei),
+                    Stein(Farbe.Schwarz, Zahl.Drei),
+                    Stein(Farbe.Schwarz, Zahl.Vier),
+                    Stein(Farbe.Blau, Zahl.Fuenf),
+                    Stein(Farbe.Schwarz, Zahl.Sechs),
+                    Stein(Farbe.Schwarz, Zahl.Sieben),
+                    Stein(Farbe.Schwarz, Zahl.Acht),
+                    Stein(Farbe.Schwarz, Zahl.Neun),
+                    Stein(Farbe.Schwarz, Zahl.Zehn),
+                    Stein(Farbe.Schwarz, Zahl.Elf),
+                    Stein(Farbe.Schwarz, Zahl.Zwoelf),
+                    Stein(Farbe.Schwarz, Zahl.Eins)
+                )
+            )
+        )
+        @JvmStatic
+        fun gueltigeFolgen() = listOf(
+            // Minimum
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Rot, Zahl.Eins),
+                    Stein(Farbe.Rot, Zahl.Zwei),
+                    Stein(Farbe.Rot, Zahl.Drei)
+                )
+            ),
+
+            // Mittelfall
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Blau, Zahl.Fuenf),
+                    Stein(Farbe.Blau, Zahl.Sechs),
+                    Stein(Farbe.Blau, Zahl.Sieben),
+                    Stein(Farbe.Blau, Zahl.Acht)
+                )
+            ),
+
+            // Maximum
+            Folge(
+                mutableListOf(
+                    Stein(Farbe.Schwarz, Zahl.Eins),
+                    Stein(Farbe.Schwarz, Zahl.Zwei),
+                    Stein(Farbe.Schwarz, Zahl.Drei),
+                    Stein(Farbe.Schwarz, Zahl.Vier),
+                    Stein(Farbe.Schwarz, Zahl.Fuenf),
+                    Stein(Farbe.Schwarz, Zahl.Sechs),
+                    Stein(Farbe.Schwarz, Zahl.Sieben),
+                    Stein(Farbe.Schwarz, Zahl.Acht),
+                    Stein(Farbe.Schwarz, Zahl.Neun),
+                    Stein(Farbe.Schwarz, Zahl.Zehn),
+                    Stein(Farbe.Schwarz, Zahl.Elf),
+                    Stein(Farbe.Schwarz, Zahl.Zwoelf),
+                    Stein(Farbe.Schwarz, Zahl.Dreizehn)
+                )
+            )
+        )
         @JvmStatic
         fun steine() = listOf(
             Stein(Farbe.Rot, Zahl.Eins),
@@ -56,7 +189,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine()
+            create14Steine(),
+            true
         )
         val leereKombi = Folge(
             mutableListOf()
@@ -83,7 +217,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine()
+            create14Steine(),
+            true
         )
 
         val kombi = Folge(
@@ -120,7 +255,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine()
+            create14Steine(),
+            true
         )
 
         val steine = mutableListOf(
@@ -158,7 +294,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine()
+            create14Steine(),
+            true
         )
 
         val kombi = Folge(
@@ -189,6 +326,53 @@ class SpielTest {
             spieler.id,
             neuesSpiel.aktivSpieler.id
         )
+    }
+
+    @Test
+    fun `aufloesen - ungueltiger Spieler wirft Exception`() {
+
+        val spieler1 = Spieler(
+            "Max",
+            "1",
+            create14Steine(),
+            true
+        )
+
+        val spieler2 = Spieler(
+            "Moritz",
+            "2",
+            create14Steine(),
+            true
+        )
+
+        val kombi = Folge(
+            mutableListOf(
+                Stein(Farbe.Blau, Zahl.Sieben),
+                Stein(Farbe.Blau, Zahl.Acht),
+                Stein(Farbe.Blau, Zahl.Neun)
+            )
+        )
+
+        val tisch = Tisch(
+            mutableListOf(kombi)
+        )
+
+        val spiel = Spiel(
+            aktivSpieler = spieler1,
+            beutel = emptyList(),
+            tisch = tisch
+        )
+
+        val exception = assertThrows<InvalidObjectException> {
+            spiel.aufloesen(
+                kombi,
+                spieler2,
+                tisch
+            )
+        }
+
+        assertThat(exception.message)
+            .contains("Spieler ist nicht an der Reihe!")
     }
 
 
@@ -268,7 +452,7 @@ class SpielTest {
         val neuStein = testfall.first.second
         val varargSteine = testfall.first.third
 
-        val spieler = Spieler("Luxi-Taxi", "1", create14Steine(*hand.toTypedArray()))
+        val spieler = Spieler("Luxi-Taxi", "1", create14Steine(*hand.toTypedArray()), true)
         val spiel = Spiel(
             aktivSpieler = spieler,
             beutel = emptyList(),
@@ -292,8 +476,8 @@ class SpielTest {
     @Test
     fun `auslegen - auslegen von ungueltigem Spieler wirft Exception`() {
         // given
-        val spieler1 = Spieler("Luxi-Taxi", "1", create14Steine(standardStein))
-        val spieler2 = Spieler("Smilla", "2", create14Steine())
+        val spieler1 = Spieler("Luxi-Taxi", "1", create14Steine(standardStein), true)
+        val spieler2 = Spieler("Smilla", "2", create14Steine(), true)
         val spiel = Spiel(
             aktivSpieler = spieler1,
             beutel = emptyList(),
@@ -317,7 +501,7 @@ class SpielTest {
     @Test
     fun `auslegen - gueltiges auslegen einer neuen Kombination funktioniert`() {
         // given
-        val spieler = Spieler("Luxi-Taxi", "1", create14Steine(standardStein, stein2, stein3))
+        val spieler = Spieler("Luxi-Taxi", "1", create14Steine(standardStein, stein2, stein3), true)
         val spiel = Spiel(
             aktivSpieler = spieler,
             beutel = emptyList(),
@@ -339,8 +523,8 @@ class SpielTest {
     @Test
     fun `anlegen - ungueltiger Spieler wirft Exception`() {
 
-        val spieler1 = Spieler("Max", "1", create14Steine())
-        val spieler2 = Spieler("Moritz", "2", create14Steine())
+        val spieler1 = Spieler("Max", "1", create14Steine(),true)
+        val spieler2 = Spieler("Moritz", "2", create14Steine(),true)
 
         val stein = Stein(Farbe.Rot, Zahl.Eins)
 
@@ -373,7 +557,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine(steinHand)
+            create14Steine(steinHand),
+            true
         )
 
         val tisch = Tisch(
@@ -416,7 +601,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine(stein)
+            create14Steine(stein),
+            true
         )
 
         val spiel = Spiel(
@@ -450,20 +636,21 @@ class SpielTest {
 
         val tisch = Tisch(mutableListOf(kombi))
 
-        val spieler = Spieler(
+        val spieler1 = Spieler(
             "Max",
             "1",
-            create14Steine(stein)
+            create14Steine(stein),
+            true
         )
 
         val spiel = Spiel(
-            aktivSpieler = spieler,
+            aktivSpieler = spieler1,
             beutel = emptyList(),
             tisch = tisch
         )
 
         spiel.anlegen(
-            spieler = spieler,
+            spieler = spieler1,
             neuStein = stein,
             kombi = 0,
             aktuellerTisch = tisch
@@ -473,6 +660,7 @@ class SpielTest {
         assertThat(tisch.tischReadOnly[0].get())
             .contains(stein)
     }
+
     @Test
     fun `anlegen - Tisch anlegen wird ausgefuehrt`() {
 
@@ -491,7 +679,9 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine(stein)
+            create14Steine(stein),
+            true
+
         )
 
         val spiel = Spiel(
@@ -529,7 +719,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine(stein)
+            create14Steine(stein),
+            true
         )
 
         val spiel = Spiel(
@@ -548,6 +739,41 @@ class SpielTest {
         assertThat(neuesSpiel)
             .isNotSameAs(spiel)
     }
+
+    @ParameterizedTest
+    @MethodSource("gueltigeFolgen", "gueltigeSets4Steine", "gueltigeSets3Steine")
+    fun `Sets und Folgen sind gueltig im Tisch`(
+        kombi: Kombinationen
+    ) {
+        val spiel = Spiel(
+            aktivSpieler = Spieler("spieler1", "1", create14Steine(), true),
+            beutel = emptyList(),
+            tisch = Tisch(mutableListOf(kombi))
+
+        )
+
+        Assertions.assertDoesNotThrow {
+            spiel.gueltigerZug()
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("ungueltigeKombi")
+    fun `Sets und Folgen sind nicht gueltig im Tisch`(
+        kombi: Kombinationen
+    ) {
+
+        val spiel = Spiel(
+            aktivSpieler = Spieler("spieler1", "1", create14Steine(),  true),
+            beutel = emptyList(),
+            tisch = Tisch(mutableListOf(kombi))
+
+        )
+        assertThrows<IllegalArgumentException> {
+            spiel.gueltigerZug()
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("steine")
     fun `anlegen - verschiedene Steine funktionieren korrekt`(stein: Stein) {
@@ -565,7 +791,8 @@ class SpielTest {
         val spieler = Spieler(
             "Max",
             "1",
-            create14Steine(stein)
+            create14Steine(stein),
+            true
         )
 
         val spiel = Spiel(
@@ -583,6 +810,4 @@ class SpielTest {
             )
         }
     }
-
-
 }

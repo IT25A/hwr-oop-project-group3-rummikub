@@ -9,7 +9,7 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
     }
 
     var tmpListe = mutableListOf<Stein>()
-    
+
     fun gueltig(){
         for (i in tisch){
             i.istGueltig()

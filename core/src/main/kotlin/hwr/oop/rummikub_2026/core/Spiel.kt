@@ -5,9 +5,10 @@ import java.io.InvalidObjectException
 data class Spiel(
     val aktivSpieler: Spieler,
     val beutel: List<Stein>,
-    val tisch: Tisch
-) {
+    val tisch: Tisch,
     var gesammeltePunkte: Int = 0
+) {
+
 
     fun gueltigerZug() {
         tisch.gueltig()
@@ -58,6 +59,7 @@ data class Spiel(
 
         return this.copy(
             tisch = aktuellerTisch,
+            gesammeltePunkte = gesammeltePunkte,
             aktivSpieler = Spieler(aktivSpieler.nameReadOnly, aktivSpieler.id, brett, aktivSpieler.rausgekommen, false)
         )
     }
@@ -133,7 +135,7 @@ data class Spiel(
         spieler: Spieler,
         aktuellerTisch: Tisch
     ): Spiel {
-        require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du anlegen kannst!" }
+        require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du aufloesen kannst!" }
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }

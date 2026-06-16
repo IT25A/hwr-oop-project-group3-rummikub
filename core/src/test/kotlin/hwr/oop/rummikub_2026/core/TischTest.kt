@@ -16,27 +16,19 @@ class TischTest {
     companion object {
         @JvmStatic
         fun kombinationen() = listOf(
-
-            // Einzelner Stein
             Sets(mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins)
             )),
-
-            // Gruppe
             Sets(mutableListOf(
                 Stein(Farbe.Rot, Zahl.Sieben),
                 Stein(Farbe.Blau, Zahl.Sieben),
                 Stein(Farbe.Schwarz, Zahl.Sieben)
             )),
-
-            // Lauf
             Folge(mutableListOf(
                 Stein(Farbe.Orange, Zahl.Acht),
                 Stein(Farbe.Orange, Zahl.Neun),
                 Stein(Farbe.Orange, Zahl.Zehn)
             )),
-
-            // Langer Lauf
             Folge(mutableListOf(
                 Stein(Farbe.Blau, Zahl.Sechs),
                 Stein(Farbe.Blau, Zahl.Sieben),
@@ -46,6 +38,7 @@ class TischTest {
                 Stein(Farbe.Blau, Zahl.Elf)
             ))
         )
+        
         @JvmStatic
         fun gueltigeSteineFuerSets() = listOf(
             mutableListOf(
@@ -53,7 +46,6 @@ class TischTest {
                 Stein(Farbe.Schwarz, Zahl.Eins),
                 Stein(Farbe.Blau, Zahl.Eins)
             ),
-            
             mutableListOf(
                 Stein(Farbe.Blau, Zahl.Fuenf),
                 Stein(Farbe.Orange, Zahl.Fuenf),
@@ -61,24 +53,20 @@ class TischTest {
                 Stein(Farbe.Rot, Zahl.Fuenf)
             )
         )
+        
         @JvmStatic
         fun gueltigeSteineFuerFolgen() = listOf(
-            // Minimum
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins),
                 Stein(Farbe.Rot, Zahl.Zwei),
                 Stein(Farbe.Rot, Zahl.Drei)
             ),
-            
-            // Mittelfall
             mutableListOf(
                 Stein(Farbe.Blau, Zahl.Fuenf),
                 Stein(Farbe.Blau, Zahl.Sechs),
                 Stein(Farbe.Blau, Zahl.Sieben),
                 Stein(Farbe.Blau, Zahl.Acht)
             ),
-            
-            // Maximum
             mutableListOf(
                 Stein(Farbe.Schwarz, Zahl.Eins),
                 Stein(Farbe.Schwarz, Zahl.Zwei),
@@ -98,7 +86,6 @@ class TischTest {
         
         @JvmStatic
         fun gueltigeFolgen() = listOf(
-            // Minimum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Rot, Zahl.Eins),
@@ -106,8 +93,6 @@ class TischTest {
                     Stein(Farbe.Rot, Zahl.Drei)
                 )
             ),
-            
-            // Mittelfall
             Folge(
                 mutableListOf(
                     Stein(Farbe.Blau, Zahl.Fuenf),
@@ -116,8 +101,6 @@ class TischTest {
                     Stein(Farbe.Blau, Zahl.Acht)
                 )
             ),
-            
-            // Maximum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Schwarz, Zahl.Eins),
@@ -136,9 +119,9 @@ class TischTest {
                 )
             )
         )
+        
         @JvmStatic
         fun ungueltigeKombi() = listOf(
-            // Minimum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Rot, Zahl.Eins),
@@ -146,8 +129,6 @@ class TischTest {
                     Stein(Farbe.Rot, Zahl.Vier)
                 )
             ),
-            
-            // Mittelfall
             Folge(
                 mutableListOf(
                     Stein(Farbe.Blau, Zahl.Fuenf),
@@ -156,8 +137,6 @@ class TischTest {
                     Stein(Farbe.Blau, Zahl.Acht)
                 )
             ),
-            
-            // Maximum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Schwarz, Zahl.Eins),
@@ -176,6 +155,7 @@ class TischTest {
                 )
             )
         )
+        
         @JvmStatic
         fun gueltigeSets3Steine() = listOf(
             Sets(
@@ -247,6 +227,7 @@ class TischTest {
         kombi: Kombinationen
     ) {
         val testTisch = Tisch(mutableListOf(kombi))
+        
         assertThrows<IllegalArgumentException> {
             testTisch.gueltig()
         }
@@ -292,7 +273,6 @@ class TischTest {
     ) {
         val tisch = Tisch(mutableListOf(set))
         tisch.anlegen(0, Stein(Farbe.Orange, Zahl.Eins))
-        //*list.toIntArray()
         
         assertThat(tisch.tischReadOnly[0].get()).contains(Stein(Farbe.Orange, Zahl.Eins))
     }
@@ -304,7 +284,6 @@ class TischTest {
     ) {
         val tisch = Tisch(mutableListOf(folge))
         tisch.anlegen(0, Stein(Farbe.Orange, Zahl.Eins))
-        //*list.toIntArray()
         
         assertThat(tisch.tischReadOnly[0].get()).contains(Stein(Farbe.Orange, Zahl.Eins))
     }
@@ -340,7 +319,6 @@ class TischTest {
     fun `Kombination an beliebiger Position kann aufgeloest werden`(
         index: Int
     ) {
-
         val k1 = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Drei),
@@ -377,13 +355,10 @@ class TischTest {
 
         tisch.aufloesen(target)
 
-        assertFalse(
-            tisch.tischReadOnly.contains(target)
-        )
+        assertFalse(tisch.tischReadOnly.contains(target))
     }
     @Test
     fun `Exception wenn Kombination nicht auf dem Tisch liegt`() {
-
         val vorhandene = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins),
@@ -400,14 +375,13 @@ class TischTest {
             )
         )
 
-        val tisch = Tisch(
-            mutableListOf(vorhandene)
-        )
+        val tisch = Tisch(mutableListOf(vorhandene))
 
         assertThrows<IllegalArgumentException> {
             tisch.aufloesen(nichtVorhandene)
         }
     }
+    
     @Test
     fun `bei zwei identischen Folgen bleibt eine erhalten`() {
 
@@ -430,8 +404,6 @@ class TischTest {
 
         assertEquals(1, tisch.tischReadOnly.size)
 
-        assertTrue(
-            tisch.tischReadOnly.contains(folge)
-        )
+        assertTrue(tisch.tischReadOnly.contains(folge))
     }
 }

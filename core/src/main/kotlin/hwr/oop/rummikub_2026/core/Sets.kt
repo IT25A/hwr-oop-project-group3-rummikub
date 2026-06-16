@@ -1,7 +1,5 @@
 package hwr.oop.rummikub_2026.core
 
-//import org.assertj.core.api.Assertions.assertThat
-
 data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 	
 	val setReadOnly: List<Stein>
@@ -23,7 +21,6 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 		val zahlen = setListe[0].zahl()
 		for (i in setListe) {
 			if (i.zahl() != zahlen) {
-				//keine Coverage!!!
 				return false
 			}
 		}
@@ -35,7 +32,6 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 		val farben = mutableSetOf<Any>()
 		for (i in setListe) {
 			if (!farben.add(i.farbe())) {
-				//keine Coverage!!
 				return false
 			}
 		}
@@ -52,16 +48,4 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 		this.istGueltig()
 		return stein
 	}
-	
 }
-
-/*             (val folgeListe: List<Stein>): Boolean {
-        assertThat(set).hasSize(4);
-
-        val alleSindEins = set.all { it.zahl() == Zahl.Eins }
-        assertThat(alleSindEins).isTrue()
-        assertThat(Zahl.Eins.value).isEqualTo(1)
-        assertThat(set).extracting("Farbe")
-            .containsExactlyInAnyOrder(Farbe.Blau, Farbe.Orange, Farbe.Rot, Farbe.Schwarz)
-    }
-*/

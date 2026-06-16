@@ -18,7 +18,6 @@ class SetsBearbeitenTest {
     companion object {
         @JvmStatic
         fun gueltigeHinzufuegenZu3erSet() = listOf(
-            // 3er Set Eins + Schwarz Eins
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),
@@ -27,7 +26,6 @@ class SetsBearbeitenTest {
                 ),
                 Stein(Farbe.Schwarz, Zahl.Eins)
             ),
-            // 3er Set Sechs + Blau Sechs
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Sechs),
@@ -36,7 +34,6 @@ class SetsBearbeitenTest {
                 ),
                 Stein(Farbe.Blau, Zahl.Sechs)
             ),
-            // 3er Set Dreizehn + Schwarz Dreizehn
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Dreizehn),
@@ -49,7 +46,6 @@ class SetsBearbeitenTest {
 
         @JvmStatic
         fun ungueltigeHinzufuegenZu4erSet() = listOf(
-            // 4er Set Eins + fünfter Stein
             SetTestfall(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),
@@ -60,7 +56,6 @@ class SetsBearbeitenTest {
                 Stein(Farbe.Schwarz, Zahl.Eins),
                 "Maximal 4 Steine"
             ),
-            // 4er Set Sechs + fünfter Stein
             SetTestfall(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Sechs),
@@ -71,7 +66,6 @@ class SetsBearbeitenTest {
                 Stein(Farbe.Schwarz, Zahl.Sechs),
                 "Maximal 4 Steine"
             ),
-            // 4er Set Dreizehn + fünfter Stein
             SetTestfall(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Dreizehn),
@@ -86,7 +80,6 @@ class SetsBearbeitenTest {
 
         @JvmStatic
         fun gueltigesWegnehmenVon4erSet() = listOf(
-            // 4er Set Eins - Rot Eins
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),
@@ -96,7 +89,6 @@ class SetsBearbeitenTest {
                 ),
                 Stein(Farbe.Rot, Zahl.Eins)
             ),
-            // 4er Set Sechs - Blau Sechs
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Sechs),
@@ -106,7 +98,6 @@ class SetsBearbeitenTest {
                 ),
                 Stein(Farbe.Blau, Zahl.Sechs)
             ),
-            // 4er Set Dreizehn - Orange Dreizehn
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Dreizehn),
@@ -120,7 +111,6 @@ class SetsBearbeitenTest {
 
         @JvmStatic
         fun ungueltigesWegnehmenVon3erSet() = listOf(
-            // 3er Set Eins - Orange Eins
             SetTestfall(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),
@@ -130,7 +120,6 @@ class SetsBearbeitenTest {
                 Stein(Farbe.Orange, Zahl.Eins),
                 "Mindestens 3 Steine"
             ),
-            // 3er Set Sechs - Rot Sechs
             SetTestfall(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Sechs),
@@ -140,7 +129,6 @@ class SetsBearbeitenTest {
                 Stein(Farbe.Rot, Zahl.Sechs),
                 "Mindestens 3 Steine"
             ),
-            // 3er Set Dreizehn - Schwarz Dreizehn
             SetTestfall(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Dreizehn),
@@ -204,6 +192,7 @@ class SetsBearbeitenTest {
             sets.wegnehmenVomSet(testfall.stein)
             sets.istGueltig()
         }
+        
         assertThat(sets.setReadOnly).doesNotContain(testfall.stein)
         assertThat(exception.message).contains(testfall.erwarteteFehlerNachricht)
     }

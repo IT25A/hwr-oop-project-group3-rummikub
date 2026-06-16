@@ -1,7 +1,6 @@
 package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -52,7 +51,6 @@ class SetsPruefenTest {
 
         @JvmStatic
         fun ungueltigeSetsGleicheFarbe() = listOf(
-            // 4 Steine - doppelte Farbe Rot
             Pair(
                 mutableListOf(
                     Stein(Farbe.Rot, Zahl.Eins),
@@ -62,7 +60,6 @@ class SetsPruefenTest {
                 ),
                 "Alle Steine muessen unterschiedliche Farbe haben"
             ),
-            // 4 Steine - doppelte Farbe Orange
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Sechs),
@@ -72,7 +69,6 @@ class SetsPruefenTest {
                 ),
                 "Alle Steine muessen unterschiedliche Farbe haben"
             ),
-            // 4 Steine - doppelte Farbe Blau
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Dreizehn),
@@ -82,7 +78,6 @@ class SetsPruefenTest {
                 ),
                 "Alle Steine muessen unterschiedliche Farbe haben"
             ),
-            // 3 Steine - doppelte Farbe Orange
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),
@@ -91,7 +86,6 @@ class SetsPruefenTest {
                 ),
                 "Alle Steine muessen unterschiedliche Farbe haben"
             ),
-            // 3 Steine - doppelte Farbe Schwarz
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Sechs),
@@ -100,7 +94,6 @@ class SetsPruefenTest {
                 ),
                 "Alle Steine muessen unterschiedliche Farbe haben"
             ),
-            // 3 Steine - doppelte Farbe Blau
             Pair(
                 mutableListOf(
                     Stein(Farbe.Rot, Zahl.Dreizehn),
@@ -113,7 +106,6 @@ class SetsPruefenTest {
 
         @JvmStatic
         fun ungueltigeSetsUnterschiedlicheZahl() = listOf(
-            // 4 Steine - unterschiedliche Zahlen
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),
@@ -123,7 +115,6 @@ class SetsPruefenTest {
                 ),
                 "Alle Steine muessen dieselbe Zahl haben"
             ),
-            // 3 Steine - unterschiedliche Zahlen
             Pair(
                 mutableListOf(
                     Stein(Farbe.Orange, Zahl.Eins),

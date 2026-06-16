@@ -46,7 +46,6 @@ data class Spiel(
 
         for (i in liste) {
             gesammeltePunkte += i.zahl().value
-
         }
 
         if(gesammeltePunkte >= 30){

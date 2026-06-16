@@ -102,7 +102,6 @@ class FolgePruefenTest {
 
         @JvmStatic
         fun ungueltigeReihenfolgen() = listOf(
-
             // Lücke
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins),
@@ -173,8 +172,7 @@ class FolgePruefenTest {
             folge.istGueltig()
         }
 
-        assertThat(exception.message)
-            .contains("Mindestens 3 Steine")
+        assertThat(exception.message).contains("Mindestens 3 Steine")
     }
 
     @ParameterizedTest
@@ -188,8 +186,7 @@ class FolgePruefenTest {
             folge.istGueltig()
         }
 
-        assertThat(exception.message)
-            .contains("Maximal 13 Steine")
+        assertThat(exception.message).contains("Maximal 13 Steine")
     }
 
     @ParameterizedTest
@@ -203,8 +200,7 @@ class FolgePruefenTest {
             folge.istGueltig()
         }
 
-        assertThat(exception.message)
-            .contains("Alle Steine muessen die selbe Farbe haben")
+        assertThat(exception.message).contains("Alle Steine muessen die selbe Farbe haben")
     }
 
     @ParameterizedTest
@@ -218,7 +214,6 @@ class FolgePruefenTest {
             folge.istGueltig()
         }
 
-        assertThat(exception.message)
-            .contains("Steine muessen aufeinander Folgen")
+        assertThat(exception.message).contains("Steine muessen aufeinander Folgen")
     }
 }

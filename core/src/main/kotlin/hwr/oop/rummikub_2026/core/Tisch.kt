@@ -56,17 +56,3 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
         tisch.removeAt(stelle)
     }
 }
-
-/* (+)TODO: Tisch mit einer Liste mit Folgen und Sets (interface)
-   (+)TODO: neue kombi legen
-   (+)TODO: Tisch/Kombis anzeige
-   (+)TODO: etwas anlegen können
-   (+)TODO: gucken ob alles valid ist
-    TODO: auseinanderziehen
-    TODO: temporäre Liste aktualisieren nach jedem Zug
-
-   */
-
-/*In Kotlin gibt es die Möglichkeit, eine Funktion so zu definieren, dass sie eine variable Anzahl an Argumenten mit demselben Datentyp entgegennehmen kann.
-Dies nennt man ein Vararg-Parameter. Dies ist nützlich, wenn man nicht genau weiß, wie viele Argumente an die Funktion übergeben werden. 
-Ein Vararg-Parameter wird in der Funktionsdeklaration mit dem Schlüsselwort vararg gekennzeichnet.*/

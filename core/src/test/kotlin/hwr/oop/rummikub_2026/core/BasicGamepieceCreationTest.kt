@@ -26,7 +26,7 @@ class BasicPieceCreationTest {
 			Zahl.Zehn,
 			Zahl.Elf,
 			Zahl.Zwoelf,
-			Zahl.Dreizehn,
+			Zahl.Dreizehn
 		)
 	}
 
@@ -47,7 +47,7 @@ class BasicPieceCreationTest {
 			Zahl.Zehn,
 			Zahl.Elf,
 			Zahl.Zwoelf,
-			Zahl.Dreizehn,
+			Zahl.Dreizehn
 		)
 
 		// when
@@ -72,7 +72,7 @@ class BasicPieceCreationTest {
 			 Farbe.Orange,
 			 Farbe.Rot,
 			 Farbe.Blau,
-			 Farbe.Schwarz,
+			 Farbe.Schwarz
 		)
 	}
 

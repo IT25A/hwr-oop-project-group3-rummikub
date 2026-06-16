@@ -21,7 +21,6 @@ data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()
 	
 	fun zieheSteinAusBeutel(): Stein? {
 		return if (steineBeutel.isNotEmpty()) {
-			//TODO("Stein hinzufügen zum Tisch")
 			steineBeutel.removeAt(0)
 		} else {
 			null

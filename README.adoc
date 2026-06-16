@@ -26,8 +26,8 @@ Beutel:
 - Beutel hat 104 (ohne Joker) Steine
 - Steine ziehen funktioniert korrekt (Stein Anzahl minus 1)
 Tisch:
--Gültige Kombinationen aus Sets und Folgen werden auf dem Tisch geprüft und angelegt
--passende Kombi kann aufgelöst werden
+- Gültige Kombinationen aus Sets und Folgen werden auf dem Tisch geprüft und angelegt
+- passende Kombi kann aufgelöst werden
 Spiel
 - Züge werden auf Gültigkeit geprüft
 - Auslegen: Die Punkte der Steine werden addiert. Ein Spieler darf Steine ab einem Gesamtwert von >= 30 Punkten auslegen
@@ -37,15 +37,22 @@ Spiel
 
 Alle oben genannten Features sind getestet
 
+
 Offen:
 (+) 30 Punkte zum Rauslegen (Zählen + Züge zulassen) pro Spieler
 - Test für 30 Punkte
 (+) Spielzug gueltig
 - Gewinnen/ Spiel beenden
 - Highscore/ übrige Punktzahl zählen pro Spieler
-- TODO rausnehmen/ bearbeiten
+(+) TODO rausnehmen/ bearbeiten
 (+) Read-me anpassen
 - SpielTest auseinanderziehen
+- PlayerTest - Line 217 + 228 unused variable
+- SpielTest - Line 426 unused variable
+- TischTest - Line 252 + 263 +  unused variable
+- Todo-File löschen?
+- Parameter bei Variablen/ Funktionen mehrzeilig/ einzeilig?
+- Variablen/ Funktionen Platz dazwischen/ direkt untereinander?
 
 - Test-coverage
 - Mutations-coverage

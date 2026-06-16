@@ -100,14 +100,11 @@ class FolgeBearbeitenTest {
         }
 
         // then
-        assertThat(folge.folgeReadOnly)
-            .contains(stein)
+        assertThat(folge.folgeReadOnly).contains(stein)
 
-        assertThat(folge.folgeReadOnly.last())
-            .isEqualTo(stein)
+        assertThat(folge.folgeReadOnly.last()).isEqualTo(stein)
 
-        assertThat(folge.folgeReadOnly)
-            .hasSize(4)
+        assertThat(folge.folgeReadOnly).hasSize(4)
     }
 
     @ParameterizedTest
@@ -124,8 +121,7 @@ class FolgeBearbeitenTest {
         }
 
         // then
-        assertThat(exception.message)
-            .contains(testfall.second)
+        assertThat(exception.message).contains(testfall.second)
     }
 
     @ParameterizedTest
@@ -142,14 +138,11 @@ class FolgeBearbeitenTest {
         }
 
         // then
-        assertThat(folge.folgeReadOnly)
-            .contains(stein)
+        assertThat(folge.folgeReadOnly).contains(stein)
 
-        assertThat(folge.folgeReadOnly.first())
-            .isEqualTo(stein)
+        assertThat(folge.folgeReadOnly.first()).isEqualTo(stein)
 
-        assertThat(folge.folgeReadOnly)
-            .hasSize(4)
+        assertThat(folge.folgeReadOnly).hasSize(4)
     }
 
     @ParameterizedTest
@@ -166,8 +159,7 @@ class FolgeBearbeitenTest {
         }
 
         // then
-        assertThat(exception.message)
-            .contains(testfall.second)
+        assertThat(exception.message).contains(testfall.second)
     }
 
     @Test
@@ -186,14 +178,11 @@ class FolgeBearbeitenTest {
         val entfernt = folge.wegnehmenHinten()
 
         // then
-        assertThat(entfernt)
-            .isEqualTo(Stein(Farbe.Rot, Zahl.Fuenf))
+        assertThat(entfernt).isEqualTo(Stein(Farbe.Rot, Zahl.Fuenf))
 
-        assertThat(folge.folgeReadOnly)
-            .doesNotContain(Stein(Farbe.Rot, Zahl.Fuenf))
+        assertThat(folge.folgeReadOnly).doesNotContain(Stein(Farbe.Rot, Zahl.Fuenf))
 
-        assertThat(folge.folgeReadOnly)
-            .hasSize(3)
+        assertThat(folge.folgeReadOnly).hasSize(3)
     }
 
     @Test
@@ -212,14 +201,11 @@ class FolgeBearbeitenTest {
         val entfernt = folge.wegnehmenVorne()
 
         // then
-        assertThat(entfernt)
-            .isEqualTo(Stein(Farbe.Rot, Zahl.Zwei))
+        assertThat(entfernt).isEqualTo(Stein(Farbe.Rot, Zahl.Zwei))
 
-        assertThat(folge.folgeReadOnly)
-            .doesNotContain(Stein(Farbe.Rot, Zahl.Zwei))
+        assertThat(folge.folgeReadOnly).doesNotContain(Stein(Farbe.Rot, Zahl.Zwei))
 
-        assertThat(folge.folgeReadOnly)
-            .hasSize(3)
+        assertThat(folge.folgeReadOnly).hasSize(3)
     }
 
     @Test
@@ -238,8 +224,7 @@ class FolgeBearbeitenTest {
             folge.wegnehmenHinten()
         }
 
-        assertThat(exception.message)
-            .contains("Mindestens 3 Steine")
+        assertThat(exception.message).contains("Mindestens 3 Steine")
     }
 
     @Test
@@ -258,8 +243,7 @@ class FolgeBearbeitenTest {
             folge.wegnehmenVorne()
         }
 
-        assertThat(exception.message)
-            .contains("Mindestens 3 Steine")
+        assertThat(exception.message).contains("Mindestens 3 Steine")
     }
 
     @Test
@@ -288,8 +272,7 @@ class FolgeBearbeitenTest {
             folge.hinzufuegenHinten(Stein(Farbe.Schwarz, Zahl.Dreizehn))
         }
 
-        assertThat(exception.message)
-            .contains("Maximal 13 Steine")
+        assertThat(exception.message).contains("Maximal 13 Steine")
     }
 
     @Test
@@ -304,11 +287,9 @@ class FolgeBearbeitenTest {
         folge.hinzufuegenHinten(Stein(Farbe.Rot, Zahl.Fuenf))
 
         // then
-        assertThat(entfernt)
-            .isEqualTo(Stein(Farbe.Rot, Zahl.Fuenf))
+        assertThat(entfernt).isEqualTo(Stein(Farbe.Rot, Zahl.Fuenf))
 
-        assertThat(folge.folgeReadOnly)
-            .containsExactly(
+        assertThat(folge.folgeReadOnly).containsExactly(
                 Stein(Farbe.Rot, Zahl.Eins),
                 Stein(Farbe.Rot, Zahl.Zwei),
                 Stein(Farbe.Rot, Zahl.Drei),

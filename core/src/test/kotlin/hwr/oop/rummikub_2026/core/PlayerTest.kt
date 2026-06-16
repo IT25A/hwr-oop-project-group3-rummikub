@@ -32,7 +32,6 @@ class SpielerTest {
         val spieler2 = Spieler("Gabriela", "2", steine14)
         val spieler3 = Spieler("Charlotte", "3", steine14)
         val spieler4 = Spieler("Maxi-Taxi", "4", steine14)
-        //when
 
         //then
         assertThat(spieler1.nameReadOnly).isEqualTo("Thanh")
@@ -70,7 +69,6 @@ class SpielerTest {
     companion object {
         @JvmStatic
         fun liste14Steine() = listOf(
-            // 14 Steine
             mutableListOf(
                 Stein(Farbe.Orange, Zahl.Eins),
                 Stein(Farbe.Blau, Zahl.Zwei),
@@ -91,7 +89,6 @@ class SpielerTest {
 
         @JvmStatic
         fun listeNicht14Steine() = listOf(
-            // 14 Steine
             mutableListOf(
                 Stein(Farbe.Orange, Zahl.Eins),
                 Stein(Farbe.Orange, Zahl.Eins),
@@ -108,7 +105,6 @@ class SpielerTest {
                 Stein(Farbe.Orange, Zahl.Zwoelf),
                 Stein(Farbe.Blau, Zahl.Dreizehn),
                 Stein(Farbe.Blau, Zahl.Dreizehn)
-
             ),
             mutableListOf(
                 Stein(Farbe.Orange, Zahl.Eins),
@@ -204,7 +200,6 @@ class SpielerTest {
             Stein(Farbe.Schwarz, Zahl.Dreizehn)
         )
         val spieler = Spieler("Maxi-Taxi", "4", loeschenListe.toMutableList())
-        //when
         //then
         val exception = assertThrows<IllegalArgumentException> {
             spieler.entfernen(stein)
@@ -235,6 +230,3 @@ class SpielerTest {
         assertThat(exception.message).contains("Es muss 14 Steine vergeben werden")
     }
 }
-
-
-

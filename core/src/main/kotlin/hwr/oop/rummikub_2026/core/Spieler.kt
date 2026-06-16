@@ -24,7 +24,6 @@ data class Spieler(
 	}
 	
 	fun entfernen(stein: Stein) {
-		
 		val funktioniert = board.remove(stein)
 		require(funktioniert) { "Der Stein ist nicht vorhanden." }
 	}

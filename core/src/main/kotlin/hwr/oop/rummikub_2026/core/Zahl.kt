@@ -13,5 +13,5 @@ enum class Zahl(val value: Int) {
 	Zehn(10),
 	Elf(11),
 	Zwoelf(12),
-	Dreizehn(13),
+	Dreizehn(13)
 }

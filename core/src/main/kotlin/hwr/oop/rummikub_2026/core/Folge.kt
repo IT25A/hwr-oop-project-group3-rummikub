@@ -61,4 +61,3 @@ data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 		return stein
 	}
 }
-

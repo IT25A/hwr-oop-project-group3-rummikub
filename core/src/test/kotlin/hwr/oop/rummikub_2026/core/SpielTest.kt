@@ -78,9 +78,9 @@ class SpielTest {
                 )
             )
         )
+        
         @JvmStatic
         fun ungueltigeKombi() = listOf(
-            // Minimum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Rot, Zahl.Eins),
@@ -88,8 +88,6 @@ class SpielTest {
                     Stein(Farbe.Rot, Zahl.Vier)
                 )
             ),
-
-            // Mittelfall
             Folge(
                 mutableListOf(
                     Stein(Farbe.Blau, Zahl.Fuenf),
@@ -98,8 +96,6 @@ class SpielTest {
                     Stein(Farbe.Blau, Zahl.Acht)
                 )
             ),
-
-            // Maximum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Schwarz, Zahl.Eins),
@@ -118,9 +114,9 @@ class SpielTest {
                 )
             )
         )
+        
         @JvmStatic
         fun gueltigeFolgen() = listOf(
-            // Minimum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Rot, Zahl.Eins),
@@ -128,8 +124,6 @@ class SpielTest {
                     Stein(Farbe.Rot, Zahl.Drei)
                 )
             ),
-
-            // Mittelfall
             Folge(
                 mutableListOf(
                     Stein(Farbe.Blau, Zahl.Fuenf),
@@ -138,8 +132,6 @@ class SpielTest {
                     Stein(Farbe.Blau, Zahl.Acht)
                 )
             ),
-
-            // Maximum
             Folge(
                 mutableListOf(
                     Stein(Farbe.Schwarz, Zahl.Eins),
@@ -158,6 +150,7 @@ class SpielTest {
                 )
             )
         )
+        
         @JvmStatic
         fun steine() = listOf(
             Stein(Farbe.Rot, Zahl.Eins),
@@ -192,12 +185,8 @@ class SpielTest {
             create14Steine(),
             true
         )
-        val leereKombi = Folge(
-            mutableListOf()
-        )
-        val tisch = Tisch(
-            mutableListOf(leereKombi)
-        )
+        val leereKombi = Folge(mutableListOf())
+        val tisch = Tisch(mutableListOf(leereKombi))
         val spiel = Spiel(
             spieler,
             emptyList(),
@@ -229,9 +218,7 @@ class SpielTest {
             )
         )
 
-        val tisch = Tisch(
-            mutableListOf(kombi)
-        )
+        val tisch = Tisch(mutableListOf(kombi))
 
         val spiel = Spiel(
             spieler,
@@ -245,9 +232,7 @@ class SpielTest {
             tisch
         )
 
-        assertFalse(
-            neuesSpiel.tisch.tischReadOnly.contains(kombi)
-        )
+        assertFalse(neuesSpiel.tisch.tischReadOnly.contains(kombi))
     }
     @Test
     fun `aufloesen - Steine der Kombination landen in tmpListe`() {
@@ -267,9 +252,7 @@ class SpielTest {
 
         val kombi = Folge(steine)
 
-        val tisch = Tisch(
-            mutableListOf(kombi)
-        )
+        val tisch = Tisch(mutableListOf(kombi))
 
         val spiel = Spiel(
             spieler,
@@ -288,6 +271,7 @@ class SpielTest {
             tisch.tmpListe
         )
     }
+    
     @Test
     fun `aufloesen - aktiver Spieler bleibt erhalten`() {
 
@@ -306,9 +290,7 @@ class SpielTest {
             )
         )
 
-        val tisch = Tisch(
-            mutableListOf(kombi)
-        )
+        val tisch = Tisch(mutableListOf(kombi))
 
         val spiel = Spiel(
             spieler,
@@ -353,9 +335,7 @@ class SpielTest {
             )
         )
 
-        val tisch = Tisch(
-            mutableListOf(kombi)
-        )
+        val tisch = Tisch(mutableListOf(kombi))
 
         val spiel = Spiel(
             aktivSpieler = spieler1,
@@ -371,8 +351,7 @@ class SpielTest {
             )
         }
 
-        assertThat(exception.message)
-            .contains("Spieler ist nicht an der Reihe!")
+        assertThat(exception.message).contains("Spieler ist nicht an der Reihe!")
     }
 
 
@@ -393,14 +372,11 @@ class SpielTest {
         val neuesSpiel = spiel.ziehen(spieler)
 
         // then
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly)
-            .hasSize(testfall.second)
+        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).hasSize(testfall.second)
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly)
-            .contains(testfall.first.first())
+        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).contains(testfall.first.first())
 
-        assertThat(neuesSpiel.beutel)
-            .isEmpty()
+        assertThat(neuesSpiel.beutel).isEmpty()
     }
 
     @Test
@@ -419,8 +395,7 @@ class SpielTest {
             spiel.ziehen(spieler2)
         }
 
-        assertThat(exception.message)
-            .contains("Spieler ist nicht an der Reihe!")
+        assertThat(exception.message).contains("Spieler ist nicht an der Reihe!")
     }
 
     @Test
@@ -438,8 +413,7 @@ class SpielTest {
             spiel.ziehen(spieler)
         }
 
-        assertThat(exception.message)
-            .contains("Der Beutel ist leer!")
+        assertThat(exception.message).contains("Der Beutel ist leer!")
     }
 
     @ParameterizedTest
@@ -469,8 +443,7 @@ class SpielTest {
             )
         }
 
-        assertThat(exception.message)
-            .contains(testfall.second)
+        assertThat(exception.message).contains(testfall.second)
     }
 
     @Test
@@ -494,8 +467,7 @@ class SpielTest {
             )
         }
 
-        assertThat(exception.message)
-            .contains("Spieler ist nicht an der Reihe!")
+        assertThat(exception.message).contains("Spieler ist nicht an der Reihe!")
     }
 
     @Test
@@ -517,8 +489,7 @@ class SpielTest {
         )
 
         // then
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly)
-            .hasSize(11)
+        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).hasSize(11)
     }
     @Test
     fun `anlegen - ungueltiger Spieler wirft Exception`() {
@@ -545,8 +516,7 @@ class SpielTest {
             )
         }
 
-        assertThat(exception.message)
-            .contains("Spieler ist nicht an der Reihe!")
+        assertThat(exception.message).contains("Spieler ist nicht an der Reihe!")
     }
     @Test
     fun `anlegen - Stein nicht vorhanden wirft Exception`() {
@@ -561,9 +531,7 @@ class SpielTest {
             true
         )
 
-        val tisch = Tisch(
-            mutableListOf()
-        )
+        val tisch = Tisch(mutableListOf())
 
         val spiel = Spiel(
             aktivSpieler = spieler,
@@ -580,9 +548,9 @@ class SpielTest {
             )
         }
 
-        assertThat(exception.message)
-            .contains("Du hast diesen Stein nicht!")
+        assertThat(exception.message).contains("Du hast diesen Stein nicht!")
     }
+    
     @Test
     fun `anlegen - Stein wird aus Hand entfernt`() {
 
@@ -618,8 +586,7 @@ class SpielTest {
             aktuellerTisch = tisch
         )
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly)
-            .doesNotContain(stein)
+        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).doesNotContain(stein)
     }
     @Test
     fun `anlegen - Stein wird in Kombination eingefuegt`() {
@@ -657,8 +624,7 @@ class SpielTest {
         )
 
         // je nach Implementierung von anlegen()
-        assertThat(tisch.tischReadOnly[0].get())
-            .contains(stein)
+        assertThat(tisch.tischReadOnly[0].get()).contains(stein)
     }
 
     @Test
@@ -698,9 +664,9 @@ class SpielTest {
         )
 
         // Kombination sollte verändert worden sein
-        assertThat(tisch.tischReadOnly.first().get())
-            .contains(stein)
+        assertThat(tisch.tischReadOnly.first().get()).contains(stein)
     }
+    
     @Test
     fun `anlegen - neues Spiel wird erzeugt`() {
 
@@ -736,8 +702,7 @@ class SpielTest {
             aktuellerTisch = tisch
         )
 
-        assertThat(neuesSpiel)
-            .isNotSameAs(spiel)
+        assertThat(neuesSpiel).isNotSameAs(spiel)
     }
 
     @ParameterizedTest
@@ -749,7 +714,6 @@ class SpielTest {
             aktivSpieler = Spieler("spieler1", "1", create14Steine(), true),
             beutel = emptyList(),
             tisch = Tisch(mutableListOf(kombi))
-
         )
 
         Assertions.assertDoesNotThrow {
@@ -762,13 +726,12 @@ class SpielTest {
     fun `Sets und Folgen sind nicht gueltig im Tisch`(
         kombi: Kombinationen
     ) {
-
         val spiel = Spiel(
             aktivSpieler = Spieler("spieler1", "1", create14Steine(),  true),
             beutel = emptyList(),
             tisch = Tisch(mutableListOf(kombi))
-
         )
+        
         assertThrows<IllegalArgumentException> {
             spiel.gueltigerZug()
         }
@@ -777,7 +740,6 @@ class SpielTest {
     @ParameterizedTest
     @MethodSource("steine")
     fun `anlegen - verschiedene Steine funktionieren korrekt`(stein: Stein) {
-
         val kombi = Folge(
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins),

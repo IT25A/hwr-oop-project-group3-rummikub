@@ -13,17 +13,28 @@ data class Spieler(
 			require(board.size == 14) { "Es muss 14 Steine vergeben werden" }
 		}
 	}
-	
 	val nameReadOnly: String
 		get() = name
 	val boardReadOnly: MutableList<Stein>
 		get() = board.toMutableList()
-	
-	fun ziehen(stein: Stein) {
+
+//	fun punktzahl(): Int {
+//		var punkte = 0
+//		for (stein in board) {
+//			punkte += stein.zahl().value
+//		}
+//		return punkte
+//	}
+
+	fun ziehen(
+		stein: Stein
+	) {
 		board.add(stein)
 	}
 	
-	fun entfernen(stein: Stein) {
+	fun entfernen(
+		stein: Stein
+	) {
 		val funktioniert = board.remove(stein)
 		require(funktioniert) { "Der Stein ist nicht vorhanden." }
 	}

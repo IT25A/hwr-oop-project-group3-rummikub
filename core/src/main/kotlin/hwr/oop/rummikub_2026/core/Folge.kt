@@ -37,12 +37,16 @@ data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 		return true
 	}
 	
-	fun hinzufuegenHinten(stein: Stein) {
+	fun hinzufuegenHinten(
+		stein: Stein
+	) {
 		folgeListe.add(stein)
 		this.istGueltig()
 	}
 	
-	fun hinzufuegenVorne(stein: Stein) {
+	fun hinzufuegenVorne(
+		stein: Stein
+	) {
 		folgeListe.add(0, stein)
 		this.istGueltig()
 	}

@@ -38,12 +38,16 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 		return true
 	}
 	
-	fun hinzufuegenZumSet(stein: Stein) {
+	fun hinzufuegenZumSet(
+		stein: Stein
+	) {
 		setListe.add(stein)
 		this.istGueltig()
 	}
 	
-	fun wegnehmenVomSet(stein: Stein): Stein {
+	fun wegnehmenVomSet(
+		stein: Stein
+	): Stein {
 		setListe.remove(stein)
 		this.istGueltig()
 		return stein

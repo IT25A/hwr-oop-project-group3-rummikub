@@ -49,10 +49,11 @@ Offen:
 - SpielTest auseinanderziehen
 - PlayerTest - Line 217 + 228 unused variable
 - SpielTest - Line 426 unused variable
+- SpielTest - Line 442 redundant spread (*) operator
 - TischTest - Line 252 + 263 +  unused variable
 - Todo-File löschen?
-- Parameter bei Variablen/ Funktionen mehrzeilig/ einzeilig?
-- Variablen/ Funktionen Platz dazwischen/ direkt untereinander?
+- Parameter bei Variablen/ Funktionen mehrzeilig
+- Variablen/ Funktionen Platz dazwischen Platz
 
 - Test-coverage
 - Mutations-coverage

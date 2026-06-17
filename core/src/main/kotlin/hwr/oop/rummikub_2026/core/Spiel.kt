@@ -13,7 +13,27 @@ data class Spiel(
     fun gueltigerZug() {
         tisch.gueltig()
         gesammeltePunkte = 0
+        //if(aktivSpieler.boardReadOnly.isEmpty()){
+            //gewonnen(aktivSpieler)
+        //}
     }
+
+//    fun gewonnen(
+//        gewinner: Spieler
+//    ) {
+//        val spieler = mutableListOf<Spieler>(
+//            Spieler("Maxi-Taxi", "2", mutableListOf(Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Rot, Zahl.Eins)), true, false),
+//            Spieler("Luxi-Taxi", "3", mutableListOf(Stein(Farbe.Blau, Zahl.Drei), Stein(Farbe.Schwarz, Zahl.Zwei)),true, false),
+//            Spieler("Fuxi-Taxi", "1", mutableListOf(),true, false)
+//        )
+//
+//        val rangliste = mutableListOf<Spieler>(gewinner)
+//        spieler -= gewinner
+//
+//
+//    }
+
+
 
     fun auslegen(
         spieler: Spieler,
@@ -95,14 +115,15 @@ data class Spiel(
         )
     }
 
-
 //    if (alteKombination != null) {
 //    // Entferne alte Kombination und füge neue hinzu
 //    aktuelleTischListe.remove(alteKombination)
 //}
 //    aktuelleTischListe.add(kombination)
 
-    fun ziehen(spieler: Spieler): Spiel {
+    fun ziehen(
+        spieler: Spieler
+    ): Spiel {
 
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")

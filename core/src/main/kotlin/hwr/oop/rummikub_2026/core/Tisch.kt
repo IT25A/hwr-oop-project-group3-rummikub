@@ -17,7 +17,9 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
         }
     }
 
-    fun kombiLegen (istSet: Boolean, liste: MutableList<Stein>) {
+    fun kombiLegen (
+        istSet: Boolean, liste: MutableList<Stein>
+    ) {
         val mglKombi : Kombinationen
 
         if (istSet){
@@ -30,7 +32,9 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
         tisch.add(mglKombi)
     }
     
-    fun anlegen (kombination: Int, stein: Stein) {
+    fun anlegen (
+        kombination: Int, stein: Stein
+    ) {
         require(tisch.size >= kombination) { "Die Kombi gibt es nicht" }
         if (tisch[kombination] is Sets) {
             val neueListe = tisch[kombination].get()
@@ -49,7 +53,9 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
 //        tmpListe.addAll(tisch[kombi].get())
 //        tisch.removeAt(kombi)
 //    }
-    fun aufloesen (kombi: Kombinationen){
+    fun aufloesen (
+    kombi: Kombinationen
+    ){
         val stelle = tisch.indexOf(kombi)
         require(stelle != -1){"Ungueltiger Zug: Diese Kombination gibt es nicht."}
         tmpListe.addAll(tisch[stelle].get())

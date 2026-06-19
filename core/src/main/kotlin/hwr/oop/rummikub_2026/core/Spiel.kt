@@ -13,7 +13,7 @@ data class Spiel(
     fun gueltigerZug() {
         tisch.gueltig()
         gesammeltePunkte = 0
-        //if(aktivSpieler.boardReadOnly.isEmpty()){
+        //if(aktivSpieler.brettReadOnly.isEmpty()){
             //gewonnen(aktivSpieler)
         //}
     }
@@ -52,7 +52,7 @@ data class Spiel(
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }
 
-        var brett = aktivSpieler.boardReadOnly
+        var brett = aktivSpieler.brettReadOnly
         var mglSteine = brett + aktuellerTisch.tmpListe
 
         if (!(mglSteine).containsAll(liste)) {
@@ -96,7 +96,7 @@ data class Spiel(
 
         require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du anlegen kannst!" }
 
-        var brett = aktivSpieler.boardReadOnly
+        var brett = aktivSpieler.brettReadOnly
         var mglSteine = brett + aktuellerTisch.tmpListe
 
         if (!(mglSteine).contains(neuStein)) {
@@ -136,7 +136,7 @@ data class Spiel(
         val gezogenerStein = beutel.first()
         val neuerBeutel = beutel - gezogenerStein
 
-        val aktuelleSteine = (aktivSpieler.boardReadOnly)
+        val aktuelleSteine = (aktivSpieler.brettReadOnly)
         val neueSteine = (aktuelleSteine + gezogenerStein).toMutableList()
 
         return this.copy(
@@ -160,7 +160,7 @@ data class Spiel(
         if (spieler != aktivSpieler) {
             throw InvalidObjectException("Spieler ist nicht an der Reihe!")
         }
-        var brett = aktivSpieler.boardReadOnly
+        var brett = aktivSpieler.brettReadOnly
 
         if (aufzuloesendeKombi.get().isEmpty()) {
             throw InvalidObjectException("Keine Kombi ausgewählt!")

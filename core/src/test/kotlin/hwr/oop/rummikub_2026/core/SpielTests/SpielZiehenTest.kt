@@ -34,8 +34,8 @@ class SpielZiehenTest {
 
         val neuesSpiel = spiel.ziehen(spieler)
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).hasSize(testfall.second)
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).contains(testfall.first.first())
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).hasSize(testfall.second)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).contains(testfall.first.first())
         assertThat(neuesSpiel.beutel).isEmpty()
     }
 

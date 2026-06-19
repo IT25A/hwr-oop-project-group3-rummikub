@@ -133,7 +133,7 @@ class SpielAnlegenTest {
             aktuellerTisch = tisch
         )
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).doesNotContain(stein)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).doesNotContain(stein)
     }
 
     @Test

@@ -63,7 +63,7 @@ class SpielerTest {
         //when
         spieler.ziehen(Stein(Farbe.Orange, Zahl.Zwei))
         //then
-        assertThat(spieler.boardReadOnly).contains(Stein(Farbe.Orange, Zahl.Zwei))
+        assertThat(spieler.brettReadOnly).contains(Stein(Farbe.Orange, Zahl.Zwei))
     }
 
     companion object {
@@ -182,7 +182,7 @@ class SpielerTest {
         spieler.entfernen(stein)
         loeschenListe.remove(stein)
         //then
-        assertThat(spieler.boardReadOnly).containsExactlyInAnyOrderElementsOf(loeschenListe)
+        assertThat(spieler.brettReadOnly).containsExactlyInAnyOrderElementsOf(loeschenListe)
     }
 
     @ParameterizedTest

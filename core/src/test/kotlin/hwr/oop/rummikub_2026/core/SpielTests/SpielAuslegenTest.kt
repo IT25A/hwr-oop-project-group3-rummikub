@@ -101,7 +101,7 @@ class SpielAuslegenTest {
             steine = arrayOf(standardStein, stein2, stein3)
         )
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).hasSize(11)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).hasSize(11)
     }
 
     @ParameterizedTest

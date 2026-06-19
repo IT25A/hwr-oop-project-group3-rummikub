@@ -194,7 +194,7 @@ class `30PunkteTest` {
         val neuesSpiel = spiel.ziehen(spieler)
 
         // then
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly)
             .contains(Stein(Farbe.Schwarz, Zahl.Fuenf))
 
         assertThat(neuesSpiel.beutel)
@@ -219,7 +219,7 @@ class `30PunkteTest` {
             Stein(Farbe.Rot, Zahl.Fuenf)
         )
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).doesNotContain(Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Fuenf),  Stein(Farbe.Rot, Zahl.Fuenf))
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).doesNotContain(Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Fuenf),  Stein(Farbe.Rot, Zahl.Fuenf))
         assertThat(neuesSpiel.tisch.tischReadOnly).contains(Sets(mutableListOf(Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Fuenf), Stein(Farbe.Rot, Zahl.Fuenf))))
     }
 

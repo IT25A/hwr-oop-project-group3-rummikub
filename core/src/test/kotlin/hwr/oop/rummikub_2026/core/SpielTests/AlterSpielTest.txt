@@ -484,9 +484,9 @@ class SpielTest {
         val neuesSpiel = spiel.ziehen(spieler)
 
         // then
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).hasSize(testfall.second)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).hasSize(testfall.second)
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).contains(testfall.first.first())
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).contains(testfall.first.first())
 
         assertThat(neuesSpiel.beutel).isEmpty()
     }
@@ -601,7 +601,7 @@ class SpielTest {
         )
 
         // then
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).hasSize(11)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).hasSize(11)
     }
     @Test
     fun `anlegen - ungueltiger Spieler wirft Exception`() {
@@ -708,7 +708,7 @@ class SpielTest {
             aktuellerTisch = tisch
         )
 
-        assertThat(neuesSpiel.aktivSpieler.boardReadOnly).doesNotContain(stein)
+        assertThat(neuesSpiel.aktivSpieler.brettReadOnly).doesNotContain(stein)
     }
     @Test
     fun `anlegen - Stein wird in Kombination eingefuegt`() {

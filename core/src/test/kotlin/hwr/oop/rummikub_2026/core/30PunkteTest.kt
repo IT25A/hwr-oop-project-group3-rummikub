@@ -95,11 +95,23 @@ class `30PunkteTest` {
         kombi : Kombinationen
     ){
         //given
-        val spiel = Spiel(rausgekommenerSpieler, emptyList(), Tisch(mutableListOf(kombi)))
+        val spiel = Spiel(
+            rausgekommenerSpieler,
+            emptyList(),
+            Tisch(mutableListOf(kombi))
+        )
         //when
-        spiel.anlegen(rausgekommenerSpieler, Stein(Farbe.Rot, Zahl.Zwei), 0, spiel.tisch)
+        spiel.anlegen(
+            rausgekommenerSpieler,
+            Stein(Farbe.Rot, Zahl.Zwei),
+            0,
+            spiel.tisch
+        )
         //then
-        assertEquals(kombi.get() + mutableListOf(Stein(Farbe.Rot, Zahl.Zwei)), spiel.tisch.tischReadOnly[0].get())
+        assertEquals(
+            kombi.get() + mutableListOf(Stein(Farbe.Rot, Zahl.Zwei)),
+            spiel.tisch.tischReadOnly[0].get()
+        )
     }
 
     @ParameterizedTest
@@ -107,9 +119,17 @@ class `30PunkteTest` {
     fun `Anlegen geht nicht wenn nicht rausgekommen`(
         kombi : Kombinationen
     ){
-        val spiel = Spiel(nichtRausgekommenerSpieler, emptyList(), Tisch(mutableListOf(kombi)))
+        val spiel = Spiel(
+            nichtRausgekommenerSpieler,
+            emptyList(),
+            Tisch(mutableListOf(kombi))
+        )
         val exception = assertThrows<IllegalArgumentException> {
-            spiel.anlegen(nichtRausgekommenerSpieler, Stein(Farbe.Rot, Zahl.Zwei), 0, spiel.tisch)
+            spiel.anlegen(
+                nichtRausgekommenerSpieler,
+                Stein(Farbe.Rot, Zahl.Zwei),
+                0,
+                spiel.tisch)
         }
         assertThat(exception.message)
             .contains("Du musst erst rauskommen, bevor du anlegen kannst!")
@@ -120,8 +140,16 @@ class `30PunkteTest` {
     fun `Aufloesen geht wenn rausgekommen`(
         kombi : Kombinationen
     ){
-        val spiel = Spiel(rausgekommenerSpieler, emptyList(), Tisch(mutableListOf(kombi)))
-        spiel.aufloesen(kombi, rausgekommenerSpieler, spiel.tisch)
+        val spiel = Spiel(
+            rausgekommenerSpieler,
+            emptyList(),
+            Tisch(mutableListOf(kombi))
+        )
+        spiel.aufloesen(
+            kombi,
+            rausgekommenerSpieler,
+            spiel.tisch
+        )
 
         assertEquals(
             kombi.get(),
@@ -137,9 +165,17 @@ class `30PunkteTest` {
     fun `Aufloesen geht nicht wenn nicht rausgekommen`(
         kombi : Kombinationen
     ){
-        val spiel = Spiel(nichtRausgekommenerSpieler, emptyList(), Tisch(mutableListOf(kombi)))
+        val spiel = Spiel(
+            nichtRausgekommenerSpieler,
+            emptyList(),
+            Tisch(mutableListOf(kombi))
+        )
         val exception = assertThrows<IllegalArgumentException> {
-            spiel.aufloesen(kombi, nichtRausgekommenerSpieler, spiel.tisch)
+            spiel.aufloesen(
+                kombi,
+                nichtRausgekommenerSpieler,
+                spiel.tisch
+            )
         }
         assertThat(exception.message)
             .contains("Du musst erst rauskommen, bevor du aufloesen kannst!")
@@ -150,7 +186,10 @@ class `30PunkteTest` {
     fun `Ziehen geht immer`(
         spieler : Spieler
     ){
-        val spiel = Spiel(spieler, listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)), Tisch(mutableListOf()))
+        val spiel = Spiel(
+            spieler,
+            listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)),
+            Tisch(mutableListOf()))
         // when
         val neuesSpiel = spiel.ziehen(spieler)
 
@@ -166,8 +205,19 @@ class `30PunkteTest` {
     fun `Auslegen geht immer`(
         spieler : Spieler
     ){
-        val spiel = Spiel(spieler, listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)), Tisch(mutableListOf()))
-        val neuesSpiel = spiel.auslegen(spieler, true, spiel.tisch, Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Fuenf),  Stein(Farbe.Rot, Zahl.Fuenf))
+        val spiel = Spiel(
+            spieler,
+            listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)),
+            Tisch(mutableListOf())
+        )
+        val neuesSpiel = spiel.auslegen(
+            spieler,
+            true,
+            spiel.tisch,
+            Stein(Farbe.Schwarz, Zahl.Fuenf),
+            Stein(Farbe.Blau, Zahl.Fuenf),
+            Stein(Farbe.Rot, Zahl.Fuenf)
+        )
 
         assertThat(neuesSpiel.aktivSpieler.boardReadOnly).doesNotContain(Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Fuenf),  Stein(Farbe.Rot, Zahl.Fuenf))
         assertThat(neuesSpiel.tisch.tischReadOnly).contains(Sets(mutableListOf(Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Fuenf), Stein(Farbe.Rot, Zahl.Fuenf))))
@@ -175,24 +225,78 @@ class `30PunkteTest` {
 
     @Test
     fun `Wenn genau 30 Punkte gelegt wurden , ist Spieler rausgekommen`() {
-        val spiel = Spiel(Spieler("spielerx", "4", mutableListOf(Stein(Farbe.Schwarz, Zahl.Zehn), Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Rot, Zahl.Zehn)), false, false), emptyList(), Tisch(mutableListOf()))
+        val spiel = Spiel(
+            Spieler(
+                "spielerx",
+                "4",
+                mutableListOf(Stein(Farbe.Schwarz, Zahl.Zehn), Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Rot, Zahl.Zehn)),
+                false,
+                false),
+            emptyList(),
+            Tisch(mutableListOf())
+        )
 
-        val neuesSpiel = spiel.auslegen(spiel.aktivSpieler, true, spiel.tisch,Stein(Farbe.Schwarz, Zahl.Zehn), Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Rot, Zahl.Zehn))
-        assertEquals(true, neuesSpiel.aktivSpieler.rausgekommen)
+        val neuesSpiel = spiel.auslegen(
+            spiel.aktivSpieler,
+            true,
+            spiel.tisch,
+            Stein(Farbe.Schwarz, Zahl.Zehn),
+            Stein(Farbe.Blau, Zahl.Zehn),
+            Stein(Farbe.Rot, Zahl.Zehn)
+        )
+        assertEquals(
+            true,
+            neuesSpiel.aktivSpieler.rausgekommen
+        )
     }
     @Test
     fun `Wenn weniger als 30 Punkte gelegt wurden , ist Spieler nicht rausgekommen`() {
-        val spiel = Spiel(Spieler("spielerx", "4", mutableListOf(Stein(Farbe.Schwarz, Zahl.Neun), Stein(Farbe.Blau, Zahl.Neun), Stein(Farbe.Rot, Zahl.Neun)), false, false), emptyList(), Tisch(mutableListOf()))
-        val neuesSpiel = spiel.auslegen(spiel.aktivSpieler, true, spiel.tisch,Stein(Farbe.Schwarz, Zahl.Neun), Stein(Farbe.Blau, Zahl.Neun), Stein(Farbe.Rot, Zahl.Neun))
-        assertEquals(false, neuesSpiel.aktivSpieler.rausgekommen)
+        val spiel = Spiel(
+            Spieler(
+                "spielerx",
+                "4",
+                mutableListOf(Stein(Farbe.Schwarz, Zahl.Neun), Stein(Farbe.Blau, Zahl.Neun), Stein(Farbe.Rot, Zahl.Neun)),
+                false,
+                false),
+            emptyList(),
+            Tisch(mutableListOf())
+        )
+        val neuesSpiel = spiel.auslegen(
+            spiel.aktivSpieler,
+            true,
+            spiel.tisch,
+            Stein(Farbe.Schwarz, Zahl.Neun),
+            Stein(Farbe.Blau, Zahl.Neun),
+            Stein(Farbe.Rot, Zahl.Neun)
+        )
+        assertEquals(
+            false,
+            neuesSpiel.aktivSpieler.rausgekommen
+        )
     }
 
     @Test
     fun `Wenn mehr als 30 Punkte gelegt wurden , ist Spieler rausgekommen`() {
-        val spiel = Spiel(Spieler("spielerx", "4", mutableListOf(Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf)), false, false), emptyList(), Tisch(mutableListOf()))
+        val spiel = Spiel(
+            Spieler(
+                "spielerx",
+                "4",
+                mutableListOf(Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf)),
+                false,
+                false),
+            emptyList(), Tisch(mutableListOf())
+        )
 
-        val neuesSpiel = spiel.auslegen(spiel.aktivSpieler, true, spiel.tisch,Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf))
-        assertEquals(true, neuesSpiel.aktivSpieler.rausgekommen)
+        val neuesSpiel = spiel.auslegen(
+            spiel.aktivSpieler,
+            true,
+            spiel.tisch,
+            Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf)
+        )
+        assertEquals(
+            true,
+            neuesSpiel.aktivSpieler.rausgekommen
+        )
     }
 
     @ParameterizedTest
@@ -200,10 +304,30 @@ class `30PunkteTest` {
     fun `Wenn mehrere Kombinationen zusammen 30 Punkte ergeben , ist Spieler rausgekommen`(
         kombis : Pair<Kombinationen, Kombinationen>
     ) {
-        val spieler = Spieler("spielerx", "4", (kombis.first.get() + kombis.second.get()).toMutableList(), false, false)
-        val spiel = Spiel(spieler, emptyList(), Tisch(mutableListOf()))
-        val neuesSpiel = spiel.auslegen(spiel.aktivSpieler, true, spiel.tisch, *kombis.first.get().toTypedArray())
-        val neueresSpiel = neuesSpiel.auslegen(neuesSpiel.aktivSpieler, false, neuesSpiel.tisch, *kombis.second.get().toTypedArray())
+        val spieler = Spieler(
+            "spielerx",
+            "4",
+            (kombis.first.get() + kombis.second.get()).toMutableList(),
+            false,
+            false
+        )
+        val spiel = Spiel(
+            spieler,
+            emptyList(),
+            Tisch(mutableListOf())
+        )
+        val neuesSpiel = spiel.auslegen(
+            spiel.aktivSpieler,
+            true,
+            spiel.tisch,
+            *kombis.first.get().toTypedArray()
+        )
+        val neueresSpiel = neuesSpiel.auslegen(
+            neuesSpiel.aktivSpieler,
+            false,
+            neuesSpiel.tisch,
+            *kombis.second.get().toTypedArray()
+        )
 
         assertEquals(true, neueresSpiel.aktivSpieler.rausgekommen)
     }

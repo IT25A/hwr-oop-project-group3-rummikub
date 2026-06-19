@@ -48,18 +48,15 @@ class FolgePruefenTest {
 
         @JvmStatic
         fun zuKurzeFolgen() = listOf(
-            // Nur 2 Steine
             mutableListOf(
                 Stein(Farbe.Rot, Zahl.Eins),
                 Stein(Farbe.Rot, Zahl.Zwei)
             ),
 
-            // Nur 1 Stein
             mutableListOf(
                 Stein(Farbe.Blau, Zahl.Fuenf)
             ),
 
-            // Leere Liste
             mutableListOf<Stein>()
         )
 

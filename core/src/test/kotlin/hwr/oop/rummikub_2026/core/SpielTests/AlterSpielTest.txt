@@ -1,3 +1,6 @@
+Hier ist nur der alte Spiel Test drin ,ich wollte den noch nicht löschen, falls etwas mit der Aufteilung nicht stimmt!
+
+
 package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
@@ -78,7 +81,7 @@ class SpielTest {
                 )
             )
         )
-        
+
         @JvmStatic
         fun ungueltigeKombi() = listOf(
             Folge(
@@ -114,7 +117,7 @@ class SpielTest {
                 )
             )
         )
-        
+
         @JvmStatic
         fun gueltigeFolgen() = listOf(
             Folge(
@@ -150,7 +153,7 @@ class SpielTest {
                 )
             )
         )
-        
+
         @JvmStatic
         fun steine() = listOf(
             Stein(Farbe.Rot, Zahl.Eins),
@@ -380,7 +383,7 @@ class SpielTest {
             tisch.tmpListe
         )
     }
-    
+
     @Test
     fun `aufloesen - aktiver Spieler bleibt erhalten`() {
 
@@ -492,7 +495,7 @@ class SpielTest {
     fun `ziehen - ungueltiger Spieler darf nicht ziehen wirft Exception`() {
         // given
         val spieler1 = Spieler("Luxi-Taxi", "1", create14Steine())
-        val spieler2 = Spieler("Smilla", "2", create14Steine())
+        val spieler2 = Spieler("Maxi-Taxi", "2", create14Steine())
         val spiel = Spiel(
             aktivSpieler = spieler1,
             beutel = listOf(steinRot),
@@ -603,8 +606,18 @@ class SpielTest {
     @Test
     fun `anlegen - ungueltiger Spieler wirft Exception`() {
 
-        val spieler1 = Spieler("Max", "1", create14Steine(),true)
-        val spieler2 = Spieler("Moritz", "2", create14Steine(),true)
+        val spieler1 = Spieler(
+            "Max",
+            "1",
+            create14Steine(),
+            true
+        )
+        val spieler2 = Spieler(
+            "Moritz",
+            "2",
+            create14Steine(),
+            true
+        )
 
         val stein = Stein(Farbe.Rot, Zahl.Eins)
 
@@ -659,7 +672,7 @@ class SpielTest {
 
         assertThat(exception.message).contains("Du hast diesen Stein nicht!")
     }
-    
+
     @Test
     fun `anlegen - Stein wird aus Hand entfernt`() {
 
@@ -775,7 +788,7 @@ class SpielTest {
         // Kombination sollte verändert worden sein
         assertThat(tisch.tischReadOnly.first().get()).contains(stein)
     }
-    
+
     @Test
     fun `anlegen - neues Spiel wird erzeugt`() {
 
@@ -850,7 +863,7 @@ class SpielTest {
             beutel = emptyList(),
             tisch = Tisch(mutableListOf(kombi))
         )
-        
+
         assertThrows<IllegalArgumentException> {
             spiel.gueltigerZug()
         }

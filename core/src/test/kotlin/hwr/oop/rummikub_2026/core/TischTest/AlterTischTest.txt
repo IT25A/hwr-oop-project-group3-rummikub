@@ -1,3 +1,6 @@
+Hier ist nur der alte Spiel Test drin, ich wollte den noch nicht löschen, falls etwas mit der Aufteilung nicht stimmt!
+
+
 package hwr.oop.rummikub_2026.core
 
 import org.assertj.core.api.Assertions.assertThat
@@ -37,7 +40,7 @@ class TischTest {
                 Stein(Farbe.Blau, Zahl.Elf)
             ))
         )
-        
+
         @JvmStatic
         fun gueltigeSteineFuerSets() = listOf(
             mutableListOf(
@@ -52,7 +55,7 @@ class TischTest {
                 Stein(Farbe.Rot, Zahl.Fuenf)
             )
         )
-        
+
         @JvmStatic
         fun gueltigeSteineFuerFolgen() = listOf(
             mutableListOf(
@@ -82,7 +85,7 @@ class TischTest {
                 Stein(Farbe.Schwarz, Zahl.Dreizehn)
             )
         )
-        
+
         @JvmStatic
         fun gueltigeFolgen() = listOf(
             Folge(
@@ -118,7 +121,7 @@ class TischTest {
                 )
             )
         )
-        
+
         @JvmStatic
         fun ungueltigeKombi() = listOf(
             Folge(
@@ -154,7 +157,7 @@ class TischTest {
                 )
             )
         )
-        
+
         @JvmStatic
         fun gueltigeSets3Steine() = listOf(
             Sets(
@@ -179,7 +182,7 @@ class TischTest {
                 )
             )
         )
-        
+
         @JvmStatic
         fun gueltigeSets4Steine() = listOf(
             Sets(
@@ -382,7 +385,7 @@ class TischTest {
             )
         )
     }
-    
+
     @ParameterizedTest
     @MethodSource("gueltigeFolgen", "gueltigeSets4Steine", "gueltigeSets3Steine")
     fun `Sets und Folgen sind gueltig im Tisch`(
@@ -409,7 +412,7 @@ class TischTest {
             testTisch.gueltig()
         }
     }
-    
+
     @ParameterizedTest
     @MethodSource("gueltigeFolgen", "gueltigeSets4Steine", "gueltigeSets3Steine")
     fun `Folgen und Sets koennen auf dem Tisch liegen`(
@@ -421,7 +424,7 @@ class TischTest {
         // then
         assertThat(testTisch.tischReadOnly).contains(kombi)
     }
-    
+
     @ParameterizedTest
     @MethodSource("gueltigeSteineFuerFolgen")
     fun `kombi legen fuer Folge pruefen`(
@@ -450,7 +453,7 @@ class TischTest {
         // then
         assertThat(tisch.tischReadOnly).isNotEmpty()
     }
-    
+
     @ParameterizedTest
     @MethodSource("gueltigeSets3Steine", "gueltigeSets4Steine")
     fun `anlegen funktioniert set`(
@@ -465,7 +468,7 @@ class TischTest {
         // then
         assertThat(tisch.tischReadOnly[0].get()).contains(Stein(Farbe.Orange, Zahl.Eins))
     }
-    
+
     @ParameterizedTest
     @MethodSource("gueltigeFolgen")
     fun `anlegen funktioniert folge`(
@@ -573,7 +576,7 @@ class TischTest {
             tisch.aufloesen(nichtVorhandene)
         }
     }
-    
+
     @Test
     fun `bei zwei identischen Folgen bleibt eine erhalten`() {
         // given

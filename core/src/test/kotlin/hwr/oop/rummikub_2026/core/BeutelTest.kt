@@ -102,9 +102,6 @@ class BeutelTest {
             steineAusBeutel1.add(beutel1.zieheSteinAusBeutel()!!)
             steineAusBeutel2.add(beutel2.zieheSteinAusBeutel()!!)
         }
-
-        // Die Reihenfolge sollte mit hoher Wahrscheinlichkeit unterschiedlich sein
-        // (bei echtem Shuffle ist die Wahrscheinlichkeit für identische Reihenfolge extrem gering)
         val sindIdentisch = steineAusBeutel1.zip(steineAusBeutel2).all { (s1, s2) ->
             s1.farbe() == s2.farbe() && s1.zahl() == s2.zahl()
         }

@@ -11,7 +11,6 @@ class BasicPieceCreationTest {
 	fun `alle Zahlen existieren`() {
 		// given
 		val zahlen= Zahl.entries
-		// when
 		// then
 		assertThat(zahlen).containsExactlyInAnyOrder(
 			Zahl.Eins,

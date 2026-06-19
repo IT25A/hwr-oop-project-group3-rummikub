@@ -35,7 +35,9 @@ class Tisch (private val tisch: MutableList<Kombinationen>) {
     fun anlegen (
         kombination: Int, stein: Stein
     ) {
-        require(tisch.size >= kombination) { "Die Kombi gibt es nicht" }
+        if (kombination >= tisch.size) {
+            throw IndexOutOfBoundsException("Die Kombi gibt es nicht")
+        }
         if (tisch[kombination] is Sets) {
             val neueListe = tisch[kombination].get()
             neueListe.add(stein)

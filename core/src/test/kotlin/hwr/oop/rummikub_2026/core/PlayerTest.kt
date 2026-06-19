@@ -145,6 +145,14 @@ class SpielerTest {
             Stein(Farbe.Blau, Zahl.Eins),
             Stein(Farbe.Schwarz, Zahl.Sechs)
         )
+
+        @JvmStatic
+        fun listeSpielerIds() = listOf(
+            "1",
+            "2",
+            "spieler-123",
+            "player-abc"
+        )
     }
 
     @ParameterizedTest
@@ -228,5 +236,33 @@ class SpielerTest {
             val spieler1 = Spieler("Thanh", "1", anfangsSteine)
         }
         assertThat(exception.message).contains("Es muss 14 Steine vergeben werden")
+    }
+
+    @ParameterizedTest
+    @MethodSource("listeSpielerIds")
+    fun `Spieler ID wird korrekt gesetzt`(
+        spielerId: String
+    ) {
+        //given
+        val steine14 = mutableListOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Blau, Zahl.Zwei),
+            Stein(Farbe.Schwarz, Zahl.Drei),
+            Stein(Farbe.Rot, Zahl.Vier),
+            Stein(Farbe.Orange, Zahl.Fuenf),
+            Stein(Farbe.Blau, Zahl.Sechs),
+            Stein(Farbe.Schwarz, Zahl.Sieben),
+            Stein(Farbe.Orange, Zahl.Acht),
+            Stein(Farbe.Blau, Zahl.Neun),
+            Stein(Farbe.Orange, Zahl.Zehn),
+            Stein(Farbe.Rot, Zahl.Elf),
+            Stein(Farbe.Orange, Zahl.Zwoelf),
+            Stein(Farbe.Blau, Zahl.Dreizehn),
+            Stein(Farbe.Schwarz, Zahl.Dreizehn)
+        )
+        val spieler = Spieler("TestSpieler", spielerId, steine14)
+
+        //then
+        assertThat(spieler.id).isEqualTo(spielerId)
     }
 }

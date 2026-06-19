@@ -165,6 +165,116 @@ class SpielTest {
         )
 
         @JvmStatic
+        fun beutelSzenarien() = listOf(
+            listOf(steinRot),
+            listOf(standardStein, stein2),
+            listOf(steinRot, stein2, stein3, standardStein)
+        )
+
+        @JvmStatic
+        fun gesammeltePunkteSzenarien() = listOf(
+            Triple(
+                listOf(Stein(Farbe.Blau, Zahl.Fuenf), Stein(Farbe.Blau, Zahl.Sechs), Stein(Farbe.Blau, Zahl.Sieben)),
+                false,
+                18
+            ),
+            Triple(
+                listOf(Stein(Farbe.Rot, Zahl.Zehn), Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Schwarz, Zahl.Zehn)),
+                true,
+                30
+            ),
+            Triple(
+                listOf(Stein(Farbe.Orange, Zahl.Eins), Stein(Farbe.Orange, Zahl.Zwei), Stein(Farbe.Orange, Zahl.Drei)),
+                false,
+                6
+            )
+        )
+
+        @JvmStatic
+        fun tmpListeAuslegenSzenarien() = listOf(
+            Triple(
+                listOf(Stein(Farbe.Rot, Zahl.Eins), Stein(Farbe.Rot, Zahl.Zwei), Stein(Farbe.Rot, Zahl.Drei)),
+                false,
+                true
+            ),
+            Triple(
+                listOf(Stein(Farbe.Blau, Zahl.Fuenf), Stein(Farbe.Schwarz, Zahl.Fuenf), Stein(Farbe.Rot, Zahl.Fuenf)),
+                true,
+                true
+            )
+        )
+
+        @JvmStatic
+        fun tmpListeAuslegenMitTmpSteinenSzenarien() = listOf(
+            Triple(
+                listOf(Stein(Farbe.Rot, Zahl.Drei), Stein(Farbe.Rot, Zahl.Vier), Stein(Farbe.Rot, Zahl.Fuenf)),
+                listOf(Stein(Farbe.Rot, Zahl.Sechs)),
+                listOf(Stein(Farbe.Rot, Zahl.Sechs))
+            ),
+            Triple(
+                listOf(Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Blau, Zahl.Zwoelf)),
+                listOf(Stein(Farbe.Blau, Zahl.Dreizehn)),
+                listOf(Stein(Farbe.Blau, Zahl.Dreizehn))
+            ),
+            // Test case where one stone from hand and two from tmpListe are used - tmpListe should be empty after
+            Triple(
+                listOf(Stein(Farbe.Schwarz, Zahl.Drei), Stein(Farbe.Schwarz, Zahl.Vier), Stein(Farbe.Schwarz, Zahl.Fuenf)),
+                listOf(Stein(Farbe.Schwarz, Zahl.Vier), Stein(Farbe.Schwarz, Zahl.Fuenf)),
+                emptyList()
+            )
+        )
+
+        @JvmStatic
+        fun tmpListeAnlegenSzenarien() = listOf(
+            Pair(
+                Stein(Farbe.Schwarz, Zahl.Eins),
+                Folge(
+                    mutableListOf(
+                        Stein(Farbe.Schwarz, Zahl.Zwei),
+                        Stein(Farbe.Schwarz, Zahl.Drei),
+                        Stein(Farbe.Schwarz, Zahl.Vier)
+                    )
+                )
+            ),
+            Pair(
+                Stein(Farbe.Orange, Zahl.Zehn),
+                Sets(
+                    mutableListOf(
+                        Stein(Farbe.Rot, Zahl.Zehn),
+                        Stein(Farbe.Blau, Zahl.Zehn),
+                        Stein(Farbe.Schwarz, Zahl.Zehn)
+                    )
+                )
+            )
+        )
+
+        @JvmStatic
+        fun tmpListeAnlegenMitTmpSteinenSzenarien() = listOf(
+            Triple(
+                Stein(Farbe.Rot, Zahl.Vier),
+                Folge(
+                    mutableListOf(
+                        Stein(Farbe.Rot, Zahl.Fuenf),
+                        Stein(Farbe.Rot, Zahl.Sechs),
+                        Stein(Farbe.Rot, Zahl.Sieben)
+                    )
+                ),
+                listOf(Stein(Farbe.Blau, Zahl.Eins), Stein(Farbe.Blau, Zahl.Zwei))
+            ),
+            Triple(
+                Stein(Farbe.Orange, Zahl.Elf),
+                Sets(
+                    mutableListOf(
+                        Stein(Farbe.Rot, Zahl.Elf),
+                        Stein(Farbe.Blau, Zahl.Elf),
+                        Stein(Farbe.Schwarz, Zahl.Elf)
+                    )
+                ),
+                listOf(Stein(Farbe.Schwarz, Zahl.Drei))
+            )
+        )
+
+        @JvmStatic
         fun ungueltigeAuslegenSzenarien() = listOf(
             Pair(
                 Triple(listOf(standardStein), listOf(steinRot), arrayOf(steinRot)),
@@ -202,7 +312,6 @@ class SpielTest {
     }
     @Test
     fun `aufloesen - Kombination wird vom Tisch entfernt`() {
-
         val spieler = Spieler(
             "Max",
             "1",
@@ -711,7 +820,12 @@ class SpielTest {
         kombi: Kombinationen
     ) {
         val spiel = Spiel(
-            aktivSpieler = Spieler("spieler1", "1", create14Steine(), true),
+            aktivSpieler = Spieler(
+                "Maxi-Taxi",
+                "1",
+                create14Steine(),
+                true
+            ),
             beutel = emptyList(),
             tisch = Tisch(mutableListOf(kombi))
         )
@@ -727,7 +841,12 @@ class SpielTest {
         kombi: Kombinationen
     ) {
         val spiel = Spiel(
-            aktivSpieler = Spieler("spieler1", "1", create14Steine(),  true),
+            aktivSpieler = Spieler(
+                "spieler1",
+                "1",
+                create14Steine(),
+                true
+            ),
             beutel = emptyList(),
             tisch = Tisch(mutableListOf(kombi))
         )
@@ -751,7 +870,7 @@ class SpielTest {
         val tisch = Tisch(mutableListOf(kombi))
 
         val spieler = Spieler(
-            "Max",
+            "Maxi-Taxi",
             "1",
             create14Steine(stein),
             true
@@ -771,5 +890,323 @@ class SpielTest {
                 aktuellerTisch = tisch
             )
         }
+    }
+
+    @ParameterizedTest
+    @MethodSource("beutelSzenarien")
+    fun `beutel wird korrekt initialisiert`(beutelSteine: List<Stein>) {
+        // given
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine())
+
+        val spiel = Spiel(
+            aktivSpieler = spieler,
+            beutel = beutelSteine,
+            tisch = Tisch(mutableListOf())
+        )
+
+        // then
+        assertThat(spiel.beutel).isEqualTo(beutelSteine)
+        assertThat(spiel.beutel).hasSize(beutelSteine.size)
+    }
+
+    @ParameterizedTest
+    @MethodSource("gesammeltePunkteSzenarien")
+    fun `gesammeltePunkte werde nbeim Auslegen korrekt berechnet`(
+        testfall: Triple<List<Stein>, Boolean, Int>
+    ) {
+        // given
+        val steine = testfall.first
+        val istSet = testfall.second
+        val erwartePunkte = testfall.third
+
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(*steine.toTypedArray())
+        )
+
+        val spiel = Spiel(
+            aktivSpieler = spieler,
+            beutel = emptyList(),
+            tisch = Tisch(mutableListOf())
+        )
+
+        // when
+        val neuesSpiel = spiel.auslegen(
+            spieler = spieler,
+            istSet = istSet,
+            aktuellerTisch = spiel.tisch,
+            steine = steine.toTypedArray()
+        )
+
+        // then
+        assertThat(neuesSpiel.gesammeltePunkte).isEqualTo(erwartePunkte)
+    }
+
+    @ParameterizedTest
+    @MethodSource("tmpListeAuslegenSzenarien")
+    fun `tmpListe wird beim Auslegen korrekt gesetzt`(
+        testfall: Triple<List<Stein>, Boolean, Boolean>
+    ) {
+        // given
+        val steine = testfall.first
+        val istSet = testfall.second
+
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(*steine.toTypedArray())
+        )
+
+        val tisch = Tisch(mutableListOf())
+        val spiel = Spiel(
+            aktivSpieler = spieler,
+            beutel = emptyList(),
+            tisch = tisch
+        )
+
+        // when
+        spiel.auslegen(
+            spieler = spieler,
+            istSet = istSet,
+            aktuellerTisch = tisch,
+            steine = steine.toTypedArray()
+        )
+
+        // then
+        assertThat(tisch.tmpListe).isEmpty()
+    }
+
+    @ParameterizedTest
+    @MethodSource("tmpListeAnlegenSzenarien")
+    fun `tmpListe wird beim Anlegen korrekt gesetzt`(
+        testfall: Pair<Stein, Kombinationen>
+    ) {
+        // given
+        val neuStein = testfall.first
+        val kombi = testfall.second
+
+        val tisch = Tisch(mutableListOf(kombi))
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(neuStein),
+            true
+        )
+
+        val spiel = Spiel(
+            aktivSpieler = spieler,
+            beutel = emptyList(),
+            tisch = tisch
+        )
+
+        // when
+        spiel.anlegen(
+            spieler = spieler,
+            neuStein = neuStein,
+            kombi = 0,
+            aktuellerTisch = tisch
+        )
+
+        // then
+        assertThat(tisch.tmpListe).isEmpty()
+    }
+
+    @ParameterizedTest
+    @MethodSource("tmpListeAuslegenMitTmpSteinenSzenarien")
+    fun `tmpListe wird beim Auslegen mit der vorhandenen tmpListe (Steinen) korrekt berechnet`(
+        testfall: Triple<List<Stein>, List<Stein>, List<Stein>>
+    ) {
+        // given
+        val handSteine = testfall.first
+        val tmpSteine = testfall.second
+        val erwarteteTmpListe = testfall.third
+
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(*handSteine.toTypedArray())
+        )
+        val tisch = Tisch(mutableListOf())
+        tisch.tmpListe = tmpSteine.toMutableList()
+
+        val spiel = Spiel(
+            aktivSpieler = spieler,
+            beutel = emptyList(),
+            tisch = tisch
+        )
+
+        // when
+        val neuesSpiel = spiel.auslegen(
+            spieler = spieler,
+            istSet = false,
+            aktuellerTisch = tisch,
+            steine = handSteine.toTypedArray()
+        )
+
+        // then
+        assertThat(tisch.tmpListe).containsExactlyInAnyOrderElementsOf(erwarteteTmpListe)
+    }
+
+    @ParameterizedTest
+    @MethodSource("tmpListeAnlegenMitTmpSteinenSzenarien")
+    fun `tmpListe wird beim Anlegen mit der vorhandenen tmpListe (Steinen) korrekt berechnet`(
+        testfall: Triple<Stein, Kombinationen, List<Stein>>
+    ) {
+        // given
+        val neuStein = testfall.first
+        val kombi = testfall.second
+        val tmpSteine = testfall.third
+
+        val tisch = Tisch(mutableListOf(kombi))
+        tisch.tmpListe = tmpSteine.toMutableList()
+
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(neuStein),
+            true
+        )
+        val spiel = Spiel(
+            aktivSpieler = spieler,
+            beutel = emptyList(),
+            tisch = tisch
+        )
+
+        // when
+        spiel.anlegen(
+            spieler = spieler,
+            neuStein = neuStein,
+            kombi = 0,
+            aktuellerTisch = tisch
+        )
+
+        // then
+        assertThat(tisch.tmpListe).containsExactlyInAnyOrderElementsOf(tmpSteine)
+    }
+
+    @Test
+    fun `Rausgekommen wird auf true gesetzt wenn 30 Punkte erreicht werden`() {
+        // given
+        val steine = listOf(
+            Stein(Farbe.Rot, Zahl.Zehn),
+            Stein(Farbe.Blau, Zahl.Zehn),
+            Stein(Farbe.Schwarz, Zahl.Zehn)
+        )
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(*steine.toTypedArray()),
+            false
+        )
+        val tisch = Tisch(mutableListOf())
+        val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+
+        // when
+        val neuesSpiel = spiel.auslegen(
+            spieler = spieler,
+            istSet = true,
+            aktuellerTisch = tisch,
+            steine = steine.toTypedArray()
+        )
+
+        // then
+        assertThat(neuesSpiel.aktivSpieler.rausgekommen).isTrue()
+    }
+
+    @Test
+    fun `Rausgekommen wird nicht true wenn weniger als 30 Punkte gelegt werden`() {
+        // given
+        val steine = listOf(
+            Stein(Farbe.Rot, Zahl.Sieben),
+            Stein(Farbe.Rot, Zahl.Acht),
+            Stein(Farbe.Rot, Zahl.Neun)
+        )
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(*steine.toTypedArray()),
+            false
+        )
+        val tisch = Tisch(mutableListOf())
+        val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+
+        // when
+        val neuesSpiel = spiel.auslegen(
+            spieler = spieler,
+            istSet = false,
+            aktuellerTisch = tisch,
+            steine = steine.toTypedArray()
+        )
+
+        // then
+        assertThat(neuesSpiel.aktivSpieler.rausgekommen).isFalse()
+    }
+
+    @Test
+    fun `auslegen fuegt Kombination zum Tisch hinzu`() {
+        // given
+        val steine = listOf(
+            Stein(Farbe.Orange, Zahl.Eins),
+            Stein(Farbe.Orange, Zahl.Zwei),
+            Stein(Farbe.Orange, Zahl.Drei)
+        )
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(*steine.toTypedArray())
+        )
+        val tisch = Tisch(mutableListOf())
+        val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+
+        // when
+        spiel.auslegen(
+            spieler = spieler,
+            istSet = false,
+            aktuellerTisch = tisch,
+            steine = steine.toTypedArray()
+        )
+
+        // then
+        assertThat(tisch.tischReadOnly).hasSize(1)
+        assertThat(tisch.tischReadOnly[0].get()).containsExactlyInAnyOrder(*steine.toTypedArray())
+    }
+
+    @Test
+    fun `anlegen mit Stein aus tmpListe aktualisiert tmpListe korrekt`() {
+        // given
+        val neuStein = Stein(Farbe.Orange, Zahl.Acht)
+        val kombi = Folge(
+            mutableListOf(
+                Stein(Farbe.Orange, Zahl.Fuenf),
+                Stein(Farbe.Orange, Zahl.Sechs),
+                Stein(Farbe.Orange, Zahl.Sieben)
+            )
+        )
+        val tmpSteine = listOf(neuStein, Stein(Farbe.Rot, Zahl.Eins))
+
+        val tisch = Tisch(mutableListOf(kombi))
+        tisch.tmpListe = tmpSteine.toMutableList()
+
+        val spieler = Spieler(
+            "Maxi-Taxi",
+            "1",
+            create14Steine(),
+            true)
+        val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+
+        // when
+        spiel.anlegen(
+            spieler = spieler,
+            neuStein = neuStein,
+            kombi = 0,
+            aktuellerTisch = tisch
+        )
+
+        // then
+        assertThat(tisch.tmpListe).containsExactly(Stein(Farbe.Rot, Zahl.Eins))
     }
 }

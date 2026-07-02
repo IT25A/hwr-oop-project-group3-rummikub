@@ -5,9 +5,10 @@ data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 	val folgeReadOnly: List<Stein>
 		get() = folgeListe.toMutableList()
 	
-	override fun get() : MutableList<Stein>{
+	override fun get(): MutableList<Stein> {
 		return folgeListe.toMutableList()
 	}
+	
 	override fun istGueltig() {
 		require(folgeListe.size >= 3) { "Mindestens 3 Steine" }
 		require(folgeListe.size <= 13) { "Maximal 13 Steine" }
@@ -38,14 +39,14 @@ data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 	}
 	
 	fun hinzufuegenHinten(
-		stein: Stein
+		stein: Stein,
 	) {
 		folgeListe.add(stein)
 		this.istGueltig()
 	}
 	
 	fun hinzufuegenVorne(
-		stein: Stein
+		stein: Stein,
 	) {
 		folgeListe.add(0, stein)
 		this.istGueltig()

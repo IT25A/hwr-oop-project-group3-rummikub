@@ -5,7 +5,7 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 	val setReadOnly: List<Stein>
 		get() = setListe.toList()
 	
-	override fun get() : MutableList<Stein>{
+	override fun get(): MutableList<Stein> {
 		return setListe.toMutableList()
 	}
 	
@@ -39,14 +39,14 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 	}
 	
 	fun hinzufuegenZumSet(
-		stein: Stein
+		stein: Stein,
 	) {
 		setListe.add(stein)
 		this.istGueltig()
 	}
 	
 	fun wegnehmenVomSet(
-		stein: Stein
+		stein: Stein,
 	): Stein {
 		setListe.remove(stein)
 		this.istGueltig()

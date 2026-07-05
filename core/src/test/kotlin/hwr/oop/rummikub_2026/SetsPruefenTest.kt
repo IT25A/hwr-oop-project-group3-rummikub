@@ -1,5 +1,9 @@
-package hwr.oop.rummikub_2026.core
+package hwr.oop.rummikub_2026
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Sets
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -129,7 +133,7 @@ class SetsPruefenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeSets3Steine")
 	fun `gueltige Sets mit 3 Steinen werfen keine Exception`(
-      set: MutableList<Stein>,
+		set: MutableList<Stein>,
   ) {
 		// when
 		val sets = Sets(set)
@@ -142,7 +146,7 @@ class SetsPruefenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeSets4Steine")
 	fun `gueltige Sets mit 4 Steinen werfen keine Exception`(
-      set: MutableList<Stein>,
+		set: MutableList<Stein>,
   ) {
 		// when
 		val sets = Sets(set)
@@ -153,7 +157,7 @@ class SetsPruefenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeSetsGleicheFarbe")
 	fun `ungueltige Sets mit gleichen Farben werfen Exception`(
-      testfall: Pair<MutableList<Stein>, String>,
+		testfall: Pair<MutableList<Stein>, String>,
   ) {
 		// when
 		val sets = Sets(testfall.first)
@@ -168,7 +172,7 @@ class SetsPruefenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeSetsUnterschiedlicheZahl")
 	fun `ungueltige Sets mit unterschiedlichen Zahlen werfen Exception`(
-      testfall: Pair<MutableList<Stein>, String>,
+		testfall: Pair<MutableList<Stein>, String>,
   ) {
 		// when
 		val sets = Sets(testfall.first)

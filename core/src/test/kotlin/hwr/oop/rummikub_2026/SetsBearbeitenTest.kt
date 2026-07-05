@@ -1,5 +1,9 @@
-package hwr.oop.rummikub_2026.core
+package hwr.oop.rummikub_2026
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Sets
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
@@ -10,9 +14,9 @@ import org.junit.jupiter.params.provider.MethodSource
 class SetsBearbeitenTest {
 	
 	data class SetTestfall(
-      val set: MutableList<Stein>,
-      val stein: Stein,
-      val erwarteteFehlerNachricht: String,
+		val set: MutableList<Stein>,
+		val stein: Stein,
+		val erwarteteFehlerNachricht: String,
   )
 	
 	companion object {
@@ -144,7 +148,7 @@ class SetsBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeHinzufuegenZu3erSet")
 	fun `Hinzufuegen zu 3er Set = gueltiges 4er Set`(
-      testfall: Pair<MutableList<Stein>, Stein>,
+		testfall: Pair<MutableList<Stein>, Stein>,
   ) {
 		val set = Sets(testfall.first)
 		
@@ -173,7 +177,7 @@ class SetsBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigesWegnehmenVon4erSet")
 	fun `Wegnehmen vom 4er Set = gueltiges 3er Set`(
-      testfall: Pair<MutableList<Stein>, Stein>,
+		testfall: Pair<MutableList<Stein>, Stein>,
   ) {
 		val sets = Sets(testfall.first)
 		

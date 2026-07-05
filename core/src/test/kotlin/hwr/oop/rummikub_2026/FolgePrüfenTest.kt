@@ -1,5 +1,9 @@
-package hwr.oop.rummikub_2026.core
+package hwr.oop.rummikub_2026
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Folge
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -138,7 +142,7 @@ class FolgePruefenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeFolgen")
 	fun `gueltige Folgen werfen keine Exception`(
-      steine: MutableList<Stein>,
+		steine: MutableList<Stein>,
   ) {
 		val folge = Folge(steine)
 		
@@ -150,7 +154,7 @@ class FolgePruefenTest {
 	@ParameterizedTest
 	@MethodSource("zuKurzeFolgen")
 	fun `zu kurze Folgen werfen Exception`(
-      steine: MutableList<Stein>,
+		steine: MutableList<Stein>,
   ) {
 		val folge = Folge(steine)
 		
@@ -164,7 +168,7 @@ class FolgePruefenTest {
 	@ParameterizedTest
 	@MethodSource("zuLangeFolgen")
 	fun `zu lange Folgen werfen Exception`(
-      steine: MutableList<Stein>,
+		steine: MutableList<Stein>,
   ) {
 		val folge = Folge(steine)
 		
@@ -178,7 +182,7 @@ class FolgePruefenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeFarben")
 	fun `unterschiedliche Farben werfen Exception`(
-      steine: MutableList<Stein>,
+		steine: MutableList<Stein>,
   ) {
 		val folge = Folge(steine)
 		
@@ -192,7 +196,7 @@ class FolgePruefenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeReihenfolgen")
 	fun `ungueltige Reihenfolgen werfen Exception`(
-      steine: MutableList<Stein>,
+		steine: MutableList<Stein>,
   ) {
 		val folge = Folge(steine)
 		

@@ -1,5 +1,9 @@
-package hwr.oop.rummikub_2026.core
+package hwr.oop.rummikub_2026
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Spieler
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -182,7 +186,7 @@ class SpielerTest {
 	@ParameterizedTest
 	@MethodSource("listeGueltigeSteine")
 	fun `Stein loeschen funktioniert`(
-      stein: Stein,
+		stein: Stein,
   ) {
 		//given
 		val loeschenListe = mutableListOf(
@@ -217,7 +221,7 @@ class SpielerTest {
 	@ParameterizedTest
 	@MethodSource("listeUngueltigeSteine")
 	fun `Stein, der nicht in der Liste ist, loeschen funktioniert nicht`(
-      stein: Stein,
+		stein: Stein,
   ) {
 		//given
 		val loeschenListe = mutableListOf(
@@ -253,7 +257,7 @@ class SpielerTest {
 	@ParameterizedTest
 	@MethodSource("liste14Steine")
 	fun `Anfangssteine werfen keine Exception`(
-      anfangsSteine: MutableList<Stein>,
+		anfangsSteine: MutableList<Stein>,
   ) {
 		//then
 		Assertions.assertDoesNotThrow {
@@ -268,7 +272,7 @@ class SpielerTest {
 	@ParameterizedTest
 	@MethodSource("listeNicht14Steine")
 	fun `Ungueltige Anzahl Anfangssteine werfen Exception`(
-      anfangsSteine: MutableList<Stein>,
+		anfangsSteine: MutableList<Stein>,
   ) {
 		//then
 		val exception = assertThrows<IllegalArgumentException> {

@@ -1,4 +1,4 @@
-package hwr.oop.rummikub_2026.core.TischTests
+package hwr.oop.rummikub_2026.TischTests
 
 import hwr.oop.rummikub_2026.core.Stein
 import hwr.oop.rummikub_2026.core.Tisch

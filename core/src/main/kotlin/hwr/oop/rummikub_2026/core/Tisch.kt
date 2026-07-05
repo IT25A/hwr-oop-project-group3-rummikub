@@ -3,25 +3,25 @@ package hwr.oop.rummikub_2026.core
 class Tisch(private val tisch: MutableList<Kombinationen>) {
 	val tischReadOnly: List<Kombinationen>
 		get() = tisch.toList()
-	
+
 	init {
 		val copyTisch = tisch.toMutableList()
 	}
-	
+
 	var tmpListe = mutableListOf<Stein>()
-	
+
 	fun gueltig() {
 		for (i in tisch) {
 			i.istGueltig()
 			require(tmpListe.isEmpty()) { "Ungueltiger Zug, du hast nicht alle aufgeloesten Kombinationen verwendet." }
 		}
 	}
-	
+
 	fun kombiLegen(
 		istSet: Boolean, liste: MutableList<Stein>,
 	) {
 		val mglKombi: Kombinationen
-		
+
 		if (istSet) {
 			mglKombi = Sets(liste)
 			mglKombi.istGueltig()
@@ -30,10 +30,10 @@ class Tisch(private val tisch: MutableList<Kombinationen>) {
 			mglKombi = Folge(liste)
 			mglKombi.istGueltig()
 		}
-		
+
 		tisch.add(mglKombi)
 	}
-	
+
 	fun anlegen(
 		kombination: Int, stein: Stein,
 	) {
@@ -58,7 +58,7 @@ class Tisch(private val tisch: MutableList<Kombinationen>) {
 //        tmpListe.addAll(tisch[kombi].get())
 //        tisch.removeAt(kombi)
 //    }
-	
+
 	fun aufloesen(
 		kombi: Kombinationen,
 	) {

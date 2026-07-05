@@ -1,5 +1,14 @@
-package hwr.oop.rummikub_2026.core
+package hwr.oop.rummikub_2026
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Folge
+import hwr.oop.rummikub_2026.core.Kombinationen
+import hwr.oop.rummikub_2026.core.Sets
+import hwr.oop.rummikub_2026.core.Spiel
+import hwr.oop.rummikub_2026.core.Spieler
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Tisch
+import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -64,7 +73,7 @@ class `30PunkteTest` {
 				true,
 				false
 			),
-			
+
 			Spieler(
 				"Nicht Rausgekommener Spieler",
 				"2",
@@ -119,7 +128,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Anlegen geht wenn rausgekommen`(
-      kombi: Kombinationen,
+		kombi: Kombinationen,
   ) {
 		//given
 		val spiel = Spiel(
@@ -144,7 +153,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Anlegen geht nicht wenn nicht rausgekommen`(
-      kombi: Kombinationen,
+		kombi: Kombinationen,
   ) {
 		val spiel = Spiel(
 			nichtRausgekommenerSpieler,
@@ -167,7 +176,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Aufloesen geht wenn rausgekommen`(
-      kombi: Kombinationen,
+		kombi: Kombinationen,
   ) {
 		val spiel = Spiel(
 			rausgekommenerSpieler,
@@ -192,7 +201,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Aufloesen geht nicht wenn nicht rausgekommen`(
-      kombi: Kombinationen,
+		kombi: Kombinationen,
   ) {
 		val spiel = Spiel(
 			nichtRausgekommenerSpieler,
@@ -214,7 +223,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("verschiedeneSpieler")
 	fun `Ziehen geht immer`(
-      spieler: Spieler,
+		spieler: Spieler,
   ) {
 		val spiel = Spiel(
 			spieler,
@@ -233,7 +242,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("verschiedeneSpieler")
 	fun `Auslegen geht immer`(
-      spieler: Spieler,
+		spieler: Spieler,
   ) {
 		val spiel = Spiel(
 			spieler,
@@ -272,7 +281,11 @@ class `30PunkteTest` {
 			Spieler(
 				"spielerx",
 				"4",
-				mutableListOf(Stein(Farbe.Schwarz, Zahl.Zehn), Stein(Farbe.Blau, Zahl.Zehn), Stein(Farbe.Rot, Zahl.Zehn)),
+				mutableListOf(
+					Stein(Farbe.Schwarz, Zahl.Zehn),
+					Stein(Farbe.Blau, Zahl.Zehn),
+					Stein(Farbe.Rot, Zahl.Zehn)
+				),
 				false,
 				false
 			),
@@ -301,7 +314,11 @@ class `30PunkteTest` {
 			Spieler(
 				"spielerx",
 				"4",
-				mutableListOf(Stein(Farbe.Schwarz, Zahl.Neun), Stein(Farbe.Blau, Zahl.Neun), Stein(Farbe.Rot, Zahl.Neun)),
+				mutableListOf(
+					Stein(Farbe.Schwarz, Zahl.Neun),
+					Stein(Farbe.Blau, Zahl.Neun),
+					Stein(Farbe.Rot, Zahl.Neun)
+				),
 				false,
 				false
 			),
@@ -353,7 +370,7 @@ class `30PunkteTest` {
 	@ParameterizedTest
 	@MethodSource("zweiKombisUeberDreissig")
 	fun `Wenn mehrere Kombinationen zusammen 30 Punkte ergeben , ist Spieler rausgekommen`(
-      kombis: Pair<Kombinationen, Kombinationen>,
+		kombis: Pair<Kombinationen, Kombinationen>,
   ) {
 		val spieler = Spieler(
 			"spielerx",

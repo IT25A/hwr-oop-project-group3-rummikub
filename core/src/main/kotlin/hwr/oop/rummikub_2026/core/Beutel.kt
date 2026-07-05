@@ -1,13 +1,13 @@
 package hwr.oop.rummikub_2026.core
 
 data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()) {
-	
+
 	init {
 		if (steineBeutel.isEmpty()) {
 			initialisiereBeutel()
 		}
 	}
-	
+
 	private fun initialisiereBeutel() {
 		for (farbe in Farbe.entries) {
 			for (zahl in Zahl.entries) {
@@ -18,7 +18,7 @@ data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()
 		}
 		steineBeutel.shuffle()
 	}
-	
+
 	fun zieheSteinAusBeutel(): Stein? {
 		return if (steineBeutel.isNotEmpty()) {
 			steineBeutel.removeAt(0)
@@ -26,9 +26,8 @@ data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()
 			null
 		}
 	}
-	
+
 	fun anzahlSteine(): Int = steineBeutel.size
-	
+
 	fun istLeer(): Boolean = steineBeutel.isEmpty()
 }
-

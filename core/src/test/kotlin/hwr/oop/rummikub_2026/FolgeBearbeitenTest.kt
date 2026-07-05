@@ -1,5 +1,9 @@
-package hwr.oop.rummikub_2026.core
+package hwr.oop.rummikub_2026
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Folge
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -88,7 +92,7 @@ class FolgeBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeHintenSteine")
 	fun `gueltiges hinten hinzufuegen funktioniert`(
-      stein: Stein,
+		stein: Stein,
   ) {
 		// given
 		val folge = standardFolge()
@@ -109,7 +113,7 @@ class FolgeBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeHintenSteine")
 	fun `ungueltiges hinten hinzufuegen wirft exception`(
-      testfall: Pair<Stein, String>,
+		testfall: Pair<Stein, String>,
   ) {
 		// given
 		val folge = standardFolge()
@@ -126,7 +130,7 @@ class FolgeBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeVorneSteine")
 	fun `gueltiges vorne hinzufuegen funktioniert`(
-      stein: Stein,
+		stein: Stein,
   ) {
 		// given
 		val folge = standardFolge()
@@ -147,7 +151,7 @@ class FolgeBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeVorneSteine")
 	fun `ungueltiges vorne hinzufuegen wirft exception`(
-      testfall: Pair<Stein, String>,
+		testfall: Pair<Stein, String>,
   ) {
 		// given
 		val folge = standardFolge()

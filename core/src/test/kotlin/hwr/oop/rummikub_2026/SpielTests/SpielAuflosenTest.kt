@@ -24,7 +24,8 @@ class SpielAuflosenTest {
 		val spiel = Spiel(
 			spieler,
 			emptyList(),
-			tisch
+			tisch,
+			listOf()
 		)
 		
 		assertThrows<InvalidObjectException> {
@@ -58,7 +59,8 @@ class SpielAuflosenTest {
 		val spiel = Spiel(
 			spieler,
 			emptyList(),
-			tisch
+			tisch,
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.aufloesen(
@@ -92,7 +94,8 @@ class SpielAuflosenTest {
 		val spiel = Spiel(
 			spieler,
 			emptyList(),
-			tisch
+			tisch,
+			listOf()
 		)
 		
 		spiel.aufloesen(
@@ -129,7 +132,8 @@ class SpielAuflosenTest {
 		val spiel = Spiel(
 			spieler,
 			emptyList(),
-			tisch
+			tisch,
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.aufloesen(
@@ -173,7 +177,8 @@ class SpielAuflosenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler1,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {

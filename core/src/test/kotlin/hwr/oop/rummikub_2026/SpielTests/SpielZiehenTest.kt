@@ -34,7 +34,8 @@ class SpielZiehenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = testfall.first,
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.ziehen(spieler)
@@ -61,7 +62,8 @@ class SpielZiehenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler1,
 			beutel = listOf(steinRot),
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {
@@ -82,7 +84,8 @@ class SpielZiehenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val exception = assertThrows<IllegalStateException> {

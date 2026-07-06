@@ -1,5 +1,7 @@
 package hwr.oop.rummikub_2026.core
+import kotlinx.serialization.Serializable
 
+@Serializable
 class Tisch(private val tisch: MutableList<Kombinationen>) {
 	val tischReadOnly: List<Kombinationen>
 		get() = tisch.toList()

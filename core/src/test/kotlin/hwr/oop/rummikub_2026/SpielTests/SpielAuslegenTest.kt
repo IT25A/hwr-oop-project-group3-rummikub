@@ -49,7 +49,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {
@@ -83,7 +84,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler1,
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {
@@ -109,7 +111,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(
@@ -134,7 +137,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = beutelSteine,
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		assertThat(spiel.beutel).isEqualTo(beutelSteine)
@@ -159,7 +163,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf())
+			tisch = Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(
@@ -190,7 +195,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		spiel.auslegen(
@@ -224,7 +230,8 @@ class SpielAuslegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		spiel.auslegen(
@@ -253,7 +260,8 @@ class SpielAuslegenTest {
 		)
 		
 		val tisch = Tisch(mutableListOf())
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
+			listOf())
 		
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
@@ -281,7 +289,8 @@ class SpielAuslegenTest {
 		)
 		
 		val tisch = Tisch(mutableListOf())
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
+			listOf())
 		
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
@@ -308,7 +317,8 @@ class SpielAuslegenTest {
 		)
 		
 		val tisch = Tisch(mutableListOf())
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
+			listOf())
 		
 		spiel.auslegen(
 			spieler = spieler,

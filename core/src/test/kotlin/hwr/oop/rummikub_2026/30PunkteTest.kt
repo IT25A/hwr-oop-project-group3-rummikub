@@ -134,7 +134,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			rausgekommenerSpieler,
 			emptyList(),
-			Tisch(mutableListOf(kombi))
+			Tisch(mutableListOf(kombi)),
+			listOf()
 		)
 		//when
 		spiel.anlegen(
@@ -158,7 +159,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			nichtRausgekommenerSpieler,
 			emptyList(),
-			Tisch(mutableListOf(kombi))
+			Tisch(mutableListOf(kombi)),
+			listOf()
 		)
 		
 		val exception = assertThrows<IllegalArgumentException> {
@@ -181,7 +183,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			rausgekommenerSpieler,
 			emptyList(),
-			Tisch(mutableListOf(kombi))
+			Tisch(mutableListOf(kombi)),
+			listOf()
 		)
 		
 		spiel.aufloesen(
@@ -206,7 +209,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			nichtRausgekommenerSpieler,
 			emptyList(),
-			Tisch(mutableListOf(kombi))
+			Tisch(mutableListOf(kombi)),
+			listOf()
 		)
 		
 		val exception = assertThrows<IllegalArgumentException> {
@@ -228,7 +232,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			spieler,
 			listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)),
-			Tisch(mutableListOf())
+			Tisch(mutableListOf()),
+			listOf()
 		)
 		// when
 		val neuesSpiel = spiel.ziehen(spieler)
@@ -247,7 +252,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			spieler,
 			listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)),
-			Tisch(mutableListOf())
+			Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(
@@ -290,7 +296,8 @@ class `30PunkteTest` {
 				false
 			),
 			emptyList(),
-			Tisch(mutableListOf())
+			Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(
@@ -323,7 +330,8 @@ class `30PunkteTest` {
 				false
 			),
 			emptyList(),
-			Tisch(mutableListOf())
+			Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(
@@ -351,7 +359,8 @@ class `30PunkteTest` {
 				false,
 				false
 			),
-			emptyList(), Tisch(mutableListOf())
+			emptyList(), Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(
@@ -383,7 +392,8 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			spieler,
 			emptyList(),
-			Tisch(mutableListOf())
+			Tisch(mutableListOf()),
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.auslegen(

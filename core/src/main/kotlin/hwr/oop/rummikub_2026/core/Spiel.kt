@@ -1,15 +1,26 @@
 package hwr.oop.rummikub_2026.core
-
+import kotlinx.serialization.Serializable
 import java.io.InvalidObjectException
-
+@Serializable
 data class Spiel(
     val aktivSpieler: Spieler,
     val beutel: List<Stein>,
     val tisch: Tisch,
+    val spieler : List<Spieler>,
     var gesammeltePunkte: Int = 0,
-	var id : SpielId =  SpielId.random()
+	var id : SpielId =  SpielId.random(),
+
 ) {
 
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (other !is Spiel) return false
+
+		return aktivSpieler == other.aktivSpieler &&
+				beutel == other.beutel &&
+				tisch.tischReadOnly == other.tisch.tischReadOnly &&
+				id.wert == other.id.wert
+	}
 
 	fun gueltigerZug() {
 		tisch.gueltig()

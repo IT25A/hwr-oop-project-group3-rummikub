@@ -2,15 +2,16 @@ package hwr.oop.examples.template
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import hwr.oop.rummikub_2026.core.TestData
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
-@Disabled("Requires Docker")
 @Testcontainers
 class SqlPersistenceTest {
 	
@@ -40,13 +41,26 @@ class SqlPersistenceTest {
 			dataSource.close()
 		}
 	}
-	
+
+	private val spiel = TestData().testspiel
+	private val gameId = spiel.id
+
 	@Test
-	fun `do nothing`() {
-		// given
+	fun `kann Spiel speichern`() {
 		// when
+		adapter.save(spiel)
+		val loaded = adapter.loadByid(gameId)
+
 		// then
+		assertThat(loaded).isEqualTo(spiel)
 	}
-	
+
+	@Test
+	fun `Fehlerfall`() {
+		// when / then
+		assertThatThrownBy {
+			adapter.loadByid(gameId)
+		}.hasMessageContainingAll("Could not load game", gameId.toString())
+	}
 }
 

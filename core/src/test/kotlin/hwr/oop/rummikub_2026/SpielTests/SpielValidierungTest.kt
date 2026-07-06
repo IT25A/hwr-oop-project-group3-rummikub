@@ -39,7 +39,8 @@ class SpielValidierungTest {
 				true
 			),
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf(kombi))
+			tisch = Tisch(mutableListOf(kombi)),
+			listOf(),
 		)
 		
 		Assertions.assertDoesNotThrow {
@@ -60,7 +61,8 @@ class SpielValidierungTest {
 				true
 			),
 			beutel = emptyList(),
-			tisch = Tisch(mutableListOf(kombi))
+			tisch = Tisch(mutableListOf(kombi)),
+			listOf(),
 		)
 		
 		assertThrows<IllegalArgumentException> {

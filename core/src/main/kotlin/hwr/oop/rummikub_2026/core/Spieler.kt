@@ -1,5 +1,6 @@
 package hwr.oop.rummikub_2026.core
-
+import kotlinx.serialization.Serializable
+@Serializable
 data class Spieler(
     private val name: String,
     val id: String,

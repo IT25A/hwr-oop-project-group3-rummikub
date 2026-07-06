@@ -46,7 +46,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler1,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {
@@ -78,7 +79,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {
@@ -117,7 +119,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.anlegen(
@@ -154,7 +157,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler1,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		spiel.anlegen(
@@ -191,7 +195,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		spiel.anlegen(
@@ -228,7 +233,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		val neuesSpiel = spiel.anlegen(
@@ -264,7 +270,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		assertDoesNotThrow {
@@ -296,7 +303,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		spiel.anlegen(
@@ -331,7 +339,8 @@ class SpielAnlegenTest {
 		val spiel = Spiel(
 			aktivSpieler = spieler,
 			beutel = emptyList(),
-			tisch = tisch
+			tisch = tisch,
+			listOf()
 		)
 		
 		spiel.anlegen(
@@ -367,7 +376,8 @@ class SpielAnlegenTest {
 			true
 		)
 		
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch)
+		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
+			listOf())
 		
 		spiel.anlegen(
 			spieler = spieler,

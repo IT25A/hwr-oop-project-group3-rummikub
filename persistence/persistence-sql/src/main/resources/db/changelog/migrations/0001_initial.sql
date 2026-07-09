@@ -1,4 +1,4 @@
-liquibase formatted sql
+--liquibase formatted sql
 
 --changeset system:1 dbms:postgresql
 CREATE TABLE rummikub_spiele

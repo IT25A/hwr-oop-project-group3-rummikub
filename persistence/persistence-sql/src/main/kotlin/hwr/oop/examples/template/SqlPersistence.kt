@@ -30,7 +30,7 @@ private val format = Json {
 	ignoreUnknownKeys = true
 }
 
-object RummikubSpieleTabelle : UUIDTable("doppelkopf_games") {
+object RummikubSpieleTabelle : UUIDTable("rummikub_spiele") {
 	val game = jsonb<Spiel>("game", format)
 }
 

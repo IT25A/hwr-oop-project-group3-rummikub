@@ -1,15 +1,15 @@
-package hwr.oop.examples.doppelkopf_2026.adapters.`in`
+package hwr.oop.rummikub_2026.adapters.`in`
 
-import hwr.oop.examples.doppelkopf_2026.core.Game
-import hwr.oop.examples.doppelkopf_2026.core.GameId
-import hwr.oop.examples.doppelkopf_2026.ports.out.LoadGameByIdPort
+import hwr.oop.rummikub_2026.core.Spiel
+import hwr.oop.rummikub_2026.core.SpielId
+import hwr.oop.rummikub_2026.ports.out.SpielLadenByIdPort
 
 class LoadGameByIdQuery(
-	private val loadGameByIdPort: LoadGameByIdPort,
+	private val loadGameByIdPort: SpielLadenByIdPort,
 ) {
 	
-	fun loadGameById(gameId: String): Game {
-		val gameId = GameId(gameId)
+	fun loadGameById(gameId: String): Spiel {
+		val gameId = SpielId(gameId)
 		return loadGameByIdPort.loadByid(gameId)
 	}
 }

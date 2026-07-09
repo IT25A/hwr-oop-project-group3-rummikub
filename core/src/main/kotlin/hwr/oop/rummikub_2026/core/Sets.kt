@@ -1,7 +1,7 @@
 package hwr.oop.rummikub_2026.core
 
 data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
-
+	//[ACHTUNG] ist das gleiche wie get()
 	val setReadOnly: List<Stein>
 		get() = setListe.toList()
 

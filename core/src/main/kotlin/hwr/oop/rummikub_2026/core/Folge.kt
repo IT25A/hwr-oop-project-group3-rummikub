@@ -2,6 +2,7 @@ package hwr.oop.rummikub_2026.core
 
 data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 
+	//[ACHTUNG] ist das gleiche wie get()
 	val folgeReadOnly: List<Stein>
 		get() = folgeListe.toMutableList()
 

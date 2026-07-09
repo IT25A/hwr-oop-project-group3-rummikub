@@ -8,7 +8,7 @@ data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()
 		}
 	}
 
-	private fun initialisiereBeutel() {
+	fun initialisiereBeutel() {
 		for (farbe in Farbe.entries) {
 			for (zahl in Zahl.entries) {
 				//jede Kombination 2x hinzufügen

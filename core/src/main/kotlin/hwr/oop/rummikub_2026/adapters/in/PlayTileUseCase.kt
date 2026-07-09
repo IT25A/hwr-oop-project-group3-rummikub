@@ -1,16 +1,16 @@
-package hwr.oop.examples.doppelkopf_2026.adapters.`in`
+package hwr.oop.rummikub_2026.adapters.`in`
 
-import hwr.oop.examples.doppelkopf_2026.core.GameId
-import hwr.oop.examples.doppelkopf_2026.ports.out.LoadGameByIdPort
-import hwr.oop.examples.doppelkopf_2026.ports.out.SaveGamePort
+import hwr.oop.rummikub_2026.core.SpielId
+import hwr.oop.rummikub_2026.ports.out.SpielLadenByIdPort
+import hwr.oop.rummikub_2026.ports.out.SpielSpeichernPort
 
 class PlayTileUseCase(
-	private val loadGameByIdPort: LoadGameByIdPort,
-	private val saveGamePort: SaveGamePort,
+	private val loadGameByIdPort: SpielLadenByIdPort,
+	private val saveGamePort: SpielSpeichernPort,
 ) {
 	
 	fun playAction(command: Command) {
-		val gameId = GameId(command.gameId)
+		val gameId = SpielId(command.gameId)
 		val loadedGame = loadGameByIdPort.loadByid(gameId)
 		val updatedGame = TODO("domain logic on game")
 		saveGamePort.save(updatedGame)

@@ -3,14 +3,39 @@ import kotlinx.serialization.Serializable
 import java.io.InvalidObjectException
 @Serializable
 data class Spiel(
-    val aktivSpieler: Spieler,
+	val aktivSpieler: Spieler, //[ACHTUNG] SpielerID verwenden? Oder vielleich einfach int (Stelle)
     val beutel: List<Stein>,
     val tisch: Tisch,
     val spieler : List<Spieler>,
     var gesammeltePunkte: Int = 0,
-	var id : SpielId =  SpielId.random(),
-
+	var id : SpielId =  SpielId.random()
 ) {
+	//Funktionen: Runden, Richtige Spielerzahl --> Züge (gewonnen), exeption, klassen überarbeiten
+
+
+	companion object {
+		fun erstelleZufaelligesSpiel(
+			players: List<SpielId>,
+			withNine: Boolean,
+			gameId: SpielId = SpielId.random(),
+		): Spiel {
+			richtigeSpielerZahl(players)
+			val beutel = Beutel().initialisiereBeutel()
+			val spieler = buildHandsBasedOn(players, beutel, withNine)
+			val bouts = listOf(
+				Zug(
+					playerOrder = players,
+				)
+			)
+			return Spiel(
+				id = gameId,
+				aktivSpieler = spieler[0],
+				beutel = beutel,
+				tisch = Tisch(),
+				spieler = spieler
+			)
+		}
+	}
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true

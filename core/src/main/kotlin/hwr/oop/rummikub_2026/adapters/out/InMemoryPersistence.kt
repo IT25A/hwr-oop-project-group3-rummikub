@@ -1,9 +1,9 @@
-package hwr.oop.examples.doppelkopf_2026.adapters.out
+package hwr.oop.rummikub_2026.adapters.out
 
-import hwr.oop.examples.doppelkopf_2026.core.Game
-import hwr.oop.examples.doppelkopf_2026.core.GameId
-import hwr.oop.examples.doppelkopf_2026.ports.out.LoadGameByIdPort
-import hwr.oop.examples.doppelkopf_2026.ports.out.SaveGamePort
+import hwr.oop.rummikub_2026.core.Game
+import hwr.oop.rummikub_2026.core.GameId
+import hwr.oop.rummikub_2026.ports.out.LoadGameByIdPort
+import hwr.oop.rummikub_2026.ports.out.SaveGamePort
 
 internal class InMemoryPersistence : LoadGameByIdPort, SaveGamePort {
 	

@@ -1,4 +1,6 @@
 package hwr.oop.rummikub_2026.core
+import kotlinx.serialization.Serializable
 
-class SpielerId {
-}
+@Serializable
+@JvmInline
+value class SpielerId(private val value: String)

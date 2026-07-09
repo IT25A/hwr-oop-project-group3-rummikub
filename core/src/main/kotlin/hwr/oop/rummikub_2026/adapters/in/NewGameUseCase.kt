@@ -1,40 +1,40 @@
-package hwr.oop.examples.doppelkopf_2026.adapters.`in`
+package hwr.oop.rummikub_2026.adapters.`in`
 
-import hwr.oop.examples.doppelkopf_2026.core.Game.Companion.createRandomGame
-import hwr.oop.examples.doppelkopf_2026.core.GameId
-import hwr.oop.examples.doppelkopf_2026.core.PlayerId
-import hwr.oop.examples.doppelkopf_2026.ports.out.SaveGamePort
+import hwr.oop.rummikub_2026.core.Spiel.Companion.erstelleZufaelligesSpiel
+import hwr.oop.rummikub_2026.core.SpielId
+import hwr.oop.rummikub_2026.core.SpielerId
+import hwr.oop.rummikub_2026.ports.out.SpielSpeichernPort
 import java.util.*
 
 class NewGameUseCase(
-	private val saveGamePort: SaveGamePort,
+	private val spielSpeichernPort: SpielSpeichernPort,
 ) {
 	fun startGame(command: Command) {
-		val playerIds = command.playersIds.map { playerId -> PlayerId(playerId) }
-		val gameId = gameIdBasedOn(command)
+		val spielerIds = command.spielerIds.map { playerId -> SpielerId(playerId)}
+		val spielId = spielIdBasedOn(command)
 		val withNine = command.withNine
-		val game = createRandomGame(
-			players = playerIds,
+		val spiel = erstelleZufaelligesSpiel(
+			players = spielerIds,
 			withNine = withNine,
-			gameId = gameId
+			spielId = spielId
 		)
-		saveGamePort.save(game)
+		spielSpeichernPort.save(spiel)
 	}
 	
-	private fun gameIdBasedOn(command: Command): GameId {
-		val nullableGameId = command.gameId
-		val gameId = if (nullableGameId != null) {
-			val uuid = UUID.fromString(nullableGameId)
-			GameId.from(uuid)
+	private fun spielIdBasedOn(command: Command): SpielId {
+		val nullablespielId = command.spielId
+		val spielId = if (nullablespielId != null) {
+			val uuid = UUID.fromString(nullablespielId)
+			SpielId.from(uuid)
 		} else {
-			GameId.random()
+			SpielId.random()
 		}
-		return gameId
+		return spielId
 	}
 	
 	data class Command(
-		val gameId: String? = null,
-		val playersIds: List<String>,
+		val spielId: String? = null,
+		val spielerIds: List<String>,
 		val withNine: Boolean = false,
 	)
 }

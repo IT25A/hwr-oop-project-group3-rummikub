@@ -1,7 +1,6 @@
 package hwr.oop.rummikub_2026.core
 
 object SpielManager {
-    //var spiel: Spiel? = null
     val zuege: MutableList<Zug> = mutableListOf()
 
     fun erstelleZufaelligesSpiel(

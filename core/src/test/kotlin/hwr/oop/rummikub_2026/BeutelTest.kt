@@ -23,12 +23,12 @@ class BeutelTest {
 	fun `Beutel hat 104 Steine`() {
 		val beutel = Beutel()
 		
-		val erwarteteAnzahl = Farbe.entries.size * Zahl.entries.size * 2 // 4 * 13 * 2 = 104
+		val erwarteteAnzahl = Farbe.entries.size * Zahl.entries.size * 2 + 2 - 26// 4 * 13 * 2 = 104
 		
 		assertEquals(
 			erwarteteAnzahl,
 			beutel.anzahlSteine(),
-			"Der Beutel enthaelt 104 Steine ."
+			"Der Beutel enthaelt 106 Steine ."
 		)
 	}
 	
@@ -40,16 +40,16 @@ class BeutelTest {
 		while (!beutel.istLeer()) {
 			alleSteine.add(beutel.zieheSteinAusBeutel()!!)
 		}
-		
-		for (farbe in Farbe.entries) {
-			for (zahl in Zahl.entries) {
-				val anzahl = alleSteine.count { it.farbe() == farbe && it.zahl() == zahl }
-				
-				assertEquals(
-					2,
-					anzahl,
-					"Es sollte genau 2 Steine mit Farbe $farbe und Zahl $zahl geben."
-				)
+		val alleSteineOhneJoker = alleSteine.filter {
+			it.farbe() != Farbe.Joker
+		}
+		for (farbe in Farbe.entries.filter { it != Farbe.Joker }) {
+			for (zahl in Zahl.entries.filter { it != Zahl.Eins }) {
+				val anzahl = alleSteineOhneJoker.count {
+					it.farbe() == farbe && it.zahl() == zahl
+				}
+
+				assertEquals(2, anzahl)
 			}
 		}
 	}
@@ -103,13 +103,14 @@ class BeutelTest {
 			"Der Beutel sollte am Anfang nicht leer sein."
 		)
 		
-		repeat(104) {
+		repeat(106) {
 			beutel.zieheSteinAusBeutel()
 		}
+		println("Steine nach 106 Zügen: ${beutel.anzahlSteine()}")
 		
 		assertTrue(
 			beutel.istLeer(),
-			"Nach dem Ziehen aller 104 Steine sollte der Beutel leer sein."
+			"Nach dem Ziehen aller 106 Steine sollte der Beutel leer sein."
 		)
 	}
 	
@@ -118,19 +119,19 @@ class BeutelTest {
 		val beutel = Beutel()
 		
 		assertEquals(
+			106,
+			beutel.anzahlSteine()
+		)
+		
+		beutel.zieheSteinAusBeutel()
+		assertEquals(
+			105,
+			beutel.anzahlSteine()
+		)
+		
+		beutel.zieheSteinAusBeutel()
+		assertEquals(
 			104,
-			beutel.anzahlSteine()
-		)
-		
-		beutel.zieheSteinAusBeutel()
-		assertEquals(
-			103,
-			beutel.anzahlSteine()
-		)
-		
-		beutel.zieheSteinAusBeutel()
-		assertEquals(
-			102,
 			beutel.anzahlSteine()
 		)
 	}

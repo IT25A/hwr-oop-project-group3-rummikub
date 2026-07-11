@@ -19,8 +19,11 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 		//Alle gleiche Zahl
 		val zahlen = setListe[0].zahl()
 		for (i in setListe) {
-			if (i.zahl() != zahlen) {
+			if (i.zahl() != zahlen && i.farbe() != Farbe.Joker) {
 				return false
+			}
+			if(i.farbe() == Farbe.Joker) {
+				i.jokerWertAnpassen(zahlen)
 			}
 		}
 		return true
@@ -30,7 +33,7 @@ data class Sets(private val setListe: MutableList<Stein>) : Kombinationen {
 		//Alle unterschiedliche Farbe
 		val farben = mutableSetOf<Any>()
 		for (i in setListe) {
-			if (!farben.add(i.farbe())) {
+			if (!farben.add(i.farbe()) && i.farbe() != Farbe.Joker) {
 				return false
 			}
 		}

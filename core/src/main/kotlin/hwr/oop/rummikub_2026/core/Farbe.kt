@@ -4,5 +4,6 @@ enum class Farbe {
 	Orange,
 	Rot,
 	Blau,
-	Schwarz
+	Schwarz,
+	Joker
 }

@@ -18,24 +18,58 @@ data class Folge(private val folgeListe: MutableList<Stein>) : Kombinationen {
 	}
 
 	private fun alleGleicheFarbe(): Boolean {
-		//Alle selbe Farbe
-		val ersteFarbe = folgeListe[0].farbe()
-		for (i in folgeListe) {
-			if (i.farbe() != ersteFarbe) {
-				return false
-			}
+		val ersteFarbe = folgeListe
+			.firstOrNull { it.farbe() != Farbe.Joker }
+			?.farbe()
+			?: return false
+
+		return folgeListe.all {
+			it.farbe() == Farbe.Joker || it.farbe() == ersteFarbe
 		}
-		return true
+	}
+	private fun jokerWert(reihenfolge: MutableList<Stein>): Zahl {
+
+		if (reihenfolge[1].farbe() == Farbe.Joker) {
+			val wert = jokerWert((reihenfolge - reihenfolge[0]).toMutableList())
+
+			val neuerWert = Zahl.entries.first {
+				it.value == reihenfolge[1].zahl().value - 1
+			}
+
+			reihenfolge[0].jokerWertAnpassen(neuerWert)
+			return neuerWert
+		}
+
+		val neuerWert = Zahl.entries.firstOrNull {
+			it.value == reihenfolge[1].zahl().value - 1
+		} ?: throw IllegalArgumentException("Joker kann keinen Wert erhalten")
+
+		reihenfolge[0].jokerWertAnpassen(neuerWert)
+		return neuerWert
 	}
 
 	private fun indexverschiebung(): Boolean {
+		if (folgeListe[0].farbe() == Farbe.Joker) {
+			jokerWert(folgeListe)
+		}
+
 		for (i in 0 until folgeListe.size - 1) {
 			val aktuellerWert = folgeListe[i].zahl().value
 			val naechsterWert = folgeListe[i + 1].zahl().value
+
 			if (naechsterWert != aktuellerWert + 1) {
-				return false
+				if (folgeListe[i + 1].farbe() == Farbe.Joker) {
+					val jokerWert = Zahl.entries.firstOrNull {
+						it.value == aktuellerWert + 1
+					} ?: return false
+
+					folgeListe[i + 1].jokerWertAnpassen(jokerWert)
+				} else {
+					return false
+				}
 			}
 		}
+
 		return true
 	}
 

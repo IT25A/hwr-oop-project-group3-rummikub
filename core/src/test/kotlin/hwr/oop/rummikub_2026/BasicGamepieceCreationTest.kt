@@ -75,7 +75,8 @@ class BasicPieceCreationTest {
 			Farbe.Orange,
 			Farbe.Rot,
 			Farbe.Blau,
-			Farbe.Schwarz
+			Farbe.Schwarz,
+			Farbe.Joker
 		)
 	}
 	
@@ -87,7 +88,8 @@ class BasicPieceCreationTest {
 			Farbe.Orange,
 			Farbe.Rot,
 			Farbe.Blau,
-			Farbe.Schwarz
+			Farbe.Schwarz,
+			Farbe.Joker
 		)
 		
 		// when
@@ -95,7 +97,7 @@ class BasicPieceCreationTest {
 		
 		// then
 		assertThat(cards)
-			.hasSize(4)
+			.hasSize(5)
 			.allMatch { it.zahl() == zahl }
 		
 		val farben = cards.map { it.farbe() }

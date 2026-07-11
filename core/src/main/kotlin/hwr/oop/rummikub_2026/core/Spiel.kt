@@ -68,7 +68,8 @@ data class Spiel(
         tisch.kombiLegen(istSet, steine.toMutableList())
 
         var neuGesammeltePunkte = gesammeltePunkte
-        for (stein in steine) {
+        val neueKombi = tisch.tischReadOnly.last()
+        for (stein in neueKombi.get()) {
             neuGesammeltePunkte += stein.zahl().value
         }
         if (neuGesammeltePunkte >= 30) {

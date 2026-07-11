@@ -62,7 +62,7 @@ class SpielManagerTest {
 
         // Assert
         // Rummikub has 106 stones, 2 players receive 28
-        assertEquals(76, spiel.beutel.size)
+        assertEquals(78, spiel.beutel.size)
     }
 
     @Test

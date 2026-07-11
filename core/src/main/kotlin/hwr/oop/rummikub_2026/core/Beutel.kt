@@ -25,12 +25,16 @@ data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()
 
 	fun initialisiereBeutel() {
 		for (farbe in Farbe.entries) {
-			for (zahl in Zahl.entries) {
-				//jede Kombination 2x hinzufügen
-				steineBeutel.add(Stein(farbe, zahl))
-				steineBeutel.add(Stein(farbe, zahl))
+			if(farbe != Farbe.Joker) {
+				for (zahl in Zahl.entries) {
+					//jede Kombination 2x hinzufügen
+					steineBeutel.add(Stein(farbe, zahl))
+					steineBeutel.add(Stein(farbe, zahl))
+				}
 			}
 		}
+		steineBeutel.add(Stein(Farbe.Joker, Zahl.Eins))
+		steineBeutel.add(Stein(Farbe.Joker, Zahl.Eins))
 		steineBeutel.shuffle()
 	}
 

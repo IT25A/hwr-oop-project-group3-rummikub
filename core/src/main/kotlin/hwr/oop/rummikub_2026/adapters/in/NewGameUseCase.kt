@@ -1,24 +1,22 @@
 package hwr.oop.rummikub_2026.adapters.`in`
 
-import hwr.oop.rummikub_2026.core.Spiel.Companion.erstelleZufaelligesSpiel
+import hwr.oop.rummikub_2026.core.SpielManager.erstelleZufaelligesSpiel
 import hwr.oop.rummikub_2026.core.SpielId
 import hwr.oop.rummikub_2026.core.SpielerId
-import hwr.oop.rummikub_2026.ports.out.SpielSpeichernPort
+import hwr.oop.rummikub_2026.ports.out.SaveGamePort
 import java.util.*
 
 class NewGameUseCase(
-	private val spielSpeichernPort: SpielSpeichernPort,
+	private val saveGamePort: SaveGamePort,
 ) {
 	fun startGame(command: Command) {
 		val spielerIds = command.spielerIds.map { playerId -> SpielerId(playerId)}
 		val spielId = spielIdBasedOn(command)
-		val withNine = command.withNine
 		val spiel = erstelleZufaelligesSpiel(
 			players = spielerIds,
-			withNine = withNine,
-			spielId = spielId
+			gameId = spielId
 		)
-		spielSpeichernPort.save(spiel)
+		saveGamePort.save(spiel)
 	}
 	
 	private fun spielIdBasedOn(command: Command): SpielId {
@@ -35,6 +33,5 @@ class NewGameUseCase(
 	data class Command(
 		val spielId: String? = null,
 		val spielerIds: List<String>,
-		val withNine: Boolean = false,
 	)
 }

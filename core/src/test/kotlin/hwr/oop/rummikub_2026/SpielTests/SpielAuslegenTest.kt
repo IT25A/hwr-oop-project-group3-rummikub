@@ -37,11 +37,11 @@ class SpielAuslegenTest {
       testfall: Pair<Triple<List<Stein>, List<Stein>, Array<Stein>>, String>,
   ) {
 		val hand = testfall.first.first
-		val varargSteine = testfall.first.third
+		val list = testfall.first.second
 		
 		val spieler = Spieler(
 			"Luxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*hand.toTypedArray()),
 			true
 		)
@@ -57,8 +57,7 @@ class SpielAuslegenTest {
 			spiel.auslegen(
 				spieler = spieler,
 				istSet = false,
-				aktuellerTisch = spiel.tisch,
-				steine = *varargSteine
+				steine = list,
 			)
 		}
 		
@@ -69,14 +68,14 @@ class SpielAuslegenTest {
 	fun `auslegen - auslegen von ungueltigem Spieler wirft Exception`() {
 		val spieler1 = Spieler(
 			"Luxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(standardStein),
 			true
 		)
 		
 		val spieler2 = Spieler(
 			"Smilla",
-			"2",
+			SpielerId("2"),
 			erstelle14Steine(),
 			true
 		)
@@ -92,8 +91,7 @@ class SpielAuslegenTest {
 			spiel.auslegen(
 				spieler = spieler2,
 				istSet = false,
-				aktuellerTisch = spiel.tisch,
-				steine = arrayOf(standardStein)
+				steine = listOf(standardStein)
 			)
 		}
 		
@@ -104,7 +102,7 @@ class SpielAuslegenTest {
 	fun `auslegen - gueltiges auslegen einer neuen Kombination funktioniert`() {
 		val spieler = Spieler(
 			"Luxi-Taxi",
-			"1", erstelle14Steine(standardStein, stein2, stein3),
+			SpielerId("1"), erstelle14Steine(standardStein, stein2, stein3),
 			true
 		)
 		
@@ -118,8 +116,7 @@ class SpielAuslegenTest {
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
 			istSet = false,
-			aktuellerTisch = spiel.tisch,
-			steine = arrayOf(standardStein, stein2, stein3)
+			steine = listOf(standardStein, stein2, stein3)
 		)
 		
 		assertThat(neuesSpiel.aktivSpieler.brettReadOnly).hasSize(11)
@@ -130,7 +127,7 @@ class SpielAuslegenTest {
 	fun `beutel wird korrekt initialisiert`(beutelSteine: List<Stein>) {
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine()
 		)
 		
@@ -156,7 +153,7 @@ class SpielAuslegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*steine.toTypedArray())
 		)
 		
@@ -170,8 +167,7 @@ class SpielAuslegenTest {
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
 			istSet = istSet,
-			aktuellerTisch = spiel.tisch,
-			steine = steine.toTypedArray()
+			steine = steine
 		)
 		
 		assertThat(neuesSpiel.gesammeltePunkte).isEqualTo(erwartePunkte)
@@ -187,7 +183,7 @@ class SpielAuslegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*steine.toTypedArray())
 		)
 		
@@ -202,8 +198,7 @@ class SpielAuslegenTest {
 		spiel.auslegen(
 			spieler = spieler,
 			istSet = istSet,
-			aktuellerTisch = tisch,
-			steine = steine.toTypedArray()
+			steine = steine
 		)
 		
 		assertThat(tisch.tmpListe).isEmpty()
@@ -220,7 +215,7 @@ class SpielAuslegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*handSteine.toTypedArray())
 		)
 		
@@ -237,8 +232,7 @@ class SpielAuslegenTest {
 		spiel.auslegen(
 			spieler = spieler,
 			istSet = false,
-			aktuellerTisch = tisch,
-			steine = handSteine.toTypedArray()
+			steine = handSteine
 		)
 		
 		assertThat(tisch.tmpListe).containsExactlyInAnyOrderElementsOf(erwarteteTmpListe)
@@ -254,7 +248,7 @@ class SpielAuslegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*steine.toTypedArray()),
 			false
 		)
@@ -266,10 +260,8 @@ class SpielAuslegenTest {
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
 			istSet = true,
-			aktuellerTisch = tisch,
-			steine = steine.toTypedArray()
+			steine = steine
 		)
-		
 		assertThat(neuesSpiel.aktivSpieler.rausgekommen).isTrue()
 	}
 	
@@ -283,7 +275,7 @@ class SpielAuslegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*steine.toTypedArray()),
 			false
 		)
@@ -295,8 +287,7 @@ class SpielAuslegenTest {
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
 			istSet = false,
-			aktuellerTisch = tisch,
-			steine = steine.toTypedArray()
+			steine = steine
 		)
 		
 		assertThat(neuesSpiel.aktivSpieler.rausgekommen).isFalse()
@@ -312,7 +303,7 @@ class SpielAuslegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(*steine.toTypedArray())
 		)
 		
@@ -323,8 +314,7 @@ class SpielAuslegenTest {
 		spiel.auslegen(
 			spieler = spieler,
 			istSet = false,
-			aktuellerTisch = tisch,
-			steine = steine.toTypedArray()
+			steine = steine
 		)
 		
 		assertThat(tisch.tischReadOnly).hasSize(1)

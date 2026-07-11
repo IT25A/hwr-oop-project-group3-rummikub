@@ -4,7 +4,7 @@ class TestData {
     val testspiel = Spiel(
         Spieler(
             "testspieler",
-            "12345",
+            SpielerId("testspielerId"),
             mutableListOf(),
             true,
             false

@@ -14,7 +14,7 @@ class SpielAuflosenTest {
 	fun `aufloesen - Exception bei leerer Kombination`() {
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			SpielTestData.erstelle14Steine(),
 			true
 		)
@@ -41,7 +41,7 @@ class SpielAuflosenTest {
 	fun `aufloesen - Kombination wird vom Tisch entfernt`() {
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			SpielTestData.erstelle14Steine(),
 			true
 		)
@@ -76,7 +76,7 @@ class SpielAuflosenTest {
 	fun `aufloesen - Steine der Kombination landen in tmpListe`() {
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			SpielTestData.erstelle14Steine(),
 			true
 		)
@@ -114,7 +114,7 @@ class SpielAuflosenTest {
 	fun `aufloesen - aktiver Spieler bleibt erhalten`() {
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			SpielTestData.erstelle14Steine(),
 			true
 		)
@@ -152,14 +152,14 @@ class SpielAuflosenTest {
 	fun `aufloesen - ungueltiger Spieler wirft Exception`() {
 		val spieler1 = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			SpielTestData.erstelle14Steine(),
 			true
 		)
 		
 		val spieler2 = Spieler(
 			"Moritz",
-			"2",
+			SpielerId("2"),
 			SpielTestData.erstelle14Steine(),
 			true
 		)

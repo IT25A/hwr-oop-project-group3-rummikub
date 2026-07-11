@@ -4,9 +4,9 @@ package hwr.oop.examples.template
 import com.zaxxer.hikari.HikariDataSource
 import hwr.oop.rummikub_2026.core.Spiel
 import hwr.oop.rummikub_2026.core.SpielId
-import hwr.oop.rummikub_2026.ports.out.SpielRepository
-import hwr.oop.rummikub_2026.ports.out.SpielLadenByIdPort
-import hwr.oop.rummikub_2026.ports.out.SpielSpeichernPort
+import hwr.oop.rummikub_2026.ports.out.GameRepository
+import hwr.oop.rummikub_2026.ports.out.LoadGameByIdPort
+import hwr.oop.rummikub_2026.ports.out.SaveGamePort
 import liquibase.Liquibase
 import liquibase.Scope
 import liquibase.database.DatabaseFactory
@@ -34,7 +34,7 @@ object RummikubSpieleTabelle : UUIDTable("rummikub_spiele") {
 	val game = jsonb<Spiel>("game", format)
 }
 
-class SqlPersistence(private val dataSource: DataSource) : SpielRepository{
+class SqlPersistence(private val dataSource: DataSource) : GameRepository{
 	
 	constructor(jdbcUrl: String, username: String, password: String) : this(
 		HikariDataSource().apply {
@@ -84,7 +84,7 @@ class SqlPersistence(private val dataSource: DataSource) : SpielRepository{
 				.map { it[RummikubSpieleTabelle.game] }
 				.firstOrNull()
 		}
-		return result ?: throw SpielLadenByIdPort.CouldNotLoadException(gameId)
+		return result ?: throw LoadGameByIdPort.CouldNotLoadException(gameId)
 	}
 	
 }

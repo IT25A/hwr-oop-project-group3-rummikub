@@ -6,6 +6,7 @@ import hwr.oop.rummikub_2026.core.Kombinationen
 import hwr.oop.rummikub_2026.core.Sets
 import hwr.oop.rummikub_2026.core.Spiel
 import hwr.oop.rummikub_2026.core.Spieler
+import hwr.oop.rummikub_2026.core.SpielerId
 import hwr.oop.rummikub_2026.core.Stein
 import hwr.oop.rummikub_2026.core.Tisch
 import hwr.oop.rummikub_2026.core.Zahl
@@ -21,14 +22,14 @@ class `30PunkteTest` {
 	
 	private val rausgekommenerSpieler = Spieler(
 		"Rausgekommener Spieler",
-		"1",
+		SpielerId("1"),
 		create14Steine(Stein(Farbe.Rot, Zahl.Zwei)),
 		true
 	)
 	
 	private val nichtRausgekommenerSpieler = Spieler(
 		"Nicht Rausgekommener Spieler",
-		"2",
+		SpielerId("2"),
 		create14Steine(Stein(Farbe.Rot, Zahl.Zwei))
 	)
 	
@@ -63,7 +64,7 @@ class `30PunkteTest` {
 		fun verschiedeneSpieler() = listOf(
 			Spieler(
 				"Rausgekommener Spieler",
-				"1",
+				SpielerId("1"),
 				mutableListOf(
 					Stein(Farbe.Rot, Zahl.Zwei),
 					Stein(Farbe.Schwarz, Zahl.Fuenf),
@@ -76,7 +77,7 @@ class `30PunkteTest` {
 
 			Spieler(
 				"Nicht Rausgekommener Spieler",
-				"2",
+				SpielerId("2"),
 				mutableListOf(
 					Stein(Farbe.Rot, Zahl.Zwei),
 					Stein(Farbe.Schwarz, Zahl.Fuenf),
@@ -259,10 +260,10 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spieler,
 			true,
-			spiel.tisch,
-			Stein(Farbe.Schwarz, Zahl.Fuenf),
-			Stein(Farbe.Blau, Zahl.Fuenf),
-			Stein(Farbe.Rot, Zahl.Fuenf)
+			listOf(Stein(Farbe.Schwarz, Zahl.Fuenf),
+				Stein(Farbe.Blau, Zahl.Fuenf),
+				Stein(Farbe.Rot, Zahl.Fuenf))
+
 		)
 		
 		assertThat(neuesSpiel.aktivSpieler.brettReadOnly).doesNotContain(
@@ -286,7 +287,7 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			Spieler(
 				"spielerx",
-				"4",
+				SpielerId("4"),
 				mutableListOf(
 					Stein(Farbe.Schwarz, Zahl.Zehn),
 					Stein(Farbe.Blau, Zahl.Zehn),
@@ -303,10 +304,10 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spiel.aktivSpieler,
 			true,
-			spiel.tisch,
-			Stein(Farbe.Schwarz, Zahl.Zehn),
-			Stein(Farbe.Blau, Zahl.Zehn),
-			Stein(Farbe.Rot, Zahl.Zehn)
+			listOf(Stein(Farbe.Schwarz, Zahl.Zehn),
+				Stein(Farbe.Blau, Zahl.Zehn),
+				Stein(Farbe.Rot, Zahl.Zehn))
+
 		)
 		
 		assertEquals(
@@ -320,7 +321,7 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			Spieler(
 				"spielerx",
-				"4",
+				SpielerId("4"),
 				mutableListOf(
 					Stein(Farbe.Schwarz, Zahl.Neun),
 					Stein(Farbe.Blau, Zahl.Neun),
@@ -337,10 +338,10 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spiel.aktivSpieler,
 			true,
-			spiel.tisch,
-			Stein(Farbe.Schwarz, Zahl.Neun),
-			Stein(Farbe.Blau, Zahl.Neun),
-			Stein(Farbe.Rot, Zahl.Neun)
+			listOf(Stein(Farbe.Schwarz, Zahl.Neun),
+				Stein(Farbe.Blau, Zahl.Neun),
+				Stein(Farbe.Rot, Zahl.Neun))
+
 		)
 		
 		assertEquals(
@@ -354,7 +355,7 @@ class `30PunkteTest` {
 		val spiel = Spiel(
 			Spieler(
 				"spielerx",
-				"4",
+				SpielerId("4"),
 				mutableListOf(Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf)),
 				false,
 				false
@@ -366,8 +367,7 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spiel.aktivSpieler,
 			true,
-			spiel.tisch,
-			Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf)
+			listOf(Stein(Farbe.Schwarz, Zahl.Elf), Stein(Farbe.Blau, Zahl.Elf), Stein(Farbe.Rot, Zahl.Elf))
 		)
 		
 		assertEquals(
@@ -383,7 +383,7 @@ class `30PunkteTest` {
   ) {
 		val spieler = Spieler(
 			"spielerx",
-			"4",
+			SpielerId("4"),
 			(kombis.first.get() + kombis.second.get()).toMutableList(),
 			false,
 			false
@@ -399,15 +399,13 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spiel.aktivSpieler,
 			true,
-			spiel.tisch,
-			*kombis.first.get().toTypedArray()
+			kombis.first.get()
 		)
 		
 		val neueresSpiel = neuesSpiel.auslegen(
 			neuesSpiel.aktivSpieler,
 			false,
-			neuesSpiel.tisch,
-			*kombis.second.get().toTypedArray()
+			kombis.second.get()
 		)
 		
 		assertEquals(true, neueresSpiel.aktivSpieler.rausgekommen)

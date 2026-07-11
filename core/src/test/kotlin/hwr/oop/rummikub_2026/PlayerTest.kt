@@ -2,6 +2,7 @@ package hwr.oop.rummikub_2026
 
 import hwr.oop.rummikub_2026.core.Farbe
 import hwr.oop.rummikub_2026.core.Spieler
+import hwr.oop.rummikub_2026.core.SpielerId
 import hwr.oop.rummikub_2026.core.Stein
 import hwr.oop.rummikub_2026.core.Zahl
 import org.assertj.core.api.Assertions.assertThat
@@ -34,25 +35,25 @@ class SpielerTest {
 		//given
 		val spieler1 = Spieler(
 			"Thanh",
-			"1",
+			SpielerId("1"),
 			steine14
 		)
 		
 		val spieler2 = Spieler(
 			"Gabriela",
-			"2",
+			SpielerId("2"),
 			steine14
 		)
 		
 		val spieler3 = Spieler(
 			"Charlotte",
-			"3",
+			SpielerId("3"),
 			steine14
 		)
 		
 		val spieler4 = Spieler(
 			"Maxi-Taxi",
-			"4",
+			SpielerId("4"),
 			steine14
 		)
 		
@@ -85,7 +86,7 @@ class SpielerTest {
 		
 		val spieler = Spieler(
 			"Luxi-Taxi",
-			"1",
+			SpielerId("1"),
 			steine14
 		)
 		//when
@@ -208,7 +209,7 @@ class SpielerTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"4",
+			SpielerId("4"),
 			loeschenListe.toMutableList()
 		)
 		//when
@@ -243,7 +244,7 @@ class SpielerTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"4",
+			SpielerId("4"),
 			loeschenListe.toMutableList()
 		)
 		//then
@@ -263,7 +264,7 @@ class SpielerTest {
 		Assertions.assertDoesNotThrow {
 			val spieler1 = Spieler(
 				"Thanh",
-				"1",
+				SpielerId("1"),
 				anfangsSteine
 			)
 		}
@@ -278,7 +279,7 @@ class SpielerTest {
 		val exception = assertThrows<IllegalArgumentException> {
 			val spieler1 = Spieler(
 				"Thanh",
-				"1",
+				SpielerId("1"),
 				anfangsSteine
 			)
 		}
@@ -288,7 +289,7 @@ class SpielerTest {
 	@ParameterizedTest
 	@MethodSource("listeSpielerIds")
 	fun `Spieler ID wird korrekt gesetzt`(
-      spielerId: String,
+      spielerId: String
   ) {
 		//given
 		val steine14 = mutableListOf(
@@ -309,11 +310,11 @@ class SpielerTest {
 		)
 		val spieler = Spieler(
 			"TestSpieler",
-			spielerId,
+			SpielerId(spielerId),
 			steine14
 		)
 		
 		//then
-		assertThat(spieler.id).isEqualTo(spielerId)
+		assertThat(spieler.id.value).isEqualTo(spielerId)
 	}
 }

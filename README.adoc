@@ -44,14 +44,14 @@ Offen:
 (+) Spielzug gueltig
 - Gewinnen/ Spiel beenden
 - Highscore/ übrige Punktzahl zählen pro Spieler
-(+) TODO rausnehmen/ bearbeiten
+(+)  rausnehmen/ bearbeiten
 (+) Read-me anpassen
 - SpielTest auseinanderziehen
 - PlayerTest - Line 217 + 228 unused variable
 - SpielTest - Line 426 unused variable
 - SpielTest - Line 442 redundant spread (*) operator
 - TischTest - Line 252 + 263 +  unused variable
-- Todo-File löschen?
+- -File löschen?
 - Parameter bei Variablen/ Funktionen mehrzeilig
 - Variablen/ Funktionen Platz dazwischen Platz
 

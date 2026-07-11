@@ -4,6 +4,7 @@ import hwr.oop.rummikub_2026.core.Kombinationen
 import hwr.oop.rummikub_2026.core.Spiel
 import hwr.oop.rummikub_2026.core.SpielTests.SpielTestData.erstelle14Steine
 import hwr.oop.rummikub_2026.core.Spieler
+import hwr.oop.rummikub_2026.core.SpielerId
 import hwr.oop.rummikub_2026.core.Tisch
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.assertThrows
@@ -33,14 +34,14 @@ class SpielValidierungTest {
   ) {
 		val spiel = Spiel(
 			aktivSpieler = Spieler(
-				"Maxi-Taxi",
-				"1",
+			"Maxi-Taxi",
+				SpielerId("1"),
 				erstelle14Steine(),
 				true
 			),
 			beutel = emptyList(),
 			tisch = Tisch(mutableListOf(kombi)),
-			listOf(),
+			spieler = listOf(),
 		)
 		
 		Assertions.assertDoesNotThrow {
@@ -55,14 +56,14 @@ class SpielValidierungTest {
   ) {
 		val spiel = Spiel(
 			aktivSpieler = Spieler(
-				"spieler1",
-				"1",
+			"spieler1",
+			SpielerId("1"),
 				erstelle14Steine(),
 				true
 			),
 			beutel = emptyList(),
 			tisch = Tisch(mutableListOf(kombi)),
-			listOf(),
+			spieler = listOf(),
 		)
 		
 		assertThrows<IllegalArgumentException> {

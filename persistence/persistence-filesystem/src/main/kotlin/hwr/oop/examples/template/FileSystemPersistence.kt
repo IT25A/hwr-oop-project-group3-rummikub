@@ -2,9 +2,9 @@ package hwr.oop.examples.template
 
 import hwr.oop.rummikub_2026.core.Spiel
 import hwr.oop.rummikub_2026.core.SpielId
-import hwr.oop.rummikub_2026.ports.out.SpielRepository
-import hwr.oop.rummikub_2026.ports.out.SpielLadenByIdPort
-import hwr.oop.rummikub_2026.ports.out.SpielSpeichernPort
+import hwr.oop.rummikub_2026.ports.out.GameRepository
+import hwr.oop.rummikub_2026.ports.out.LoadGameByIdPort
+import hwr.oop.rummikub_2026.ports.out.SaveGamePort
 import kotlinx.serialization.json.Json
 import okio.FileNotFoundException
 import okio.FileSystem
@@ -19,7 +19,7 @@ private val json = Json {
 class FileSystemPersistence(
 	configuration: FileSystemPersistenceConfiguration,
 	private val fileSystem: FileSystem = FileSystem.SYSTEM,
-) : SpielRepository, SpielSpeichernPort {
+) : GameRepository, SaveGamePort {
 
 	private val directory = configuration.directory
 
@@ -38,7 +38,7 @@ class FileSystemPersistence(
 				readUtf8()
 			}
 		}  catch (e: FileNotFoundException) {
-			throw SpielLadenByIdPort.CouldNotLoadException(gameId, e)
+			throw LoadGameByIdPort.CouldNotLoadException(gameId, e)
 		}
 		return json.decodeFromString<Spiel>(readString)
 	}

@@ -27,14 +27,14 @@ class SpielAnlegenTest {
 	fun `anlegen - ungueltiger Spieler wirft Exception`() {
 		val spieler1 = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(),
 			true
 		)
 		
 		val spieler2 = Spieler(
 			"Moritz",
-			"2",
+			SpielerId("2"),
 			erstelle14Steine(),
 			true
 		)
@@ -69,7 +69,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(steinHand),
 			true
 		)
@@ -111,7 +111,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(stein),
 			true
 		)
@@ -149,7 +149,7 @@ class SpielAnlegenTest {
 		
 		val spieler1 = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(stein),
 			true
 		)
@@ -187,7 +187,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(stein),
 			true
 		)
@@ -225,7 +225,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Max",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(stein),
 			true
 		)
@@ -262,7 +262,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(stein),
 			true
 		)
@@ -295,7 +295,7 @@ class SpielAnlegenTest {
 		val tisch = Tisch(mutableListOf(kombi))
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(neuStein),
 			true
 		)
@@ -331,7 +331,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(neuStein),
 			true
 		)
@@ -371,7 +371,7 @@ class SpielAnlegenTest {
 		
 		val spieler = Spieler(
 			"Maxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine(),
 			true
 		)

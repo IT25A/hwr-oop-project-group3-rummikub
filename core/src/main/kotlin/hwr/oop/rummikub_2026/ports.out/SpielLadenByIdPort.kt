@@ -3,7 +3,7 @@ package hwr.oop.rummikub_2026.ports.out
 import hwr.oop.rummikub_2026.core.Spiel
 import hwr.oop.rummikub_2026.core.SpielId
 
-interface SpielLadenByIdPort {
+interface LoadGameByIdPort {
 
     fun loadByid(gameId: SpielId): Spiel
 

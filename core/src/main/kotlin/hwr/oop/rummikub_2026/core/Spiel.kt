@@ -1,59 +1,37 @@
 package hwr.oop.rummikub_2026.core
+
 import kotlinx.serialization.Serializable
 import java.io.InvalidObjectException
+
 @Serializable
 data class Spiel(
-	val aktivSpieler: Spieler, //[ACHTUNG] SpielerID verwenden? Oder vielleich einfach int (Stelle)
+    val aktivSpieler: Spieler,
     val beutel: List<Stein>,
     val tisch: Tisch,
-    val spieler : List<Spieler>,
-    var gesammeltePunkte: Int = 0,
-	var id : SpielId =  SpielId.random()
+    val spieler: List<Spieler>,
+    val gesammeltePunkte: Int = 0,
+    val id: SpielId = SpielId.random()
 ) {
-	//Funktionen: Runden, Richtige Spielerzahl --> Züge (gewonnen), exeption, klassen überarbeiten
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Spiel) return false
 
-	companion object {
-		fun erstelleZufaelligesSpiel(
-			players: List<SpielId>,
-			withNine: Boolean,
-			gameId: SpielId = SpielId.random(),
-		): Spiel {
-			richtigeSpielerZahl(players)
-			val beutel = Beutel().initialisiereBeutel()
-			val spieler = buildHandsBasedOn(players, beutel, withNine)
-			val bouts = listOf(
-				Zug(
-					playerOrder = players,
-				)
-			)
-			return Spiel(
-				id = gameId,
-				aktivSpieler = spieler[0],
-				beutel = beutel,
-				tisch = Tisch(),
-				spieler = spieler
-			)
-		}
-	}
+        return aktivSpieler == other.aktivSpieler &&
+                beutel == other.beutel &&
+                tisch.tischReadOnly == other.tisch.tischReadOnly &&
+                id.wert == other.id.wert
+    }
 
-	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
-		if (other !is Spiel) return false
-
-		return aktivSpieler == other.aktivSpieler &&
-				beutel == other.beutel &&
-				tisch.tischReadOnly == other.tisch.tischReadOnly &&
-				id.wert == other.id.wert
-	}
-
-	fun gueltigerZug() {
-		tisch.gueltig()
-		gesammeltePunkte = 0
-		//if(aktivSpieler.brettReadOnly.isEmpty()){
-		//gewonnen(aktivSpieler)
-		//}
-	}
+    fun gueltigerZug():Spiel{
+        tisch.gueltig()
+        //if(aktivSpieler.brettReadOnly.isEmpty()){
+        //gewonnen(aktivSpieler)
+        //}
+        return this.copy(
+            gesammeltePunkte = 0
+        )
+    }
 
 //    fun gewonnen(
 //        gewinner: Spieler
@@ -66,166 +44,147 @@ data class Spiel(
 //
 //        val rangliste = mutableListOf<Spieler>(gewinner)
 //        spieler -= gewinner
-//
-//
 //    }
 
-	fun auslegen(
+    fun auslegen(
         spieler: Spieler,
         istSet: Boolean,
-		//neuStein: List<Stein>,
-        aktuellerTisch: Tisch,
-        vararg steine: Stein,
-	): Spiel {
+        steine: List<Stein>,
+    ): Spiel {
+        if (steine.isEmpty()) {
+            throw InvalidObjectException("Keine Steine ausgewählt!")
+        }
 
-		val liste: MutableList<Stein> = mutableListOf()
-		for (stein in steine) {
-			liste.add(stein)
-		}
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
 
-		if (spieler != aktivSpieler) {
-			throw InvalidObjectException("Spieler ist nicht an der Reihe!")
-		}
+        var brett = aktivSpieler.brettReadOnly
+        var moeglicheSteine = brett + tisch.tmpListe
+        if (!moeglicheSteine.containsAll(steine)) {
+            throw InvalidObjectException("Du hast diesen Stein nicht!")
+        }
 
-		var brett = aktivSpieler.brettReadOnly
-		var mglSteine = brett + aktuellerTisch.tmpListe
+        tisch.kombiLegen(istSet, steine.toMutableList())
 
-		if (!(mglSteine).containsAll(liste)) {
-			throw InvalidObjectException("Du hast diesen Stein nicht!")
-		}
+        var neuGesammeltePunkte = gesammeltePunkte
+        for (stein in steine) {
+            neuGesammeltePunkte += stein.zahl().value
+        }
+        if (neuGesammeltePunkte >= 30) {
+            aktivSpieler.rausgekommen = true
+        }
 
-		if (liste.isEmpty()) {
-			throw InvalidObjectException("Keine Steine ausgewählt!")
-		}
+        moeglicheSteine = moeglicheSteine - steine
+        tisch.tmpListe = moeglicheSteine.intersect(tisch.tmpListe).toMutableList()
+        brett = (moeglicheSteine - tisch.tmpListe).toMutableList()
 
-		aktuellerTisch.kombiLegen(istSet, liste)
-
-		for (i in liste) {
-			gesammeltePunkte += i.zahl().value
-		}
-
-		if (gesammeltePunkte >= 30) {
-			aktivSpieler.rausgekommen = true
-		}
-
-		mglSteine = mglSteine - liste
-		aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
-		brett = (mglSteine - aktuellerTisch.tmpListe).toMutableList()
-
-		return this.copy(
-			tisch = aktuellerTisch,
-			gesammeltePunkte = gesammeltePunkte,
-			aktivSpieler = Spieler(
-				aktivSpieler.nameReadOnly,
-				aktivSpieler.id,
-				brett,
-				aktivSpieler.rausgekommen,
-				false
-			)
+        return this.copy(
+            aktivSpieler = Spieler(
+                aktivSpieler.nameReadOnly,
+                aktivSpieler.id,
+                brett,
+                aktivSpieler.rausgekommen,
+                false
+            ),
+            gesammeltePunkte = neuGesammeltePunkte,
 		)
-	}
+    }
 
-	fun anlegen(
+    fun anlegen(
         spieler: Spieler,
         neuStein: Stein,
         kombi: Int,
         aktuellerTisch: Tisch,
-	): Spiel {
-		if (spieler != aktivSpieler) {
-			throw InvalidObjectException("Spieler ist nicht an der Reihe!")
-		}
+    ): Spiel {
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
 
-		require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du anlegen kannst!" }
+        require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du anlegen kannst!" }
 
-		var brett = aktivSpieler.brettReadOnly
-		var mglSteine = brett + aktuellerTisch.tmpListe
+        var brett = aktivSpieler.brettReadOnly
+        var mglSteine = brett + aktuellerTisch.tmpListe
 
-		if (!(mglSteine).contains(neuStein)) {
-			throw InvalidObjectException("Du hast diesen Stein nicht!")
-		}
+        if (!(mglSteine).contains(neuStein)) {
+            throw InvalidObjectException("Du hast diesen Stein nicht!")
+        }
 
-		aktuellerTisch.anlegen(kombi, neuStein)
+        aktuellerTisch.anlegen(kombi, neuStein)
 
-		mglSteine = mglSteine - neuStein
-		aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
-		brett = (mglSteine - aktuellerTisch.tmpListe).toMutableList()
+        mglSteine = mglSteine - neuStein
+        aktuellerTisch.tmpListe = mglSteine.intersect(aktuellerTisch.tmpListe).toMutableList()
+        brett = (mglSteine - aktuellerTisch.tmpListe).toMutableList()
 
-		return this.copy(
-			tisch = aktuellerTisch,
-			aktivSpieler = Spieler(
-				aktivSpieler.nameReadOnly,
-				aktivSpieler.id,
-				brett,
-				aktivSpieler.rausgekommen,
-				false
-			)
-		)
-	}
+        return this.copy(
+            tisch = aktuellerTisch,
+            aktivSpieler = Spieler(
+                aktivSpieler.nameReadOnly,
+                aktivSpieler.id,
+                brett,
+                aktivSpieler.rausgekommen,
+                false
+            )
+        )
+    }
 
-//    if (alteKombination != null) {
-//    // Entferne alte Kombination und füge neue hinzu
-//    aktuelleTischListe.remove(alteKombination)
-//}
-//    aktuelleTischListe.add(kombination)
+    fun ziehen(
+        spieler: Spieler,
+    ): Spiel {
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
 
-	fun ziehen(
-		spieler: Spieler,
-	): Spiel {
+        if (beutel.isEmpty()) {
+            throw IllegalStateException("Der Beutel ist leer!")
+        }
 
-		if (spieler != aktivSpieler) {
-			throw InvalidObjectException("Spieler ist nicht an der Reihe!")
-		}
+        val gezogenerStein = beutel.first()
+        val neuerBeutel = beutel - gezogenerStein
 
-		if (beutel.isEmpty()) {
-			throw IllegalStateException("Der Beutel ist leer!")
-		}
+        val aktuelleSteine = (aktivSpieler.brettReadOnly)
+        val neueSteine = (aktuelleSteine + gezogenerStein).toMutableList()
 
-		val gezogenerStein = beutel.first()
-		val neuerBeutel = beutel - gezogenerStein
+        return this.copy(
+            beutel = neuerBeutel,
+            aktivSpieler = Spieler(
+                aktivSpieler.nameReadOnly,
+                aktivSpieler.id,
+                neueSteine,
+                aktivSpieler.rausgekommen,
+                false
+            )
+        )
+    }
 
-		val aktuelleSteine = (aktivSpieler.brettReadOnly)
-		val neueSteine = (aktuelleSteine + gezogenerStein).toMutableList()
-
-		return this.copy(
-			beutel = neuerBeutel,
-			aktivSpieler = Spieler(
-				aktivSpieler.nameReadOnly,
-				aktivSpieler.id,
-				neueSteine,
-				aktivSpieler.rausgekommen,
-				false
-			)
-		)
-	}
-
-	fun aufloesen(
+    fun aufloesen(
         aufzuloesendeKombi: Kombinationen,
         spieler: Spieler,
         aktuellerTisch: Tisch,
-	): Spiel {
-		require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du aufloesen kannst!" }
+    ): Spiel {
+        require(spieler.rausgekommen) { "Du musst erst rauskommen, bevor du aufloesen kannst!" }
 
-		if (spieler != aktivSpieler) {
-			throw InvalidObjectException("Spieler ist nicht an der Reihe!")
-		}
+        if (spieler != aktivSpieler) {
+            throw InvalidObjectException("Spieler ist nicht an der Reihe!")
+        }
 
-		var brett = aktivSpieler.brettReadOnly
+        var brett = aktivSpieler.brettReadOnly
 
-		if (aufzuloesendeKombi.get().isEmpty()) {
-			throw InvalidObjectException("Keine Kombi ausgewählt!")
-		}
+        if (aufzuloesendeKombi.get().isEmpty()) {
+            throw InvalidObjectException("Keine Kombi ausgewählt!")
+        }
 
-		tisch.aufloesen(aufzuloesendeKombi)
+        tisch.aufloesen(aufzuloesendeKombi)
 
-		return this.copy(
-			tisch = aktuellerTisch,
-			aktivSpieler = Spieler(
-				aktivSpieler.nameReadOnly,
-				aktivSpieler.id,
-				brett,
-				aktivSpieler.rausgekommen,
-				false
-			)
-		)
-	}
+        return this.copy(
+            tisch = aktuellerTisch,
+            aktivSpieler = Spieler(
+                aktivSpieler.nameReadOnly,
+                aktivSpieler.id,
+                brett,
+                aktivSpieler.rausgekommen,
+                false
+            )
+        )
+    }
 }

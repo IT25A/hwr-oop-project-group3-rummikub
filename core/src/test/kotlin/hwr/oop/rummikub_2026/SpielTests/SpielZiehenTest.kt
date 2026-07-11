@@ -4,6 +4,7 @@ import hwr.oop.rummikub_2026.core.Spiel
 import hwr.oop.rummikub_2026.core.SpielTests.SpielTestData.erstelle14Steine
 import hwr.oop.rummikub_2026.core.SpielTests.SpielTestData.steinRot
 import hwr.oop.rummikub_2026.core.Spieler
+import hwr.oop.rummikub_2026.core.SpielerId
 import hwr.oop.rummikub_2026.core.Stein
 import hwr.oop.rummikub_2026.core.Tisch
 import org.assertj.core.api.Assertions.assertThat
@@ -27,7 +28,7 @@ class SpielZiehenTest {
   ) {
 		val spieler = Spieler(
 			"Luxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine()
 		)
 		
@@ -35,7 +36,7 @@ class SpielZiehenTest {
 			aktivSpieler = spieler,
 			beutel = testfall.first,
 			tisch = Tisch(mutableListOf()),
-			listOf()
+			spieler = listOf()
 		)
 		
 		val neuesSpiel = spiel.ziehen(spieler)
@@ -49,13 +50,13 @@ class SpielZiehenTest {
 	fun `ziehen - ungueltiger Spieler darf nicht ziehen wirft Exception`() {
 		val spieler1 = Spieler(
 			"Luxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine()
 		)
 		
 		val spieler2 = Spieler(
 			"Maxi-Taxi",
-			"2",
+			SpielerId("2"),
 			erstelle14Steine()
 		)
 		
@@ -63,7 +64,7 @@ class SpielZiehenTest {
 			aktivSpieler = spieler1,
 			beutel = listOf(steinRot),
 			tisch = Tisch(mutableListOf()),
-			listOf()
+			spieler = listOf(),
 		)
 		
 		val exception = assertThrows<InvalidObjectException> {
@@ -77,7 +78,7 @@ class SpielZiehenTest {
 	fun `ziehen - Ziehen bei leerem Beutel wirft Exception`() {
 		val spieler = Spieler(
 			"Luxi-Taxi",
-			"1",
+			SpielerId("1"),
 			erstelle14Steine()
 		)
 		
@@ -85,7 +86,7 @@ class SpielZiehenTest {
 			aktivSpieler = spieler,
 			beutel = emptyList(),
 			tisch = Tisch(mutableListOf()),
-			listOf()
+			spieler = listOf()
 		)
 		
 		val exception = assertThrows<IllegalStateException> {

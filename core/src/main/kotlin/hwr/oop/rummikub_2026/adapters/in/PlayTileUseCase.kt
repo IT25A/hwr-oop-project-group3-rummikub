@@ -1,26 +1,29 @@
 package hwr.oop.rummikub_2026.adapters.`in`
 
+import hwr.oop.rummikub_2026.core.Farbe
+import hwr.oop.rummikub_2026.core.Spieler
 import hwr.oop.rummikub_2026.core.SpielId
-import hwr.oop.rummikub_2026.ports.out.SpielLadenByIdPort
-import hwr.oop.rummikub_2026.ports.out.SpielSpeichernPort
+import hwr.oop.rummikub_2026.core.Stein
+import hwr.oop.rummikub_2026.core.Tisch
+import hwr.oop.rummikub_2026.core.Zahl
+import hwr.oop.rummikub_2026.ports.out.LoadGameByIdPort
+import hwr.oop.rummikub_2026.ports.out.SaveGamePort
 
 class PlayTileUseCase(
-	private val loadGameByIdPort: SpielLadenByIdPort,
-	private val saveGamePort: SpielSpeichernPort,
+	private val loadGameByIdPort: LoadGameByIdPort,
+	private val saveGamePort: SaveGamePort,
 ) {
-	
 	fun playAction(command: Command) {
-		val gameId = SpielId(command.gameId)
+		val gameId = SpielId(command.gameId.wert)
 		val loadedGame = loadGameByIdPort.loadByid(gameId)
-		val updatedGame = TODO("domain logic on game")
+		val updatedGame = loadedGame.auslegen(command.player, true, listOf(Stein(Farbe.Rot, Zahl.Eins), Stein(Farbe.Schwarz, Zahl.Eins), Stein(Farbe.Blau, Zahl.Eins)))
 		saveGamePort.save(updatedGame)
 	}
 	
 	data class Command(
-		val gameId: String,
-		val player: String,
-		val suit: String,
-		val rank: String,
+		val gameId: SpielId,
+		val player: Spieler,
+		val table: Tisch
 	)
 	
 }

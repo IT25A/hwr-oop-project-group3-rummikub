@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class BeutelTest {
-	
+
 	@Test
 	fun `Beutel kann existieren`() {
 		val beutel = Beutel()

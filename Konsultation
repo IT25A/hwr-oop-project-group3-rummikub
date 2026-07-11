@@ -5,30 +5,18 @@ Was nun?
 !   Logik anpassen
 !       Spiel erstellen
 !       Spielzüge implementieren
+
 ?       Exception Handling
 ?   Joker
 ?   CLI
+
 !   Line Coverage
 !   Mutation Coverage
 !   Read Me checken
-!   Konkrete fehler mit anlegen
+?   Konkrete fehler mit anlegen
 !   OOP bedingungen checken
 !   Formatieren
 
-Stefan hat ein game(das existiert und beinhaltet alles) zusätzlich hat er Runden. Ist unser Game nicht eher eine Runde?
-Idee:
-1) Spiel umbenennen in Spielzug? (aufwändug, würde ich ungerne machen)
--> Problem SpielId vorher umbenennen in tmpNamen
--> Nur in core code und test
-
-2) Züge auslagern
--> Problem: Tests müsste man anpassen, da sie auf Spiel zugreifen und nicht auf Zug
-
-3) Spielmanager drum herum bauen, der Spiel verwaltet
--> Wird vom naming komisch
-
-4)  Spiel lassen wie es ist, aufräumen was Runden und Züge angeht (Methoden)
-+ Man könnte die einzelnen Züge in Klassen auslagern, um die Klasse Spiel zu verschlanken. Hier könnten wir zeigen, wie gut wir Interfaces verstehen
 
 
 

@@ -6,10 +6,6 @@ class Tisch(private val tisch: MutableList<Kombinationen>) {
 	val tischReadOnly: List<Kombinationen>
 		get() = tisch.toList()
 
-	init {
-		val copyTisch = tisch.toMutableList()
-	}
-
 	var tmpListe = mutableListOf<Stein>()
 
 	fun gueltig() {
@@ -55,11 +51,6 @@ class Tisch(private val tisch: MutableList<Kombinationen>) {
 			tisch[kombination] = neueFolge
 		}
 	}
-
-//    fun aufloesen (kombi: Int){
-//        tmpListe.addAll(tisch[kombi].get())
-//        tisch.removeAt(kombi)
-//    }
 
 	fun aufloesen(
 		kombi: Kombinationen,

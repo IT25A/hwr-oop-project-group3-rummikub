@@ -8,6 +8,21 @@ data class Beutel(private val steineBeutel: MutableList<Stein> = mutableListOf()
 		}
 	}
 
+	val beutelReadOnly: MutableList<Stein>
+		get() = steineBeutel.toMutableList()
+
+	fun austeilen(spielerAnzahl: Int) : List<List<Stein>> {
+		var ausgeteilteKarten : List<List<Stein>> = listOf()
+		for (i in 1..spielerAnzahl) {
+			val karten : MutableList<Stein> = mutableListOf()
+			for(j in 1..14){
+				karten.add(this.zieheSteinAusBeutel()!!)
+			}
+			ausgeteilteKarten = ausgeteilteKarten + listOf(karten)
+		}
+		return ausgeteilteKarten
+	}
+
 	fun initialisiereBeutel() {
 		for (farbe in Farbe.entries) {
 			for (zahl in Zahl.entries) {

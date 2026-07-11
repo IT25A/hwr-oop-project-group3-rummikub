@@ -3,4 +3,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @JvmInline
-value class SpielerId(private val value: String)
+value class SpielerId(val value: String)

@@ -16,7 +16,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 class SqlPersistenceTest {
 	
 	companion object {
-		@Container
+	  @Container
 		@JvmStatic
 		val postgres = PostgreSQLContainer("postgres:17-alpine")
 	}

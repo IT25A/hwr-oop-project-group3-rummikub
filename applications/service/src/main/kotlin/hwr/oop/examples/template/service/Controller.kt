@@ -1,5 +1,6 @@
 package hwr.oop.examples.template.service
 
+
 import hwr.oop.rummikub_2026.adapters.`in`.NewGameUseCase
 import hwr.oop.rummikub_2026.adapters.`in`.PlayTileUseCase
 import hwr.oop.rummikub_2026.adapters.`in`.DrawTileUseCase

@@ -26,21 +26,27 @@ class ZugTest {
         // Arrange
         val spieler = SpielerId("p1")
         val stein = Stein(Farbe.Blau, Zahl.Zwei)
+        val kombi = Sets(mutableListOf(Stein(Farbe.Rot, Zahl.Eins), Stein(Farbe.Blau, Zahl.Eins), Stein(Farbe.Orange, Zahl.Eins)))
+        val angelegt = Pair(kombi, Stein(Farbe.Schwarz, Zahl.Eins))
+        val aufgeloest = Folge(mutableListOf(Stein(Farbe.Rot, Zahl.Eins), Stein(Farbe.Rot, Zahl.Zwei), Stein(Farbe.Rot, Zahl.Drei)))
 
         val zug = Zug(
             aktiverSpieler = spieler,
-            kombis = emptyList(),
-            angelegt = emptyList(),
-            auseinandergezogen = emptyList(),
+            kombis = listOf(kombi),
+            angelegt = listOf(angelegt),
+            auseinandergezogen = listOf(aufgeloest),
             gezogen = stein
         )
 
         // Assert
         assertEquals(spieler, zug.aktiverSpieler)
         assertEquals(stein, zug.gezogen)
-        assertTrue(zug.kombis.isEmpty())
-        assertTrue(zug.angelegt.isEmpty())
-        assertTrue(zug.auseinandergezogen.isEmpty())
+        assertEquals(1, zug.kombis.size)
+        assertEquals(kombi, zug.kombis[0])
+        assertEquals(1, zug.angelegt.size)
+        assertEquals(angelegt, zug.angelegt[0])
+        assertEquals(1, zug.auseinandergezogen.size)
+        assertEquals(aufgeloest, zug.auseinandergezogen[0])
     }
 
     @Test

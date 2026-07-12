@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class TischAnlegenTest {
-	
 	companion object {
 		@JvmStatic
 		fun gueltigeSets3Steine() = TischTestData.gueltigeSets3Steine()
@@ -35,8 +34,8 @@ class TischAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeSets3Steine", "gueltigeSets4Steine")
 	fun `anlegen funktioniert set`(
-      set: Sets,
-  ) {
+		set: Sets,
+	) {
 		val tisch = Tisch(mutableListOf(set))
 		
 		tisch.anlegen(
@@ -50,8 +49,8 @@ class TischAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeFolgen")
 	fun `anlegen funktioniert folge`(
-      folge: Folge,
-  ) {
+		folge: Folge,
+	) {
 		val tisch = Tisch(mutableListOf(folge))
 		
 		tisch.anlegen(
@@ -65,8 +64,8 @@ class TischAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("anlegenAusserhalb")
 	fun `anlegen ausserhalb der Tischgroesse wirft Exception`(
-      testfall: Pair<List<Kombinationen>, Int>,
-  ) {
+		testfall: Pair<List<Kombinationen>, Int>,
+	) {
 		val kombis = testfall.first
 		val position = testfall.second
 		val tisch = Tisch(kombis.toMutableList())
@@ -77,14 +76,15 @@ class TischAnlegenTest {
 				Stein(Farbe.Rot, Zahl.Eins)
 			)
 		}
+		
 		assertThat(exception.message).isEqualTo("Die Kombi gibt es nicht")
 	}
 	
 	@ParameterizedTest
 	@MethodSource("anlegenGrenzfallSzenarien")
 	fun `anlegen auf der letzten Position funktioniert`(
-      testfall: Triple<List<Kombinationen>, Int, Stein>,
-  ) {
+		testfall: Triple<List<Kombinationen>, Int, Stein>,
+	) {
 		val kombis = testfall.first
 		val position = testfall.second
 		val stein = testfall.third
@@ -103,8 +103,8 @@ class TischAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("anlegenSetsSzenarien")
 	fun `anlegen an Sets erkennt Sets korrekt`(
-      testfall: Pair<Sets, Stein>,
-  ) {
+		testfall: Pair<Sets, Stein>,
+	) {
 		val set = testfall.first
 		val stein = testfall.second
 		val tisch = Tisch(mutableListOf(set))
@@ -121,8 +121,8 @@ class TischAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("anlegenFolgenSzenarien")
 	fun `anlegen an Folge erkennt Folge korrekt`(
-      testfall: Pair<Folge, Stein>,
-  ) {
+		testfall: Pair<Folge, Stein>,
+	) {
 		val folge = testfall.first
 		val stein = testfall.second
 		val tisch = Tisch(mutableListOf(folge))

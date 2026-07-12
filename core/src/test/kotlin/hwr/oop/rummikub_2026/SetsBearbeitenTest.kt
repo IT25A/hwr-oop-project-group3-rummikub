@@ -12,12 +12,11 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class SetsBearbeitenTest {
-	
 	data class SetTestfall(
 		val set: MutableList<Stein>,
 		val stein: Stein,
 		val erwarteteFehlerNachricht: String,
-  )
+	)
 	
 	companion object {
 		@JvmStatic
@@ -149,7 +148,7 @@ class SetsBearbeitenTest {
 	@MethodSource("gueltigeHinzufuegenZu3erSet")
 	fun `Hinzufuegen zu 3er Set = gueltiges 4er Set`(
 		testfall: Pair<MutableList<Stein>, Stein>,
-  ) {
+	) {
 		val set = Sets(testfall.first)
 		
 		assertDoesNotThrow {
@@ -162,8 +161,8 @@ class SetsBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeHinzufuegenZu4erSet")
 	fun `Hinzufuegen zu 4er Set = ungueltiges Set`(
-      testfall: SetTestfall,
-  ) {
+		testfall: SetTestfall,
+	) {
 		val set = Sets(testfall.set)
 		
 		val exception = assertThrows<IllegalArgumentException> {
@@ -178,7 +177,7 @@ class SetsBearbeitenTest {
 	@MethodSource("gueltigesWegnehmenVon4erSet")
 	fun `Wegnehmen vom 4er Set = gueltiges 3er Set`(
 		testfall: Pair<MutableList<Stein>, Stein>,
-  ) {
+	) {
 		val sets = Sets(testfall.first)
 		
 		sets.wegnehmenVomSet(testfall.second)
@@ -190,8 +189,8 @@ class SetsBearbeitenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigesWegnehmenVon3erSet")
 	fun `Wegnehmen vom 3er Set = ungueltiges Set`(
-      testfall: SetTestfall,
-  ) {
+		testfall: SetTestfall,
+	) {
 		val sets = Sets(testfall.set)
 		
 		val exception = assertThrows<IllegalArgumentException> {

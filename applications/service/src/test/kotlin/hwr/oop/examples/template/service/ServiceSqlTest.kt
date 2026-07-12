@@ -44,7 +44,7 @@ class ServiceSqlTest {
 		@Primary
 		fun persistence(): Any = persistence
 	}
-
+	
 	@Autowired
 	private lateinit var webApplicationContext: WebApplicationContext
 	
@@ -62,4 +62,3 @@ class ServiceSqlTest {
 		// then
 	}
 }
-

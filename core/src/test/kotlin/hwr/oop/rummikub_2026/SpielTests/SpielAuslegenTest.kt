@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.io.InvalidObjectException
 
 class SpielAuslegenTest {
-	
 	companion object {
 		@JvmStatic
 		fun ungueltigeAuslegenSzenarien() = SpielTestData.ungueltigeAuslegenSzenarien()
@@ -34,8 +33,8 @@ class SpielAuslegenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeAuslegenSzenarien")
 	fun `auslegen - ungueltiges auslegen wirft Exception`(
-      testfall: Pair<Triple<List<Stein>, List<Stein>, Array<Stein>>, String>,
-  ) {
+		testfall: Pair<Triple<List<Stein>, List<Stein>, Array<Stein>>, String>,
+	) {
 		val hand = testfall.first.first
 		val list = testfall.first.second
 		
@@ -145,8 +144,8 @@ class SpielAuslegenTest {
 	@ParameterizedTest
 	@MethodSource("gesammeltePunkteSzenarien")
 	fun `gesammeltePunkte werde nbeim Auslegen korrekt berechnet`(
-      testfall: Triple<List<Stein>, Boolean, Int>,
-  ) {
+		testfall: Triple<List<Stein>, Boolean, Int>,
+	) {
 		val steine = testfall.first
 		val istSet = testfall.second
 		val erwartePunkte = testfall.third
@@ -176,8 +175,8 @@ class SpielAuslegenTest {
 	@ParameterizedTest
 	@MethodSource("tmpListeAuslegenSzenarien")
 	fun `tmpListe wird beim Auslegen korrekt gesetzt`(
-      testfall: Triple<List<Stein>, Boolean, Boolean>,
-  ) {
+		testfall: Triple<List<Stein>, Boolean, Boolean>,
+	) {
 		val steine = testfall.first
 		val istSet = testfall.second
 		
@@ -207,8 +206,8 @@ class SpielAuslegenTest {
 	@ParameterizedTest
 	@MethodSource("tmpListeAuslegenMitTmpSteinenSzenarien")
 	fun `tmpListe wird beim Auslegen mit der vorhandenen tmpListe (Steinen) korrekt berechnet`(
-      testfall: Triple<List<Stein>, List<Stein>, List<Stein>>,
-  ) {
+		testfall: Triple<List<Stein>, List<Stein>, List<Stein>>,
+	) {
 		val handSteine = testfall.first
 		val tmpSteine = testfall.second
 		val erwarteteTmpListe = testfall.third
@@ -254,8 +253,12 @@ class SpielAuslegenTest {
 		)
 		
 		val tisch = Tisch(mutableListOf())
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
-			listOf())
+		val spiel = Spiel(
+			aktivSpieler = spieler,
+			beutel = emptyList(),
+			tisch = tisch,
+			listOf()
+		)
 		
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
@@ -281,8 +284,12 @@ class SpielAuslegenTest {
 		)
 		
 		val tisch = Tisch(mutableListOf())
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
-			listOf())
+		val spiel = Spiel(
+			aktivSpieler = spieler,
+			beutel = emptyList(),
+			tisch = tisch,
+			listOf()
+		)
 		
 		val neuesSpiel = spiel.auslegen(
 			spieler = spieler,
@@ -308,8 +315,12 @@ class SpielAuslegenTest {
 		)
 		
 		val tisch = Tisch(mutableListOf())
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
-			listOf())
+		val spiel = Spiel(
+			aktivSpieler = spieler,
+			beutel = emptyList(),
+			tisch = tisch,
+			listOf()
+		)
 		
 		spiel.auslegen(
 			spieler = spieler,

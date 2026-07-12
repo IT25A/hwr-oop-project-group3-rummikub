@@ -9,12 +9,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 
 class BasicPieceCreationTest {
-	
 	@Test
 	fun `alle Zahlen existieren`() {
-		// given
 		val zahlen = Zahl.entries
-		// then
+		
 		assertThat(zahlen).containsExactlyInAnyOrder(
 			Zahl.Eins,
 			Zahl.Zwei,
@@ -35,7 +33,6 @@ class BasicPieceCreationTest {
 	@ParameterizedTest
 	@EnumSource(Farbe::class)
 	fun `alle Zahlen, jede Farbe existiert`(farbe: Farbe) {
-		// given
 		val allZahlen = listOf(
 			Zahl.Eins,
 			Zahl.Zwei,
@@ -52,10 +49,8 @@ class BasicPieceCreationTest {
 			Zahl.Dreizehn
 		)
 		
-		// when
 		val stein = allZahlen.map { Stein(farbe, it) }
 		
-		// then
 		assertThat(stein)
 			.hasSize(allZahlen.size)
 			.allMatch { it.farbe() == farbe }
@@ -67,10 +62,8 @@ class BasicPieceCreationTest {
 	
 	@Test
 	fun `alle Farben existieren`() {
-		// given
 		val farben = Farbe.entries
-		// when
-		// then
+		
 		assertThat(farben).containsExactlyInAnyOrder(
 			Farbe.Orange,
 			Farbe.Rot,
@@ -83,7 +76,6 @@ class BasicPieceCreationTest {
 	@ParameterizedTest
 	@EnumSource(Zahl::class)
 	fun `alle  Farben, jede Zahl existiert`(zahl: Zahl) {
-		// given
 		val allFarben = listOf(
 			Farbe.Orange,
 			Farbe.Rot,
@@ -92,10 +84,8 @@ class BasicPieceCreationTest {
 			Farbe.Joker
 		)
 		
-		// when
 		val cards = allFarben.map { Stein(it, zahl) }
 		
-		// then
 		assertThat(cards)
 			.hasSize(5)
 			.allMatch { it.zahl() == zahl }

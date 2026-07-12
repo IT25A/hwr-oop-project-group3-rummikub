@@ -12,25 +12,23 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class FolgePruefenTest {
-	
 	companion object {
-		
 		@JvmStatic
 		fun gueltigeFolgen() = listOf(
-			// Minimum
+			//Minimum
 			mutableListOf(
 				Stein(Farbe.Rot, Zahl.Eins),
 				Stein(Farbe.Rot, Zahl.Zwei),
 				Stein(Farbe.Rot, Zahl.Drei)
 			),
-			// Mittelfall
+			//Mittelfall
 			mutableListOf(
 				Stein(Farbe.Blau, Zahl.Fuenf),
 				Stein(Farbe.Blau, Zahl.Sechs),
 				Stein(Farbe.Blau, Zahl.Sieben),
 				Stein(Farbe.Blau, Zahl.Acht)
 			),
-			// Maximum
+			//Maximum
 			mutableListOf(
 				Stein(Farbe.Schwarz, Zahl.Eins),
 				Stein(Farbe.Schwarz, Zahl.Zwei),
@@ -62,7 +60,7 @@ class FolgePruefenTest {
 		
 		@JvmStatic
 		fun zuLangeFolgen() = listOf(
-			// 14 Steine
+			//14 Steine
 			mutableListOf(
 				Stein(Farbe.Orange, Zahl.Eins),
 				Stein(Farbe.Orange, Zahl.Zwei),
@@ -97,25 +95,25 @@ class FolgePruefenTest {
 		
 		@JvmStatic
 		fun ungueltigeReihenfolgen() = listOf(
-			// Lücke
+			//Lücke
 			mutableListOf(
 				Stein(Farbe.Rot, Zahl.Eins),
 				Stein(Farbe.Rot, Zahl.Zwei),
 				Stein(Farbe.Rot, Zahl.Vier)
 			),
-			// Komplett unsortiert
+			//Komplett unsortiert
 			mutableListOf(
 				Stein(Farbe.Blau, Zahl.Drei),
 				Stein(Farbe.Blau, Zahl.Eins),
 				Stein(Farbe.Blau, Zahl.Zwei)
 			),
-			// Rückwärts
+			//Rückwärts
 			mutableListOf(
 				Stein(Farbe.Orange, Zahl.Sieben),
 				Stein(Farbe.Orange, Zahl.Sechs),
 				Stein(Farbe.Orange, Zahl.Fuenf)
 			),
-			// Doppelte Zahl
+			//Doppelte Zahl
 			mutableListOf(
 				Stein(Farbe.Schwarz, Zahl.Fuenf),
 				Stein(Farbe.Schwarz, Zahl.Sechs),
@@ -127,15 +125,14 @@ class FolgePruefenTest {
 	
 	@Test
 	fun `folgeReadOnly liefert die originale Liste`() {
-		// given
 		val steine = mutableListOf(
 			Stein(Farbe.Rot, Zahl.Eins),
 			Stein(Farbe.Rot, Zahl.Zwei),
 			Stein(Farbe.Rot, Zahl.Drei)
 		)
-		// when
+		
 		val folge = Folge(steine)
-		// then
+		
 		assertThat(folge.folgeReadOnly).isEqualTo(steine)
 	}
 	
@@ -143,7 +140,7 @@ class FolgePruefenTest {
 	@MethodSource("gueltigeFolgen")
 	fun `gueltige Folgen werfen keine Exception`(
 		steine: MutableList<Stein>,
-  ) {
+	) {
 		val folge = Folge(steine)
 		
 		assertDoesNotThrow {
@@ -155,7 +152,7 @@ class FolgePruefenTest {
 	@MethodSource("zuKurzeFolgen")
 	fun `zu kurze Folgen werfen Exception`(
 		steine: MutableList<Stein>,
-  ) {
+	) {
 		val folge = Folge(steine)
 		
 		val exception = assertThrows<IllegalArgumentException> {
@@ -169,7 +166,7 @@ class FolgePruefenTest {
 	@MethodSource("zuLangeFolgen")
 	fun `zu lange Folgen werfen Exception`(
 		steine: MutableList<Stein>,
-  ) {
+	) {
 		val folge = Folge(steine)
 		
 		val exception = assertThrows<IllegalArgumentException> {
@@ -183,7 +180,7 @@ class FolgePruefenTest {
 	@MethodSource("ungueltigeFarben")
 	fun `unterschiedliche Farben werfen Exception`(
 		steine: MutableList<Stein>,
-  ) {
+	) {
 		val folge = Folge(steine)
 		
 		val exception = assertThrows<IllegalArgumentException> {
@@ -197,7 +194,7 @@ class FolgePruefenTest {
 	@MethodSource("ungueltigeReihenfolgen")
 	fun `ungueltige Reihenfolgen werfen Exception`(
 		steine: MutableList<Stein>,
-  ) {
+	) {
 		val folge = Folge(steine)
 		
 		val exception = assertThrows<IllegalArgumentException> {

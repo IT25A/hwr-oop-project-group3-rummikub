@@ -14,7 +14,6 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @Disabled("Requires Docker")
 @Testcontainers
 class CliSqlTest {
-	
 	companion object {
 		@Container
 		@JvmStatic

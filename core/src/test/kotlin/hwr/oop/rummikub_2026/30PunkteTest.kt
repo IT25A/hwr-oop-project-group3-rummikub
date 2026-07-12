@@ -1,15 +1,6 @@
 package hwr.oop.rummikub_2026
 
-import hwr.oop.rummikub_2026.core.Farbe
-import hwr.oop.rummikub_2026.core.Folge
-import hwr.oop.rummikub_2026.core.Kombinationen
-import hwr.oop.rummikub_2026.core.Sets
-import hwr.oop.rummikub_2026.core.Spiel
-import hwr.oop.rummikub_2026.core.Spieler
-import hwr.oop.rummikub_2026.core.SpielerId
-import hwr.oop.rummikub_2026.core.Stein
-import hwr.oop.rummikub_2026.core.Tisch
-import hwr.oop.rummikub_2026.core.Zahl
+import hwr.oop.rummikub_2026.core.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -19,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class `30PunkteTest` {
-	
 	private val rausgekommenerSpieler = Spieler(
 		"Rausgekommener Spieler",
 		SpielerId("1"),
@@ -74,7 +64,7 @@ class `30PunkteTest` {
 				true,
 				false
 			),
-
+			
 			Spieler(
 				"Nicht Rausgekommener Spieler",
 				SpielerId("2"),
@@ -130,7 +120,7 @@ class `30PunkteTest` {
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Anlegen geht wenn rausgekommen`(
 		kombi: Kombinationen,
-  ) {
+	) {
 		//given
 		val spiel = Spiel(
 			rausgekommenerSpieler,
@@ -156,7 +146,7 @@ class `30PunkteTest` {
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Anlegen geht nicht wenn nicht rausgekommen`(
 		kombi: Kombinationen,
-  ) {
+	) {
 		val spiel = Spiel(
 			nichtRausgekommenerSpieler,
 			emptyList(),
@@ -180,7 +170,7 @@ class `30PunkteTest` {
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Aufloesen geht wenn rausgekommen`(
 		kombi: Kombinationen,
-  ) {
+	) {
 		val spiel = Spiel(
 			rausgekommenerSpieler,
 			emptyList(),
@@ -206,7 +196,7 @@ class `30PunkteTest` {
 	@MethodSource("gueltigeKombiAnlegenRotZwei")
 	fun `Aufloesen geht nicht wenn nicht rausgekommen`(
 		kombi: Kombinationen,
-  ) {
+	) {
 		val spiel = Spiel(
 			nichtRausgekommenerSpieler,
 			emptyList(),
@@ -229,17 +219,16 @@ class `30PunkteTest` {
 	@MethodSource("verschiedeneSpieler")
 	fun `Ziehen geht immer`(
 		spieler: Spieler,
-  ) {
+	) {
 		val spiel = Spiel(
 			spieler,
 			listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)),
 			Tisch(mutableListOf()),
 			listOf()
 		)
-		// when
+		
 		val neuesSpiel = spiel.ziehen(spieler)
 		
-		// then
 		assertThat(neuesSpiel.aktivSpieler.brettReadOnly).contains(Stein(Farbe.Schwarz, Zahl.Fuenf))
 		
 		assertThat(neuesSpiel.beutel).isEmpty()
@@ -249,7 +238,7 @@ class `30PunkteTest` {
 	@MethodSource("verschiedeneSpieler")
 	fun `Auslegen geht immer`(
 		spieler: Spieler,
-  ) {
+	) {
 		val spiel = Spiel(
 			spieler,
 			listOf(Stein(Farbe.Schwarz, Zahl.Fuenf)),
@@ -260,10 +249,11 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spieler,
 			true,
-			listOf(Stein(Farbe.Schwarz, Zahl.Fuenf),
+			listOf(
+				Stein(Farbe.Schwarz, Zahl.Fuenf),
 				Stein(Farbe.Blau, Zahl.Fuenf),
-				Stein(Farbe.Rot, Zahl.Fuenf))
-
+				Stein(Farbe.Rot, Zahl.Fuenf)
+			)
 		)
 		
 		assertThat(neuesSpiel.aktivSpieler.brettReadOnly).doesNotContain(
@@ -271,6 +261,7 @@ class `30PunkteTest` {
 			Stein(Farbe.Blau, Zahl.Fuenf),
 			Stein(Farbe.Rot, Zahl.Fuenf)
 		)
+		
 		assertThat(neuesSpiel.tisch.tischReadOnly).contains(
 			Sets(
 				mutableListOf(
@@ -304,10 +295,11 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spiel.aktivSpieler,
 			true,
-			listOf(Stein(Farbe.Schwarz, Zahl.Zehn),
+			listOf(
+				Stein(Farbe.Schwarz, Zahl.Zehn),
 				Stein(Farbe.Blau, Zahl.Zehn),
-				Stein(Farbe.Rot, Zahl.Zehn))
-
+				Stein(Farbe.Rot, Zahl.Zehn)
+			)
 		)
 		
 		assertEquals(
@@ -338,10 +330,11 @@ class `30PunkteTest` {
 		val neuesSpiel = spiel.auslegen(
 			spiel.aktivSpieler,
 			true,
-			listOf(Stein(Farbe.Schwarz, Zahl.Neun),
+			listOf(
+				Stein(Farbe.Schwarz, Zahl.Neun),
 				Stein(Farbe.Blau, Zahl.Neun),
-				Stein(Farbe.Rot, Zahl.Neun))
-
+				Stein(Farbe.Rot, Zahl.Neun)
+			)
 		)
 		
 		assertEquals(
@@ -380,7 +373,7 @@ class `30PunkteTest` {
 	@MethodSource("zweiKombisUeberDreissig")
 	fun `Wenn mehrere Kombinationen zusammen 30 Punkte ergeben , ist Spieler rausgekommen`(
 		kombis: Pair<Kombinationen, Kombinationen>,
-  ) {
+	) {
 		val spieler = Spieler(
 			"spielerx",
 			SpielerId("4"),
@@ -408,6 +401,9 @@ class `30PunkteTest` {
 			kombis.second.get()
 		)
 		
-		assertEquals(true, neueresSpiel.aktivSpieler.rausgekommen)
+		assertEquals(
+			true,
+			neueresSpiel.aktivSpieler.rausgekommen
+		)
 	}
 }

@@ -10,58 +10,43 @@ Do not rely on it!
 == Feature Liste
 Steine:
 - Generierung der Steine und ueberpruefung der Steinanzahl und Farben
+
 Folgen:
 - Folgen sind richtig (Anzahl der Steine, Farbe, aufeinanderfolgende Zahlen)
 - Test - Man kann Steine zur Folge hinzufuegen - vorne und hinten
+
 Sets:
 - Sets sind richtig (Anzahl der Steine (dreier Sets und vierer Sets), unterschiedliche Farben, gleiche Zahlen)
 - Sets sind ungueltig (Anzahl der Steine ist falsch (2>=x>=5)Farbe ist doppelt, unterschiedliche Zahlen)
 - Sets Bearbeiten: Hinzufuegen zu 3er-Set (= gueltiges 4er-Set) und Hinzufuegen zu 4er-Set (= ungueltiges Set)
 - Sets Bearbeiten: Wegnehmen vom 3er-Set (= ungueltiges Set) und Wegnehmen vom 4er-Set (= gueltiges 3er-Set oder gueltige Folge)
+
 Spieler:
 - Spieler hat einen Namen und ID
-- Spieler hat Board(kann ziehen und Stein wird aus dem Beutel entfernt)
+- Spieler hat Board (kann ziehen und Stein wird aus dem Beutel entfernt)
+
 Beutel:
 - Beutel kann existieren
 - Beutel hat 104 (ohne Joker) Steine
 - Steine ziehen funktioniert korrekt (Stein Anzahl minus 1)
+
 Tisch:
 - Gültige Kombinationen aus Sets und Folgen werden auf dem Tisch geprüft und angelegt
-- passende Kombi kann aufgelöst werden
-Spiel
+- Passende Kombi kann aufgelöst werden
+
+Spiel:
 - Züge werden auf Gültigkeit geprüft
 - Auslegen: Die Punkte der Steine werden addiert. Ein Spieler darf Steine ab einem Gesamtwert von >= 30 Punkten auslegen
-- aufloesen: Ein Spieler darf bestehende Kombinationen aufloesen, sobald er herausgekommen ist
-- anlegen: Ein Spieler darf Steine anlegen, sofern er bereits mit >= 30 Punkten ausgelegt hat. Die angelegten Steine werden aus der Hand entfernt und der jeweiligen Kombination hinzugefügt
-- ziehen: pro Zug zieht der Spieler einen Stein aus dem Beutel
+- Aufloesen: Ein Spieler darf bestehende Kombinationen aufloesen, sobald er herausgekommen ist
+- Anlegen: Ein Spieler darf Steine anlegen, sofern er bereits mit >= 30 Punkten ausgelegt hat. Die angelegten Steine werden aus der Hand entfernt und der jeweiligen Kombination hinzugefügt
+- Ziehen: pro Zug zieht der Spieler einen Stein aus dem Beutel
+
+Joker:
+- Joker kann rausgelegt und angelegt werden
+- Mit dem Joker koennen Kombinationen aufgeloest und werden
+- Joker kann im gleichen Zug benutzt werden
 
 Alle oben genannten Features sind getestet
-
-
-Offen:
-(+) 30 Punkte zum Rauslegen (Zählen + Züge zulassen) pro Spieler
-- Test für 30 Punkte
-(+) Spielzug gueltig
-- Gewinnen/ Spiel beenden
-- Highscore/ übrige Punktzahl zählen pro Spieler
-(+)  rausnehmen/ bearbeiten
-(+) Read-me anpassen
-- SpielTest auseinanderziehen
-- PlayerTest - Line 217 + 228 unused variable
-- SpielTest - Line 426 unused variable
-- SpielTest - Line 442 redundant spread (*) operator
-- TischTest - Line 252 + 263 +  unused variable
-- -File löschen?
-- Parameter bei Variablen/ Funktionen mehrzeilig
-- Variablen/ Funktionen Platz dazwischen Platz
-
-- Test-coverage
-- Mutations-coverage
-
-- applications: UI-Verbindung
-- Persistence: Speichern und Laden
-(- Joker)
-- Formatierung Code vor Abgabe
 
 
 == Modulstruktur

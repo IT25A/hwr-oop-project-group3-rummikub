@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.io.InvalidObjectException
 
 class SpielAnlegenTest {
-	
 	companion object {
 		@JvmStatic
 		fun steine() = SpielTestData.steine()
@@ -287,8 +286,8 @@ class SpielAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("tmpListeAnlegenSzenarien")
 	fun `tmpListe wird beim Anlegen korrekt gesetzt`(
-      testfall: Pair<Stein, Kombinationen>,
-  ) {
+		testfall: Pair<Stein, Kombinationen>,
+	) {
 		val neuStein = testfall.first
 		val kombi = testfall.second
 		
@@ -320,8 +319,8 @@ class SpielAnlegenTest {
 	@ParameterizedTest
 	@MethodSource("tmpListeAnlegenMitTmpSteinenSzenarien")
 	fun `tmpListe wird beim Anlegen mit der vorhandenen tmpListe (Steinen) korrekt berechnet`(
-      testfall: Triple<Stein, Kombinationen, List<Stein>>,
-  ) {
+		testfall: Triple<Stein, Kombinationen, List<Stein>>,
+	) {
 		val neuStein = testfall.first
 		val kombi = testfall.second
 		val tmpSteine = testfall.third
@@ -376,8 +375,12 @@ class SpielAnlegenTest {
 			true
 		)
 		
-		val spiel = Spiel(aktivSpieler = spieler, beutel = emptyList(), tisch = tisch,
-			listOf())
+		val spiel = Spiel(
+			aktivSpieler = spieler,
+			beutel = emptyList(),
+			tisch = tisch,
+			listOf()
+		)
 		
 		spiel.anlegen(
 			spieler = spieler,

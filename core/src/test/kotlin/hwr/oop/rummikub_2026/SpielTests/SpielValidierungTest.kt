@@ -1,11 +1,7 @@
 package hwr.oop.rummikub_2026.core.SpielTests
 
-import hwr.oop.rummikub_2026.core.Kombinationen
-import hwr.oop.rummikub_2026.core.Spiel
+import hwr.oop.rummikub_2026.core.*
 import hwr.oop.rummikub_2026.core.SpielTests.SpielTestData.erstelle14Steine
-import hwr.oop.rummikub_2026.core.Spieler
-import hwr.oop.rummikub_2026.core.SpielerId
-import hwr.oop.rummikub_2026.core.Tisch
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -30,11 +26,11 @@ class SpielValidierungTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeFolgen", "gueltigeSets4Steine", "gueltigeSets3Steine")
 	fun `Sets und Folgen sind gueltig im Tisch`(
-      kombi: Kombinationen,
-  ) {
+		kombi: Kombinationen,
+	) {
 		val spiel = Spiel(
 			aktivSpieler = Spieler(
-			"Maxi-Taxi",
+				"Maxi-Taxi",
 				SpielerId("1"),
 				erstelle14Steine(),
 				true
@@ -52,12 +48,12 @@ class SpielValidierungTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeKombi")
 	fun `Sets und Folgen sind nicht gueltig im Tisch`(
-      kombi: Kombinationen,
-  ) {
+		kombi: Kombinationen,
+	) {
 		val spiel = Spiel(
 			aktivSpieler = Spieler(
-			"spieler1",
-			SpielerId("1"),
+				"spieler1",
+				SpielerId("1"),
 				erstelle14Steine(),
 				true
 			),

@@ -1,20 +1,21 @@
 package hwr.oop.rummikub_2026.core
+
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Spieler(
-    private val name: String = "namenlos",
-    val id: SpielerId,
-    private val brett: MutableList<Stein>,
-    var rausgekommen: Boolean = false,
-    private val validateInitialCount: Boolean = true,
+	private val name: String = "namenlos",
+	val id: SpielerId,
+	private val brett: MutableList<Stein>,
+	var rausgekommen: Boolean = false,
+	private val validateInitialCount: Boolean = true,
 ) {
 	init {
 		if (validateInitialCount) {
 			require(brett.size == 14) { "Es muss 14 Steine vergeben werden" }
 		}
 	}
-
+	
 	val nameReadOnly: String
 		get() = name
 	val brettReadOnly: MutableList<Stein>
@@ -27,15 +28,15 @@ data class Spieler(
 //		}
 //		return punkte
 //	}
-
+	
 	fun ziehen(
-        stein: Stein,
+		stein: Stein,
 	) {
 		brett.add(stein)
 	}
-
+	
 	fun entfernen(
-        stein: Stein,
+		stein: Stein,
 	) {
 		val funktioniert = brett.remove(stein)
 		require(funktioniert) { "Der Stein ist nicht vorhanden." }

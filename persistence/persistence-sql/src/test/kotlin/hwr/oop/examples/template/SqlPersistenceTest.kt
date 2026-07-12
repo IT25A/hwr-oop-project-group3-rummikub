@@ -14,9 +14,8 @@ import org.testcontainers.junit.jupiter.Testcontainers
 
 @Testcontainers
 class SqlPersistenceTest {
-	
 	companion object {
-	  @Container
+		@Container
 		@JvmStatic
 		val postgres = PostgreSQLContainer("postgres:17-alpine")
 	}
@@ -41,26 +40,22 @@ class SqlPersistenceTest {
 			dataSource.close()
 		}
 	}
-
+	
 	private val spiel = TestData().testspiel
 	private val gameId = spiel.id
-
+	
 	@Test
 	fun `kann Spiel speichern`() {
-		// when
 		adapter.save(spiel)
 		val loaded = adapter.loadByid(gameId)
-
-		// then
+		
 		assertThat(loaded).isEqualTo(spiel)
 	}
-
+	
 	@Test
 	fun `Fehlerfall`() {
-		// when / then
 		assertThatThrownBy {
 			adapter.loadByid(gameId)
 		}.hasMessageContainingAll("Could not load game", gameId.toString())
 	}
 }
-

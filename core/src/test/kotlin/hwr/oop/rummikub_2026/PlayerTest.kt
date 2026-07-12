@@ -1,10 +1,6 @@
 package hwr.oop.rummikub_2026
 
-import hwr.oop.rummikub_2026.core.Farbe
-import hwr.oop.rummikub_2026.core.Spieler
-import hwr.oop.rummikub_2026.core.SpielerId
-import hwr.oop.rummikub_2026.core.Stein
-import hwr.oop.rummikub_2026.core.Zahl
+import hwr.oop.rummikub_2026.core.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -13,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class SpielerTest {
-	
 	@Test
 	fun `Spieler mit Namen und ID koennen existieren`() {
 		val steine14 = mutableListOf(
@@ -32,7 +27,7 @@ class SpielerTest {
 			Stein(Farbe.Blau, Zahl.Dreizehn),
 			Stein(Farbe.Schwarz, Zahl.Dreizehn)
 		)
-		//given
+		
 		val spieler1 = Spieler(
 			"Thanh",
 			SpielerId("1"),
@@ -57,16 +52,17 @@ class SpielerTest {
 			steine14
 		)
 		
-		//then
 		assertThat(spieler1.nameReadOnly).isEqualTo("Thanh")
+		
 		assertThat(spieler2.nameReadOnly).isEqualTo("Gabriela")
+		
 		assertThat(spieler3.nameReadOnly).isEqualTo("Charlotte")
+		
 		assertThat(spieler4.nameReadOnly).isEqualTo("Maxi-Taxi")
 	}
 	
 	@Test
 	fun `Stein ziehen funktioniert`() {
-		//given
 		val steine14 = mutableListOf(
 			Stein(Farbe.Orange, Zahl.Eins),
 			Stein(Farbe.Blau, Zahl.Zwei),
@@ -89,9 +85,9 @@ class SpielerTest {
 			SpielerId("1"),
 			steine14
 		)
-		//when
+		
 		spieler.ziehen(Stein(Farbe.Orange, Zahl.Zwei))
-		//then
+		
 		assertThat(spieler.brettReadOnly).contains(Stein(Farbe.Orange, Zahl.Zwei))
 	}
 	
@@ -188,8 +184,7 @@ class SpielerTest {
 	@MethodSource("listeGueltigeSteine")
 	fun `Stein loeschen funktioniert`(
 		stein: Stein,
-  ) {
-		//given
+	) {
 		val loeschenListe = mutableListOf(
 			Stein(Farbe.Orange, Zahl.Eins),
 			Stein(Farbe.Blau, Zahl.Zwei),
@@ -212,10 +207,10 @@ class SpielerTest {
 			SpielerId("4"),
 			loeschenListe.toMutableList()
 		)
-		//when
+		
 		spieler.entfernen(stein)
 		loeschenListe.remove(stein)
-		//then
+		
 		assertThat(spieler.brettReadOnly).containsExactlyInAnyOrderElementsOf(loeschenListe)
 	}
 	
@@ -223,8 +218,7 @@ class SpielerTest {
 	@MethodSource("listeUngueltigeSteine")
 	fun `Stein, der nicht in der Liste ist, loeschen funktioniert nicht`(
 		stein: Stein,
-  ) {
-		//given
+	) {
 		val loeschenListe = mutableListOf(
 			Stein(Farbe.Orange, Zahl.Eins),
 			Stein(Farbe.Blau, Zahl.Zwei),
@@ -247,7 +241,7 @@ class SpielerTest {
 			SpielerId("4"),
 			loeschenListe.toMutableList()
 		)
-		//then
+		
 		val exception = assertThrows<IllegalArgumentException> {
 			spieler.entfernen(stein)
 		}
@@ -259,8 +253,7 @@ class SpielerTest {
 	@MethodSource("liste14Steine")
 	fun `Anfangssteine werfen keine Exception`(
 		anfangsSteine: MutableList<Stein>,
-  ) {
-		//then
+	) {
 		Assertions.assertDoesNotThrow {
 			val spieler1 = Spieler(
 				"Thanh",
@@ -274,8 +267,7 @@ class SpielerTest {
 	@MethodSource("listeNicht14Steine")
 	fun `Ungueltige Anzahl Anfangssteine werfen Exception`(
 		anfangsSteine: MutableList<Stein>,
-  ) {
-		//then
+	) {
 		val exception = assertThrows<IllegalArgumentException> {
 			val spieler1 = Spieler(
 				"Thanh",
@@ -283,15 +275,15 @@ class SpielerTest {
 				anfangsSteine
 			)
 		}
+		
 		assertThat(exception.message).contains("Es muss 14 Steine vergeben werden")
 	}
 	
 	@ParameterizedTest
 	@MethodSource("listeSpielerIds")
 	fun `Spieler ID wird korrekt gesetzt`(
-      spielerId: String
-  ) {
-		//given
+		spielerId: String,
+	) {
 		val steine14 = mutableListOf(
 			Stein(Farbe.Orange, Zahl.Eins),
 			Stein(Farbe.Blau, Zahl.Zwei),
@@ -308,13 +300,13 @@ class SpielerTest {
 			Stein(Farbe.Blau, Zahl.Dreizehn),
 			Stein(Farbe.Schwarz, Zahl.Dreizehn)
 		)
+		
 		val spieler = Spieler(
 			"TestSpieler",
 			SpielerId(spielerId),
 			steine14
 		)
 		
-		//then
 		assertThat(spieler.id.value).isEqualTo(spielerId)
 	}
 }

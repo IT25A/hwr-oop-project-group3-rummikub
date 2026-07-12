@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class BeutelTest {
-
 	@Test
 	fun `Beutel kann existieren`() {
 		val beutel = Beutel()
@@ -40,15 +39,17 @@ class BeutelTest {
 		while (!beutel.istLeer()) {
 			alleSteine.add(beutel.zieheSteinAusBeutel()!!)
 		}
+		
 		val alleSteineOhneJoker = alleSteine.filter {
 			it.farbe() != Farbe.Joker
 		}
+		
 		for (farbe in Farbe.entries.filter { it != Farbe.Joker }) {
 			for (zahl in Zahl.entries.filter { it != Zahl.Eins }) {
 				val anzahl = alleSteineOhneJoker.count {
 					it.farbe() == farbe && it.zahl() == zahl
 				}
-
+				
 				assertEquals(2, anzahl)
 			}
 		}
@@ -138,14 +139,12 @@ class BeutelTest {
 	
 	@Test
 	fun `Steine im Beutel sollten gemischt sein`() {
-		// Erstelle mehrere Beutel und prüfe, ob die Reihenfolge unterschiedlich ist
 		val beutel1 = Beutel()
 		val beutel2 = Beutel()
 		
 		val steineAusBeutel1 = mutableListOf<Stein>()
 		val steineAusBeutel2 = mutableListOf<Stein>()
 		
-		// Ziehe die ersten 10 Steine aus beiden Beuteln
 		repeat(10) {
 			steineAusBeutel1.add(beutel1.zieheSteinAusBeutel()!!)
 			steineAusBeutel2.add(beutel2.zieheSteinAusBeutel()!!)

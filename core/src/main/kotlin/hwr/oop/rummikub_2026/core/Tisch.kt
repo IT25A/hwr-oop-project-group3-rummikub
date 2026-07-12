@@ -1,37 +1,37 @@
 package hwr.oop.rummikub_2026.core
+
 import kotlinx.serialization.Serializable
 
 @Serializable
 class Tisch(private val tisch: MutableList<Kombinationen>) {
 	val tischReadOnly: List<Kombinationen>
 		get() = tisch.toList()
-
+	
 	var tmpListe = mutableListOf<Stein>()
-
+	
 	fun gueltig() {
 		for (i in tisch) {
 			i.istGueltig()
 			require(tmpListe.isEmpty()) { "Ungueltiger Zug, du hast nicht alle aufgeloesten Kombinationen verwendet." }
 		}
 	}
-
+	
 	fun kombiLegen(
 		istSet: Boolean, liste: MutableList<Stein>,
 	) {
 		val mglKombi: Kombinationen
-
+		
 		if (istSet) {
 			mglKombi = Sets(liste)
 			mglKombi.istGueltig()
-		}
-		else {
+		} else {
 			mglKombi = Folge(liste)
 			mglKombi.istGueltig()
 		}
-
+		
 		tisch.add(mglKombi)
 	}
-
+	
 	fun anlegen(
 		kombination: Int, stein: Stein,
 	) {
@@ -43,15 +43,14 @@ class Tisch(private val tisch: MutableList<Kombinationen>) {
 			neueListe.add(stein)
 			val neuesSet = Sets(neueListe)
 			tisch[kombination] = neuesSet
-		}
-		else {
+		} else {
 			val neueListe = tisch[kombination].get()
 			neueListe.add(stein)
 			val neueFolge = Folge(neueListe)
 			tisch[kombination] = neueFolge
 		}
 	}
-
+	
 	fun aufloesen(
 		kombi: Kombinationen,
 	) {

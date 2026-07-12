@@ -9,7 +9,6 @@ import org.junit.jupiter.api.assertThrows
 import java.io.InvalidObjectException
 
 class SpielAuflosenTest {
-	
 	@Test
 	fun `aufloesen - Exception bei leerer Kombination`() {
 		val spieler = Spieler(

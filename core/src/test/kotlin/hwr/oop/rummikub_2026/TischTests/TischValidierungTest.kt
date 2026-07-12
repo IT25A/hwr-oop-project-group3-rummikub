@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class TischValidierungTest {
-	
 	companion object {
 		@JvmStatic
 		fun gueltigeFolgen() = TischTestData.gueltigeFolgen()
@@ -27,8 +26,8 @@ class TischValidierungTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeFolgen", "gueltigeSets4Steine", "gueltigeSets3Steine")
 	fun `Sets und Folgen sind gueltig im Tisch`(
-      kombi: Kombinationen,
-  ) {
+		kombi: Kombinationen,
+	) {
 		val testTisch = Tisch(mutableListOf(kombi))
 		
 		assertDoesNotThrow {
@@ -39,8 +38,8 @@ class TischValidierungTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeKombi")
 	fun `Sets und Folgen sind nicht gueltig im Tisch`(
-      kombi: Kombinationen,
-  ) {
+		kombi: Kombinationen,
+	) {
 		val testTisch = Tisch(mutableListOf(kombi))
 		
 		assertThrows<IllegalArgumentException> {
@@ -51,8 +50,8 @@ class TischValidierungTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeFolgen", "gueltigeSets4Steine", "gueltigeSets3Steine")
 	fun `Folgen und Sets koennen auf dem Tisch liegen`(
-      kombi: Kombinationen,
-  ) {
+		kombi: Kombinationen,
+	) {
 		val testTisch = Tisch(mutableListOf(kombi))
 		
 		assertThat(testTisch.tischReadOnly).contains(kombi)

@@ -5,7 +5,6 @@ import hwr.oop.examples.template.FileSystemPersistenceConfiguration
 import okio.Path.Companion.toPath
 import okio.fakefilesystem.FakeFileSystem
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -43,12 +42,11 @@ class ServiceFileSystemTest {
 	fun setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build()
 	}
-
+	
 	@Test
 	fun `do nothing`() {
 		// given
 		// when
 		// then
 	}
-	
 }

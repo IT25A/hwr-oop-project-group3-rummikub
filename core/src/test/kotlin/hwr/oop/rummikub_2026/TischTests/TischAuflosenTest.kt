@@ -18,8 +18,8 @@ class TischAuflosenTest {
 	@ParameterizedTest
 	@MethodSource("kombinationen")
 	fun `alle Steine einer Kombination werden in tmpListe uebernommen und Kombination wird vom Tisch geloescht`(
-      kombination: Kombinationen,
-  ) {
+		kombination: Kombinationen,
+	) {
 		val tisch = Tisch(
 			mutableListOf(kombination)
 		)
@@ -48,8 +48,8 @@ class TischAuflosenTest {
 	@ParameterizedTest
 	@ValueSource(ints = [0, 1, 2])
 	fun `Kombination an beliebiger Position kann aufgeloest werden`(
-      index: Int,
-  ) {
+		index: Int,
+	) {
 		val k1 = Folge(
 			mutableListOf(
 				Stein(Farbe.Rot, Zahl.Drei),

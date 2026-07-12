@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class CliFileSystemTest {
-	
 	private val fakeFileSystem = FakeFileSystem()
 	private val tempDir = "/tmp/cli-fs-test".toPath()
 	private lateinit var persistence: FileSystemPersistence
@@ -36,5 +35,4 @@ class CliFileSystemTest {
 		// when
 		// then
 	}
-	
 }

@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class TischKombiLegenTest {
-	
 	companion object {
 		@JvmStatic
 		fun gueltigeSteineFuerFolgen() = TischTestData.gueltigeSteineFuerFolgen()
@@ -26,8 +25,8 @@ class TischKombiLegenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeSteineFuerFolgen")
 	fun `kombi legen fuer Folge pruefen`(
-      liste: MutableList<Stein>,
-  ) {
+		liste: MutableList<Stein>,
+	) {
 		val tisch = Tisch(mutableListOf())
 		
 		tisch.kombiLegen(
@@ -41,8 +40,8 @@ class TischKombiLegenTest {
 	@ParameterizedTest
 	@MethodSource("gueltigeSteineFuerSets")
 	fun `kombi legen fuer Sets pruefen`(
-      liste: MutableList<Stein>,
-  ) {
+		liste: MutableList<Stein>,
+	) {
 		val tisch = Tisch(mutableListOf())
 		
 		tisch.kombiLegen(
@@ -56,8 +55,8 @@ class TischKombiLegenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeSteineFuerSets")
 	fun `kombi legen fuer ungueltige Sets wirft Exception`(
-      liste: MutableList<Stein>,
-  ) {
+		liste: MutableList<Stein>,
+	) {
 		val tisch = Tisch(mutableListOf())
 		
 		assertThrows<IllegalArgumentException> {
@@ -71,8 +70,8 @@ class TischKombiLegenTest {
 	@ParameterizedTest
 	@MethodSource("ungueltigeSteineFuerFolgen")
 	fun `kombi legen fuer ungueltige Folgen wirft Exception`(
-      liste: MutableList<Stein>,
-  ) {
+		liste: MutableList<Stein>,
+	) {
 		val tisch = Tisch(mutableListOf())
 		
 		assertThrows<IllegalArgumentException> {
